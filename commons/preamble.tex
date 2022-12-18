@@ -42,7 +42,25 @@
 \usepackage{fancyvrb}
 \usepackage{fvextra}
 
-% \usepackage[colorlinks,urlcolor = blue, filecolor=blue,citecolor=blue, linkcolor = blue, unicode=true]{hyperref}
+\usepackage[colorlinks,urlcolor = blue, filecolor=blue,citecolor=blue, linkcolor = blue, unicode=true]{hyperref}
+
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\definebox}[2]{%
+  \newcounter{#1}
+  \newenvironment{#1}[1][]{%
+    \stepcounter{#1}%
+    \mdfsetup{%
+        frametitle={%
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=white]
+            {\strut \MakeUppercase#1~\csname the#1\endcsname\ifstrempty{##1}{}{:~##1}};}}%
+    \mdfsetup{innertopmargin=1pt,linecolor=#2,%
+        linewidth=3pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}%
+    \begin{mdframed}[]\relax%
+    }{\end{mdframed}}%
+}
+\definebox{definition}{orange!90}
 
 % Листинги
 \usepackage{listings} % для самих листингов

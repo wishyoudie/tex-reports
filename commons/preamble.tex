@@ -1,70 +1,97 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1,T2A]{fontenc}
-\usepackage[russian]{babel}
-
-\usepackage[left=2cm,right=2cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
-\usepackage{amsmath}
-\usepackage{enumitem}
-
-\bibliographystyle{ugost2008ls}
-
-\usepackage{tikz}
-
-%% Images
-\usepackage{graphicx} % Inputing images
+%%% Default imports
+\usepackage{listings} % Code listings
+\usepackage{graphicx} % Images
+\usepackage{booktabs} % Better tables
+\usepackage{enumitem} % Lists
+\usepackage{dsfont}
+\usepackage{geometry} % \usepackage[left=2cm,right=2cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry} % Page geometry
+\usepackage[utf8]{inputenc} % \usepackage[utf8x]{inputenc} % Encoding
+\usepackage[T2A]{fontenc} % \usepackage[T1,T2A]{fontenc} % Font
+\usepackage[english, russian]{babel} % Multi-language support
+\usepackage{titling} % Better titles
+\usepackage{textcomp} % Old-style numbers? Check difference
+\usepackage{mathtext} % Russian text in math expressions? Check difference
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools} % Mathematics
+\usepackage{icomma} % Better comma in numbers within math mode
+\usepackage{xifthen} % Better if-expressions
+\usepackage{transparent} % Transparent colors
+\usepackage{caption}    % }
+\usepackage{subcaption} % } Captioning figures
 \usepackage{xcolor} % Colors
-\usepackage{subcaption} % Captioning images
-
-%% Нумерация картинок по секциям
-\usepackage{chngcntr}
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
-
-%%Точки нумерации заголовков
-\usepackage{titlesec}
-\titlelabel{\thetitle.\quad}
-\usepackage[dotinlabels]{titletoc}
-
-\usepackage[normalem]{ulem}
-\useunder{\uline}{\ul}{}
-
-\setlist{noitemsep} % No spacing between list items
-
-%% Внесение titlepage в учёт счётчика страниц
-\renewenvironment{titlepage}{\thispagestyle{empty}}
-
-\usepackage{fancyhdr}
-\usepackage{float}
-\usepackage{multirow}
+\usepackage{textpos} % Absolute positioning
 \usepackage{upgreek} % Cool greek letters
-\usepackage{bigfoot}
+
 \usepackage{fancyvrb}
 \usepackage{fvextra}
+\usepackage{chngcntr}
 
-\usepackage[colorlinks,urlcolor = blue, filecolor=blue,citecolor=blue, linkcolor = blue, unicode=true]{hyperref}
+%%% Page geometry
+\setlength\parindent{0pt} % No indentation between paragraphs
+\setlist{noitemsep} % No spacing between list items
+
+\usepackage{float}
+\usepackage{multirow}
+
+\geometry{
+    paper=a4paper,
+    top=2.5cm,
+    bottom=3cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=0.75cm,
+    footskip=1.5cm,
+    headsep=0.75cm,
+}
+
+%%% Numeration
+\newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}}
+\renewcommand\thesubsubsection{\RNumb{\arabic{subsubsection}}}
+\renewcommand{\bf}{\textbf}
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\renewenvironment{titlepage}{\thispagestyle{empty}} % Include titlepage into page numeration
+
+%%% Headers and footers
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+
+%%% Graphics
+% Custom colors
+\definecolor{myblue}{RGB}{72, 184, 178}
+\definecolor{myblue1}{RGB}{0, 109, 167}
+\definecolor{commentgreen}{RGB}{2,112,10}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{pgfplots} % Plots
+\usepackage{tikz}
+\usetikzlibrary{3d,perspective}
+\usetikzlibrary{animations}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+\pgfplotsset{width=6cm,compat=newest}
+\usepackage{color}
 
 \usepackage[framemethod=TikZ]{mdframed}
-\newcommand{\definebox}[2]{%
-  \newcounter{#1}
-  \newenvironment{#1}[1][]{%
-    \stepcounter{#1}%
-    \mdfsetup{%
-        frametitle={%
-            \tikz[baseline=(current bounding box.east),outer sep=0pt]
-            \node[anchor=east,rectangle,fill=white]
-            {\strut \MakeUppercase#1~\csname the#1\endcsname\ifstrempty{##1}{}{:~##1}};}}%
-    \mdfsetup{innertopmargin=1pt,linecolor=#2,%
-        linewidth=3pt,topline=true,
-        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}%
-    \begin{mdframed}[]\relax%
-    }{\end{mdframed}}%
-}
-\definebox{definition}{orange!90}
+\newcommand{\definebox}[2]{\newcounter{#1}\newenvironment{#1}[1][]{\stepcounter{#1}\mdfsetup{frametitle={\tikz[baseline=(current bounding box.east),outer sep=0pt]\node[anchor=east,rectangle,fill=white]{\strut \MakeUppercase#1~\csname the#1\endcsname\ifstrempty{##1}{}{:~##1}};}}\mdfsetup{innertopmargin=1pt,linecolor=#2,linewidth=3pt,topline=true,frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}\begin{mdframed}[]\relax}{\end{mdframed}}}
+\definebox{definition}{black!90}
+\definebox{theorem}{myblue1!90}
 
-% Листинги
-\usepackage{listings} % для самих листингов
-\definecolor{commentgreen}{RGB}{2,112,10}
+\newcounter{Theorem}
+\def\themytheorem{\thesection.\arabic{Theorem}}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{theorems}
+\newtcbtheorem{Theorem}{Theorem}
+{colframe=myblue!90,coltitle=black,colback=white,fonttitle=\bfseries}{Th}
+
+%%% Code listings
 \lstdefinestyle{cpp} {
     language=C++,
     frame=tb,
@@ -108,7 +135,6 @@
     keywordstyle=\color{black},
     classoffset=0,
 }
-
 \lstdefinelanguage[RISC-V]{Assembler}
 {
     alsoletter={.}, % allow dots in keywords
@@ -142,12 +168,6 @@
     morestring=[b]",      % mark " as string start/end
     morestring=[b]'       % also mark ' as string start/end
 }
-
-% usage example:
-
-% define some basic colors
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-
 \lstdefinestyle{riscv} {
     basicstyle=\small\ttfamily,                    % very small code
     breaklines=true,                              % break long lines
@@ -163,5 +183,11 @@
     tabsize=4,                                    % indent tabs with 4 spaces
     showstringspaces=false                        % do not replace spaces with weird underlines
 }
-%% Final touch
+
+%%% Other
+\usepackage[normalem]{ulem} % }
+\useunder{\uline}{\ul}{}    % } Underline text
+\usepackage[colorlinks,urlcolor=blue,filecolor=blue,citecolor=blue,linkcolor = blue,unicode=true]{hyperref}
+
+%%% Final touch
 \usepackage{subfiles}

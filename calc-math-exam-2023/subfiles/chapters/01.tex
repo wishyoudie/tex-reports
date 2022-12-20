@@ -1,8 +1,8 @@
 \documentclass[../../calc-math-exam-2023.tex]{subfiles}
 \begin{document}
-\section{Конечные разности и их свойства. Таблица конечных разностей.}
-   % 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
-\subsection{Конечные разности и их свойства.}
+    \section{Конечные разности и их свойства. Таблица конечных разностей.}\label{sec:ch01}
+    % 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
+    \subsection{Конечные разности и их свойства.}
     \begin{definition}[Конечная разность]
         Пусть значения некоторой функции $f(x)$ известны
         лишь для дискретного множества значений независимой
@@ -25,41 +25,41 @@
     что является основой большинства конечноразностных выражений.
     \begin{enumerate}
         \item $\displaystyle \alpha = const \Rightarrow \Delta \alpha = 0$
-            \begin{equation*}
-                \alpha = const \Rightarrow \forall k \quad f(k+1) - f(k) = \alpha - \alpha = 0
-            \end{equation*}
+        \begin{equation*}
+            \alpha = const \Rightarrow \forall k \quad f(k+1) - f(k) = \alpha - \alpha = 0
+        \end{equation*}
         \item $\displaystyle \Delta \left( \alpha f(k) \right) = \alpha \Delta f(k)$
         \item $\displaystyle \Delta \left( f(k) \pm g(k) \right) = \Delta f(k) \pm \Delta g(k)$
         \item $\displaystyle \Delta \left( f(k) \cdot g(k) \right) = \Delta f(k) \cdot g(k + 1) + f(k) \Delta g(k)$
-            \begin{gather*}
-                \Delta \left( f(k) \cdot g(k) \right) = f(k + 1)g(k + 1) - f(k)g(k) =\\
-                f(k+1)g(k+1) - f(k)g(k) + f(k)g(k+1) - f(k)g(k+1) = \\
-                \Delta f(k) \cdot g(k+1) + f(k)\Delta g(k)
-            \end{gather*}
-            \emph{Заметим, что} аналогичными преобразованиями можно было получить и другой вид, в котором функции идут в другом порядке:
-            \[
-                \Delta \left(f(k) \cdot g(k) \right) = \Delta g(k) \cdot f(k + 1) + g(k) \Delta f(k)
-            \]
+        \begin{gather*}
+            \Delta \left( f(k) \cdot g(k) \right) = f(k + 1)g(k + 1) - f(k)g(k) =\\
+            f(k+1)g(k+1) - f(k)g(k) + f(k)g(k+1) - f(k)g(k+1) = \\
+            \Delta f(k) \cdot g(k+1) + f(k)\Delta g(k)
+        \end{gather*}
+        \emph{Заметим, что} аналогичными преобразованиями можно было получить и другой вид, в котором функции идут в другом порядке:
+        \[
+            \Delta \left(f(k) \cdot g(k) \right) = \Delta g(k) \cdot f(k + 1) + g(k) \Delta f(k)
+        \]
         \item Конечная разность от полинома степени $s$ равна полиному степени $s-1$.
-            \begin{equation*}
-                \Delta k^s = (k+1)^s - k^s = sk^{s-1} + \frac{s(s-1)}{2}k^{s-2} + \dots
-            \end{equation*}
+        \begin{equation*}
+            \Delta k^s = (k+1)^s - k^s = sk^{s-1} + \frac{s(s-1)}{2}k^{s-2} + \dots
+        \end{equation*}
         \item Конечная разность высокого порядка.
 
-            Подобно дифференциалам и производным высокого порядка,
-            соответствующие конечные разности строятся на основе рекуррентных соотношений.
-            Так конечная разность порядка $s+1$ строится следующим образом:
-            \begin{equation*}
-                \Delta^{s+1} f_k = \Delta \left(\Delta^s f_k \right) = \Delta^s f_{k+1} - \Delta^s f_k
-            \end{equation*}
-            По индукции можно доказать следующее утверждение:
-        \end{enumerate}
+        Подобно дифференциалам и производным высокого порядка,
+        соответствующие конечные разности строятся на основе рекуррентных соотношений.
+        Так конечная разность порядка $s+1$ строится следующим образом:
+        \begin{equation*}
+            \Delta^{s+1} f_k = \Delta \left(\Delta^s f_k \right) = \Delta^s f_{k+1} - \Delta^s f_k
+        \end{equation*}
+        По индукции можно доказать следующее утверждение:
+    \end{enumerate}
     \begin{theorem}[О конечных разностях высокого порядка]
         \begin{equation}
             \Delta^s f_k = \sum_{i=0}^s (-1)^i C_s^i f_{k+s-i}
         \end{equation}
     \end{theorem}
-\subsection{Таблица конечных разностей.}
+    \subsection{Таблица конечных разностей.}
     Аналогично тому, как в непрерывном случае строилась таблица производных,
     рассмотрим конечные разности для наиболее популярных функций.
     \begin{enumerate}

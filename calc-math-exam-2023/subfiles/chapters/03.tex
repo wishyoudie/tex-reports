@@ -1,4 +1,161 @@
 \documentclass[../../calc-math-exam-2023.tex]{subfiles}
 \begin{document}
+    \section{Разностное уравнение, его порядок. Линейные разностные уравнения первого порядка и порядка выше первого.}\label{sec:ch03}
+    Первоначально обратимся к дифференциальным уравнениям.
+    \begin{definition}[Дифференцильное уравнение]
+        Соотношение
+        \begin{equation*}
+            F \left( t, z(t), z'(t), \dots, z^{(s-1)}(t) \right) = 0
+        \end{equation*}
+        где $t$ -- независимая переменная, функция $F$ задана, функция $z(t)$ -- искомая,
+        называется \emph{дифференциальным уравнением порядка $s$}.
+    \end{definition}
+    При этом уравнение может быть разрешено относительно старшей производной
+    \begin{equation}
+        z^{(s)}(t) = f\left( t, z(t), z'(t), \dots, z^{(s-1)}(t) \right)\label{eq:diff1}
+    \end{equation}
+    Порядок уравнения $s$, определяемый номером старшей производной, является важной
+    характеристикой уравнения~\eqref{eq:diff1}. Так он определяет количество начальных
+    условий, необходимых для однозначного решения. Если дифференциальное уравнение является
+    линейным относительно функции $z(t)$ и ее производных, то величина $s$ задает
+    количество линейно независимых решений и т.д.
 
+    Рассмотрим разностный аналог дифференциального уравнения
+    \begin{equation}
+        F\left( k, f(k), \Delta f(k), \Delta^2 f(k), \dots, \Delta^s f(k) \right) = 0 \label{eq:diff2}
+    \end{equation}
+    где $k$ -- независимая целочисленная переменная, функция $F$ задана, функция $f(k)$ -- искомая.
+    Казалось бы, логично считать порядок этого уравнения равным $s$, руководствуясь номером
+    старшей конечной разности, как это было с производными в уравнении~\eqref{eq:diff1}.
+    Рассмотрим, однако, следующий пример:
+    \begin{equation*}
+        2\Delta^3 f_k + 3 \Delta^2 f_k - f_k = 0, \quad f_k \equiv f(k)
+    \end{equation*}
+    Выразим все конечные разности через значения функции в различных точках и получим
+    \begin{gather*}
+        2(f_{k+3} - 3f_{k+2} + 3f_{k+1} - f_k) + 3(f_{k+2} - 2f_{k+1} + f_k) - f_k = 0, \\
+        2f_{k+3} - 3f_{k+2} = 0
+    \end{gather*}
+    Задаваясь только одним начальным условием $f_0$ вместо ожидаемых трех и последовательно полагая
+    значение $k = -2, -1, 0, 1, \dots$ шаг за шагом воспроизводим $f_k$ для любого значения $k$.
+    В этом и есть различие между дифференциальными и разностными уравнениями. Снижение
+    ожидаемого порядка произошло за счет сокращения слагаемых. По этой причине в общем случае
+    для определения порядка разностного уравнения будем выражать все конечные разности через значения функции.
+    Тогда, после всех упрощений порядок разностного уравнения будет определяться разностью между
+    наибольшим и наименьшим значениями аргумента функции $f(k)$. В дальнейшем будем записывать разностные
+    уравнения в следующем виде.
+    \begin{definition}[Разностное уравнение]
+        Уравнение вида
+        \begin{equation*}
+            \Phi \left( k, f(k), f(k+1), \dots, f(k+s) \right) = 0
+        \end{equation*}
+        где $k$ -- независимая переменная, функция $\Phi$ задана, функция $f(k)$ -- искомая,
+        называется \emph{разностным уравнением порядка $s = (k + s) - k$}.
+    \end{definition}
+    или в виде, разрешенном относительно функции с наибольшим значением аргумента
+    \begin{equation*}
+        f(k+s) = \Phi_1 \left( k, f(k), \dots, f(k + s - 1) \right)
+    \end{equation*}
+    Для его решения достаточно последовательно полагать $k = 0, 1, 2, \dots$
+    \begin{flalign*}
+        f(s) &= \Phi_1 \left( 0, f(0), \dots, f(s - 1) \right),\\
+        f(s+1) &= \Phi_1 \left( 1, f(1), \dots, f(s) \right),\\
+        f(s+2) &= \Phi_1 \left( 2, f(2), \dots, f(s+1) \right),\\
+        &\quad \quad \dots
+    \end{flalign*}
+    Такое построение решения называют \emph{пошаговым методом решения разностного уравнения}, который
+    всегда дает решение, когда заданы $s$ начальных условий.
+
+    \subsection{Линейное разностное уравнение первого порядка}
+    Обратимся к уравнению
+    \begin{equation}
+        y(k+1) = \alpha \cdot y(k) + \varphi(k), \quad y(0) = y_0\label{eq:diff3}
+    \end{equation}
+    где $\alpha$ -- постоянный коэффициент, $\varphi_k = \varphi(k)$ -- заданная функция $k$,
+    $y_k = y(k)$ -- искомая функция. Если $\varphi(k) = 0$, уравнение называется однородным, в противном случае -- неоднородным.
+    Начнем решать уравнение~\eqref{eq:diff3} пошаговым методом.
+    \begin{flalign*}
+        &y_1 = \alpha \cdot y_0 + \varphi_0,\\
+        &y_2 = \alpha \cdot y_1 + \varphi_1 = \alpha \left( \alpha \cdot y_0 + \varphi_0 \right) + \varphi_1 = \alpha^2 \cdot y_0 + \alpha \cdot \varphi_0 + \varphi_1,\\
+        &y_3 = \alpha \cdot y_2 + \varphi_2 = \alpha \left( \alpha^2 \cdot y_0 + \alpha \cdot \varphi_0 + \varphi_1 \right) + \varphi_2 = \alpha^3 \cdot y_0 + \alpha^2 \cdot \varphi_0 + \alpha \cdot \varphi_1 + \varphi_2,\\
+        &\dots
+    \end{flalign*}
+    По индукции можно доказать, что
+    \begin{equation*}
+        y_n = \alpha^n \cdot y_0 + \sum_{k=0}^{n-1} \alpha^k \cdot \varphi_{n - 1 - k}
+    \end{equation*}
+    Для важного частного случая, когда $\varphi(k)$ -- постоянная функция $\left( \varphi_k = \beta = const \right)$:
+    \begin{equation*}
+        y_n = \alpha^n \cdot y_0 + \left( \sum_{k=0}^{n-1} \alpha^k \right) \cdot \beta = \alpha^n \cdot y_0 + \frac{1 - \alpha^n}{1 - \alpha} \cdot \beta
+    \end{equation*}
+    \subsection{Линейное разностное уравнение порядка выше первого}
+    Перейдем к уравнению порядка $s$:
+    \begin{equation}
+        y(k+s) + \alpha_1 y(k+s-1) + \alpha_2 y(k+s-2) + \dots + \alpha_s y(k) = \varphi(k)\label{eq:diff-s}
+    \end{equation}
+    где $\displaystyle \alpha_i$ -- постоянные коэффициенты, $\varphi(k)$ -- заданная функция, $y(k)$ -- искомая функция.
+
+    Рассмотрим некоторые свойства частных и общих решений систем линейных разностных уравнений.
+    \begin{theorem}
+        Пусть $\displaystyle y_1(k), y_2(k), \dots, y_p(k)$ -- частные решения линейного однородного уравнения
+        \begin{equation}
+            y(k+s) + \alpha_1 y(k+s-1) + \alpha_2 y(k+s-2) + \dots + \alpha_s y(k) = 0\label{eq:diff-s1}
+        \end{equation}
+        то любая их линейная комбинация
+        \begin{equation*}
+            c_1 y_1 (k) + c_2 y_2 (k) + \dots + c_p y_p (k)
+        \end{equation*}
+        где $\displaystyle c_i$ -- произвольные постоянные, также будет частным решением этого уравнения.
+    \end{theorem}
+    \begin{theorem}
+        Если $s$ частных решений однородного уравнения $\displaystyle y_1(k), y_2(k), \dots, y_s(k)$ -- линейно независимы, то
+        \begin{equation}
+            y(k) = \sum_{i=1}^{s} c_i y_i (k)\label{eq:diff-s2}
+        \end{equation}
+        является общим решением однородного уравнения.
+    \end{theorem}
+
+    \begin{theorem}
+        Общее решение линейного неоднородного уравнения~\eqref{eq:diff-s} представляется в виде суммы частного его решения
+        $\displaystyle y_{\textit{частн}}(k)$ и общего решения линейного уравнения~\eqref{eq:diff-s2}
+        \begin{equation*}
+            y(k) = y_{\textit{частн}}(k) + \sum_{i=1}^{s} c_i y_i (k)
+        \end{equation*}
+    \end{theorem}
+    Решение неоднородного уравнения~\eqref{eq:diff-s} начинается с решения однородного
+    уравнения~\eqref{eq:diff-s1}. Это решение будем искать в виде $\displaystyle u(k) = C\gamma^k$, где
+    $\displaystyle C = const$. Здесь уместно вспомнить, что в дифференцальном уравнении порядка $s$ с постоянными
+    коэффициентами частные решения ищутся в форме $\displaystyle z(t) = C \cdot \exp(\uplambda_k t)$. Подставим
+    $\displaystyle u(k) = C\gamma^k$ в уравнение~\eqref{eq:diff-s1} и после сокращения получаем уравнение
+    \begin{equation}
+        \gamma^s + \alpha_1 \gamma^{s-1} + \dots + \alpha_s = 0
+    \end{equation}
+    которое получило название \emph{характеристического уравнения}. Оно, с учетом кратности,
+    имеет $s$ корней, каждому из которых соответствует частное решение.
+    \begin{enumerate}
+        \item Каждому простому вещественному корню $\displaystyle \gamma_r$ соответствует частное решение
+        $\displaystyle u_r(k) = c_r\gamma_r^k$, являющееся одним из слагаемых в общем решении.
+        \item Каждой простой паре комплексно-сопряженных корней $\displaystyle \gamma_{r, r+1} = \left( \alpha_r \pm i\beta_r \right)$
+        соответствуют комплексные частные решения, являющиеся линейно независимыми
+        \begin{equation*}
+            u_r(k) = \left( \alpha_r + i\beta_r \right)^k, \quad u_{r+1}(k) = \left( \alpha_r - i\beta_r \right)^k
+        \end{equation*}
+        или вещественные частные решения
+        \begin{equation*}
+            u_r(k) = \rho_r^k \cos(k\varphi_r), \quad u_{r+1}(k) = \rho_r^k \sin(k\varphi_r), \quad \rho_r = \sqrt{\alpha_r^2 + \beta_r^2}, \quad tg(\varphi_r) = \frac{\beta_r}{\alpha_r}
+        \end{equation*}
+        В общем решении им сопоставляются два слагаемых (вещественный вариант)
+        \begin{equation*}
+            c_r \rho_r^k \cos(k\varphi_r) + c_{r+1}\rho_r^k \sin(k\varphi_r)
+        \end{equation*}
+        \item Если среди корней встречаются кратные, то корню $\gamma_r$ кратности $p$ соответствуют частные решения
+        \begin{equation*}
+            u_r(k) = \gamma_r^k, \quad u_{r+1}(k) = k\gamma_r^k, \dots, u_{r+p-1}(k) = k^{p-1}\gamma_r^k
+        \end{equation*}
+        Решения эти линейно зависимы, и в общем решении им сопоставляются слагаемые
+        \begin{equation*}
+            c_r\gamma_r^k + c_{r+1}k\gamma_r^k + \dots + c_{r+p-1}k^{p-1}\gamma_r^k = Q_{p-1}(k)\gamma_r^k
+        \end{equation*}
+        где $\displaystyle Q_{p-1}(k)$ -- полином от $k$ степени $p-1$.
+    \end{enumerate}
 \end{document}

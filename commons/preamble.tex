@@ -58,10 +58,15 @@
 %%% Headers and footers
 \usepackage{setspace}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhead[LO]{\rightmark}
-\fancyhead[RE]{\leftmark}
+\usepackage{lastpage}
+% \pagestyle{fancy}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+% \renewcommand{\footrulewidth}{0.4pt}
+% \fancyhead[LO,RE]{Example header left}
+% \fancyhead[LE,RO]{Example header right}
+% \fancyfoot[LO,RE]{Example footer left}
+% \fancyfoot[LE,RO]{Example footer right}
+% \fancyfoot[C]{\thepage/\pageref{LastPage}}
 
 %%% Graphics
 % Custom colors

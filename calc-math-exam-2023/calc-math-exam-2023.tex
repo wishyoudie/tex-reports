@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \input{../commons/preamble.tex}
 % token: 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
-
+\usepackage{titlesec}
 \begin{document}
     \begin{center}
         \Large
@@ -9,7 +9,6 @@
         \textbf{Подготовка к экзамену по вычислительной математике}\\[10pt]
         \normalsize
         Лектор: Устинов Сергей Михайлович
-        % \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
         \rule{\linewidth}{0.4pt}
     \end{center}
     \tableofcontents
@@ -21,7 +20,23 @@
     \renewcommand{\footrulewidth}{0.4pt}
     \fancyfoot[C]{\thepage/\pageref{LastPage}}
     \fancyfoot[LE,RO]{Автор конспекта: Ильин Владимир}
-    \fancyfoot[LO,RE]{Семестр \#3 ??????}
+    \fancyfoot[LO,RE]{Вопрос №\thesection}
+
+    \titleformat{\section}
+    [display]
+    {\bfseries\Large}
+    {}
+    {0ex}
+    {
+        \vspace{-3.5ex}
+        \rule{\textwidth}{0.4pt}
+        Вопрос \thesection \ \centering
+        \vspace{1ex}
+    }
+    [
+        \normalfont\normalsize
+        \rule{\textwidth}{1pt}
+    ]
 
     %\subfile{subfiles/chapters/questions_list.tex} % Список вопросов
 
@@ -32,26 +47,26 @@
     \subfile{subfiles/chapters/05.tex} % Вопрос №5
     \subfile{subfiles/chapters/06.tex} % Вопрос №6
     \subfile{subfiles/chapters/07.tex} % Вопрос №7
-    % \subfile{subfiles/chapters/08.tex} % Вопрос №8
-    % \subfile{subfiles/chapters/09.tex} % Вопрос №9
-    % \subfile{subfiles/chapters/10.tex} % Вопрос №10
-    % \subfile{subfiles/chapters/11.tex} % Вопрос №11
-    % \subfile{subfiles/chapters/12.tex} % Вопрос №12
-    % \subfile{subfiles/chapters/13.tex} % Вопрос №13
-    % \subfile{subfiles/chapters/14.tex} % Вопрос №14
-    % \subfile{subfiles/chapters/15.tex} % Вопрос №15
-    % \subfile{subfiles/chapters/16.tex} % Вопрос №16
-    % \subfile{subfiles/chapters/17.tex} % Вопрос №17
-    % \subfile{subfiles/chapters/18.tex} % Вопрос №18
-    % \subfile{subfiles/chapters/19.tex} % Вопрос №19
-    % \subfile{subfiles/chapters/20.tex} % Вопрос №20
-    % \subfile{subfiles/chapters/21.tex} % Вопрос №21
-    % \subfile{subfiles/chapters/22.tex} % Вопрос №22
-    % \subfile{subfiles/chapters/23.tex} % Вопрос №23
-    % \subfile{subfiles/chapters/24.tex} % Вопрос №24
-    % \subfile{subfiles/chapters/25.tex} % Вопрос №25
-    % \subfile{subfiles/chapters/26.tex} % Вопрос №26
-    % \subfile{subfiles/chapters/27.tex} % Вопрос №27
-    % \subfile{subfiles/chapters/28.tex} % Вопрос №28
-    % \subfile{subfiles/chapters/29.tex} % Вопрос №29
+    \subfile{subfiles/chapters/08.tex} % Вопрос №8
+    \subfile{subfiles/chapters/09.tex} % Вопрос №9
+    \subfile{subfiles/chapters/10.tex} % Вопрос №10
+    \subfile{subfiles/chapters/11.tex} % Вопрос №11
+    \subfile{subfiles/chapters/12.tex} % Вопрос №12
+    \subfile{subfiles/chapters/13.tex} % Вопрос №13
+    \subfile{subfiles/chapters/14.tex} % Вопрос №14
+    \subfile{subfiles/chapters/15.tex} % Вопрос №15
+    \subfile{subfiles/chapters/16.tex} % Вопрос №16
+    \subfile{subfiles/chapters/17.tex} % Вопрос №17
+    \subfile{subfiles/chapters/18.tex} % Вопрос №18
+    \subfile{subfiles/chapters/19.tex} % Вопрос №19
+    \subfile{subfiles/chapters/20.tex} % Вопрос №20
+    \subfile{subfiles/chapters/21.tex} % Вопрос №21
+    \subfile{subfiles/chapters/22.tex} % Вопрос №22
+    \subfile{subfiles/chapters/23.tex} % Вопрос №23
+    \subfile{subfiles/chapters/24.tex} % Вопрос №24
+    \subfile{subfiles/chapters/25.tex} % Вопрос №25
+    \subfile{subfiles/chapters/26.tex} % Вопрос №26
+    \subfile{subfiles/chapters/27.tex} % Вопрос №27
+    \subfile{subfiles/chapters/28.tex} % Вопрос №28
+    \subfile{subfiles/chapters/29.tex} % Вопрос №29
 \end{document}

@@ -1,4 +1,198 @@
 \documentclass[../../calc-math-exam-2023.tex]{subfiles}
 \begin{document}
     \section{Квадратурные формулы левых, правых и средних прямоугольников, трапеций, Симпсона. Малые и составные формулы, их остаточные члены.}\label{sec:ch09}
+
+    \subsection{Простейшие квадратурные формулы}
+    \begin{definition}[Квадратурные формулы]
+        Это формулы для вычисления значения определенного интеграла. Их получение --
+        одно из многочисленных возможных приложений интерполяционных полиномов.
+    \end{definition}
+
+    Пусть требуется вычислить некий интеграл
+    \begin{equation*}
+        I = \int_a^b f(x) dx
+    \end{equation*}
+    точное значение которого определить весьма сложно или невозможно. Тогда
+    исходная функция может быть аппроксимирована интерполяционным полиномом
+    $\displaystyle f(x) = Q_m(x) + R_m(x)$ и интеграл от интерполяционного полинома порождает
+    некоторую квадратурную формулу
+    \begin{equation}
+        I = \int_a^b f(x) dx \approx \int_a^b Q_m(x) dx \label{eq:quad_int}
+    \end{equation}
+    а интеграл от остаточного члена определяет ее погрешность
+    \begin{equation}
+        \varepsilon = \int_a^b R_m(x) dx \label{eq:quad_eps}
+    \end{equation}
+    \vspace{10pt}
+
+    Будем последовательно подставлять в~\eqref{eq:quad_int} полиномы
+    различных степеней, начиная с нулевой ($Q_0(x) = f(x_0)$) $\quad I \approx (b-a)f(x_0)$.
+    Наиболее популярными являются следующие три варианта выбора узла $x_0$:
+    \begin{enumerate}
+        \item Формула левых прямоугольников
+        \begin{equation}
+            x_0 = a, \qquad I \approx (b-a)f(a) \label{eq:quad_lrect}
+        \end{equation}
+        \item Формула правых прямоугольников
+        \begin{equation}
+            x_0 = b, \qquad I \approx (b-a)f(b) \label{eq:quad_rrect}
+        \end{equation}
+        \item Формула средних прямоугольников
+        \begin{equation}
+            x_0 = \frac{a+b}{2}, \qquad I \approx (b-a)f(\frac{a+b}{2}) \label{eq:quad_mrect}
+        \end{equation}
+    \end{enumerate}
+    Причины таких названий легко понять из геометрических иллюстраций, откуда
+    видно, что площадь под заданной функцией аппроксимируется площадью соответствующего
+    прямоугольника.
+
+    Интегрирование полинома первой степени с узлами интерполирования $x_0 = a \text{ и } x_1 = b$
+    \begin{equation*}
+        Q_1(x) = \frac{x - b}{a - b}f(a) + \frac{x - a}{b - a}f(b)
+    \end{equation*}
+    порождает квадратурную \emph{формулу трапеций}
+    \begin{equation}
+        I \approx \frac{b - a}{2}\left( f(a) + f(b) \right) \label{eq:quad_trap}
+    \end{equation}
+    а интегрирование полинома второй степени с узлами $\displaystyle x_0 = a, x_1 = \frac{a + b}{2}, x_2 = b$
+    приводит к квадратурной \emph{формуле Симпсона}
+    \begin{equation}
+        I \approx\frac{b - a}{6}\left( f(a) + 4f\left( \frac{a + b}{2} \right) + f(b) \right) \label{eq:quad_simpson}
+    \end{equation}
+
+    \subsection{Погрешность малых квадратурных формул}
+    Оценку погрешности будем выполнять на основе двух теорем о средних:
+    \begin{theorem}
+        \begin{enumerate}
+            \item Пусть $f(x)$ и $g(x)$ непрерывны на $[a, b]$, а $g(x)$ еще и знакопостоянна. Тогда найдется
+            такая точка $c$, что
+            \begin{equation*}
+                \int_a^b g(x)f(x)dx = f(c) \int_a^b g(x)dx
+            \end{equation*}
+            \item Пусть $f(x)$ непрерывна на $[a, b]$, и заданы $N$ точек $x_k \in [a, b]$. Найдется
+            точка $\eta \in [a, b]$ такая, что
+            \begin{equation*}
+                \frac{1}{N}\sum_{k=1}^{N} f(x_k) = f(\eta)
+            \end{equation*}
+        \end{enumerate}
+    \end{theorem}
+
+    Остаточный член интерполяционного полинома нулевой степени имеет вид
+    \begin{equation*}
+        R_0(x) = \frac{x - x_0}{1!}f'(\eta)
+    \end{equation*}
+    Полезно заметить, что точка $\eta$ зависит от $x$, т.е. $\eta = \eta(x)$, как это уже
+    отмечалось при выводе остаточного члена интерполяционного полинома.
+
+    Последовательно подставляя значения $x_0$, вычислим интеграл~\eqref{eq:quad_eps}:
+    \begin{gather}
+        \varepsilon_\textit{{лев. пр.}} = \int_a^b (x-a)f'(\eta)dx = f'(\eta^{*})\int_a^b (x-a)dx = \frac{(b-a)^2}{2}f'(\eta^{*})\\
+        \varepsilon_\textit{{прав. пр.}} = \int_a^b (x-b)f'(\eta)dx = f'(\eta^{*})\int_a^b (x-b)dx = -\frac{(b-a)^2}{2}f'(\eta^{*})
+    \end{gather}
+    Для формулы средних прямоугольников все немного не так, ведь $\displaystyle \left( x - \frac{a+b}{2} \right)$ меняет знак. Для
+    оценки погрешности в этом случае воспользуемся разложением $f(x)$ в ряд в точке $\displaystyle \frac{a+b}{2} = t$
+    \begin{equation*}
+        f(x) = f(t) + \frac{x - t}{1!}f'(t) + \frac{(x-t)^2}{2!}f''(t)
+    \end{equation*}
+    интегрируя его на $[a, b]$. Интеграл от первого слагаемого дает формулу средних прямоугольников, от второго равен нулю, а
+    третий определяет погрешность
+    \begin{equation}
+        \varepsilon_{\textit{ср. пр.}} = \frac{1}{2}\int_{a}^{b} \left( x - \frac{a+b}{2} \right)^2 f''(\eta) dx = \frac{f''(\eta^{*})}{2}\int_{a}^{b} \left( x - \frac{a + b}{2} \right)^2 dx = \frac{(b-a)^3}{24} f''(\eta^{*})
+    \end{equation}
+
+    Для оценки погрешности формулы трапеций проинтегрируем остаточный член полинома первой степени
+    \begin{equation}
+        \varepsilon_{\textit{трап}} = \int_{a}^{b} \frac{(x-a)(x-b)}{2!}f''(\eta)dx = f''(\eta^{*})\int_{a}^{b} \frac{(x-a)(x-b)}{2}dx = -\frac{(b-a)^3}{12}f''(\eta^{*})
+    \end{equation}
+    \vspace{10pt}
+
+    Для интеграла от остаточного члена полинома второй степени условия теоремы о среднем не выполняются, и погрешность формулы
+    Симпсона определяется по другому. По этим же трем узлам строится полинома Эрмита уже третьей степени с двумя условиями
+    в центральной точке, погрешность которого и интегрируется.
+    \begin{equation}
+        \varepsilon_{\textit{Симпс}} = -\frac{(b-a)^5}{2880}f^{(4)}(\eta)
+    \end{equation}
+
+    \subsection{Составные квадратурные формулы}
+    \begin{definition}
+        В большинстве случаев подынтегральная функция не описывается удовлетворительно полиномами первой и второй степени.
+        Поэтому, для достижения необходимой точности исходный промежуток разбивается на такие малые промежутки, где
+        указанная аппроксимация удачна, на каждом из этих промежутков применяется выбранная квадратурная формула, а результаты
+        складываются. Такие формулы получили название \emph{составных} к.ф.
+    \end{definition}
+
+    Разобьем исходный промежуток $[a, b]$ на $N$ равных промежутков $[x_k, x_{k+1}]$
+    \begin{equation*}
+        h = \frac{b - a}{N}, \qquad x_k = x_0 + kh, \qquad x_0 = a, \qquad x_N = b
+    \end{equation*}
+    На каждом промежутке применим квадратурную формулу и сложим:
+    \begin{enumerate}
+        \item Левые прямоугольники
+        \begin{flalign*}
+            &I_k = \int_{x_k}^{x_{k+1}} f(x)dx \approx (x_{k+1} - x_k)f(x_k) = \frac{b - a}{N}f(x_k) \\
+            &I_{\textit{лев. пр.}} = \sum_{k=0}^{N-1} I_k \approx \frac{b - a}{N} \sum_{k=0}^{N-1} f(x_k)
+        \end{flalign*}
+        \item Правые прямоугольники
+        \begin{flalign*}
+            &I_k = \int_{x_k}^{x_{k+1}} f(x)dx \approx (x_{k+1} - x_k)f(x_{k+1}) = \frac{b - a}{N}f(x_{k+1}) \\
+            &I_{\textit{прав. пр.}} = \sum_{k=0}^{N-1} I_k \approx \frac{b - a}{N} \sum_{k=0}^{N-1} f(x_{k+1}) = \frac{b-a}{N}\sum_{k=1}^{N} f(x_k)
+        \end{flalign*}
+        \item Средние прямоугольники
+        \begin{flalign*}
+            &I_k = \int_{x_k}^{x_{k+1}} f(x)dx \approx (x_{k+1} - x_k)f(x_k + h/2) = \frac{b-a}{N}f(x_k + h/2) \\
+            &I_{\textit{сред. пр.}} = \sum_{k=0}^{N-1} I_k \approx \frac{b-a}{N}\sum_{k=0}^{N-1} f(x_k + h/2) = \frac{b-a}{N}\sum_{k=0}^{N-1} f\left( x_k + \frac{b-a}{2N} \right)
+        \end{flalign*}
+        \item Трапеции
+        \begin{flalign*}
+            &I_k = \int_{x_k}^{x_{k+1}} f(x)dx \approx \frac{x_{k+1} - x_k}{2}\left( f(x_{k+1}) + f(x_k)\right) = \frac{b-a}{2N}\left( f(x_{k+1}) + f(x_k)\right) \\
+            &I_{\textit{трап}} = \sum_{k=0}^{N-1} I_k \approx \frac{b-a}{2N}\sum_{k=0}^{N-1} \left( f(x_{k+1} + f(x_k)) \right) = \frac{b-a}{2N}\left( f(a) + 2\sum_{k=1}^{N-1}f(x_k) + f(b) \right)
+        \end{flalign*}
+    \end{enumerate}
+
+    Для получения составной формулы Симпсона будем выбирать $N$ всегда четным, а исходный промежуток разобьем на
+    $N/2$ равных промежутков $[x_k, x_{k+2}]$ длиной $2(b-a)/N$.На каждом из них интеграл равен
+    \begin{flalign*}
+        &I_k = \int_{x_k}^{x_{k+2}} f(x)dx \approx \frac{x_{k+2} - x_k}{6} \left( f(x_{k+2}) + 4f(x_{k+1}) + f(x_k) \right) = \\
+        &= \frac{b-a}{3N} \left( f(x_{k+2}) + 4f(x_{k+1}) + f(x_k) \right)
+    \end{flalign*}
+    Суммируя по всем промежуткам, получаем \emph{составную формулу Симпсона}
+    \begin{equation}
+        I_{\textit{Симпс}} = \frac{b-a}{3N}\left[ f(a) + 4(f_1 + f_3 + \dots + f_{N-1}) + 2(f_2 + f_4 + \dots + f_{N-2}) +f(b) \right]
+    \end{equation}
+
+    \subsection{Погрешности составных квадратурных формул}
+    Для оценки погрешностей составных формул вычисляем погрешность каждого участка и складываем.
+    \begin{enumerate}
+        \item Левые прямоугольники
+        \begin{gather*}
+            \varepsilon_k = \frac{\displaystyle \left( x_{k+1} - x_k \right)^2}{2}f'(\eta_k) = \frac{(b-a)^2}{2N^2}f'(\eta_k) \\
+            \varepsilon_{\it{лев. пр.}} = \sum_{k=1}^{N} \varepsilon_k = \frac{(b-a)^2}{2N}\left[ \frac{1}{N}\sum_{k=1}^{N} f'(\eta_k) \right] = \frac{(b-a)^3}{24N^2}f''(\eta)
+        \end{gather*}
+        \item Правые прямоугольники
+        \begin{equation*}
+            \varepsilon_{\it{прав. пр.}} = -\frac{(b-a)^2}{2N}f'(\eta)
+        \end{equation*}
+        \item Средние прямоугольники
+        \begin{gather*}
+            \varepsilon_k = \frac{(x_{k+1}-x_k)^3}{24}f''(\eta_k) = \frac{(b-a)^3}{24N^3}f''(\eta_k) \\
+            \varepsilon_{\it{сред. пр.}} = \sum_{k=1}^{N} \varepsilon_k = \frac{(b-a)^3}{24N2}f''(\eta)
+        \end{gather*}
+        \item Трапеции
+        \begin{gather*}
+            \varepsilon_k = - \frac{(x_{k+1} - x_k)^3}{12}f''(\eta_k) = -\frac{(b-a)^3}{12N^3}f''(\eta_k) \\
+            \varepsilon_{\it{трап}} = \sum_{k=1}^{N} \varepsilon_k = -\frac{(b-a)^3}{12N^2}f''(\eta)
+        \end{gather*}
+        \item Формула Симпсона
+
+        Тут следует учитывать, что длина каждого участка в два раза больше, чем ранее,
+        а число таких участков в два раза меньше -- $N/2$.
+        \begin{gather*}
+            \varepsilon_k = -\frac{(x_{k+2}-x_k)^5}{2880}f^{(4)}(\eta_k) = -\frac{(b-a)^5}{90N^5}f^{(4)}(\eta_k) \\
+            \varepsilon_{\it{Симпс}} = \sum_{k=1}^{N/2} \varepsilon_k = -\frac{(b-a)^5}{180N^4}\left[ \frac{1}{N/2}\sum_{k=1}^{N/2} f^{(4)}(\eta_k) \right] = -\frac{(b-a)^5}{180N^4}f^{(4)}(\eta)
+        \end{gather*}
+    \end{enumerate}
+    \emph{Заметим, что} все эти формулы описываются общей зависимостью
+    \begin{equation}
+        \displaystyle \varepsilon = \alpha \frac{(b-a)^{p+1}}{N^p} f^{(p)}(\eta)\label{eq:quad_eps_common}
+    \end{equation}
 \end{document}

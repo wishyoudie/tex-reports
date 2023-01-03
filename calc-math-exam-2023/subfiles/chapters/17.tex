@@ -1,4 +1,248 @@
 \documentclass[../../calc-math-exam-2023.tex]{subfiles}
 \begin{document}
     \section{7 теорем о матричных функциях.}\label{sec:ch17}
+    Предварительно введем следующее определение
+    \begin{definition}[Подобная матрица]
+        Пусть задана матрица \bf{A} и некоторая неособенная матрица \bf{S} (т.е. $\det(\bf{S}) \neq 0$
+        и существует $\displaystyle S^{-1}$). Всякая матрица $\displaystyle \bf{B} = \bf{S} \bf{A} \bf{S}^{-1}$
+        называется \emph{подобной} матрице \bf{A}. Очевидно, что и $\displaystyle \bf{A} = \bf{S}^{-1} \bf{B} \bf{S}$
+        подобна \bf{B}.
+    \end{definition}
+    \begin{theorem}
+        Подобные матрицы \bf{A} и $\displaystyle \bf{B} = \bf{S} \bf{A} \bf{S}^{-1}$ имеют одинаковые
+        собственные значения. При этом, если собственному значению $\uplambda$ матрицы \bf{A} отвечает
+        собственный вектор \bf{u}, то у матрицы \bf{B} этому же собственному числу $\uplambda$
+        соответствует собственный вектор $\bf{S}\bf{u}$.
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        Так как $\bf{S} \bf{S}^{-1} = \bf{E}$, то $\displaystyle \det\left( \bf{S}\bf{S}^{-1} \right) = \det(\bf{S}) \det(\bf{S}^{-1}) = \det(\bf{E}) = 1$.
+        Для характеристических полиномов \bf{A} и \bf{B} имеем
+        \begin{flalign*}
+            \det \left( \bf{B} - \uplambda \bf{E} \right) = \det \left( \bf{S} \bf{A} \bf{S}^{-1} - \uplambda \bf{S} \bf{S}^{-1} \right) =
+            \det \left( \bf{S} \left( \bf{A} - \uplambda \bf{E} \right) \bf{S}^{-1} \right) = \\
+            = \det\left( \bf{S} \right) \cdot \det \left( \bf{A} - \uplambda \bf{E} \right) \cdot \det \left( \bf{S}^{-1} \right) = \det \left( \bf{A} - \uplambda \bf{E} \right)
+        \end{flalign*}
+        Характеристические полиномы для обеих матриц совпали, следовательно, совпали и их корни, т.е.
+        собственные значения. Для доказательства второй части теоремы в равенстве $\bf{A} \bf{u} = \uplambda \bf{u}$
+        заменим матрицу \bf{A} на подобную ей $\displaystyle \bf{S} \bf{A} \bf{S}^{-1}$:
+        \begin{equation*}
+            \bf{S}^{-1} \bf{B} \bf{S} \bf{u} = \uplambda \bf{u}
+        \end{equation*}
+        Теперь, умножив обе части равенства на \bf{S} слева, получим требуемый результат:
+        \begin{equation*}
+            \bf{B} \left( \bf{S} \bf{u} \right) = \uplambda \left( \bf{S} \bf{u} \right)
+        \end{equation*}
+    \end{theorem}
+
+    \begin{theorem}
+        Если матрицы \bf{A} и \bf{B} подобны, то их матричные функции также подобны.
+
+        Иными словами, если $\bf{B} = \bf{S} \bf{A} \bf{S}^{-1}$, то $\bf{f}\left( \bf{B} \right) = \bf{S} \bf{f} \left( \bf{A} \right) \bf{S}^{-1}$
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        Первоначально определим $\displaystyle \bf{B}^k$
+        \begin{gather*}
+            \bf{B}^k = \left( \bf{S} \bf{A} \bf{S}^{-1} \right)^k = \bf{S} \bf{A} \bf{S}^{-1} \bf{S} \bf{A} \bf{S}^{-1} \dots \bf{S} \bf{A} \bf{S}^{-1} = \bf{S} \bf{A}\bf{A}\dots \bf{S}^{-1} = \bf{S} \bf{A}^k \bf{S}^{-1}\\
+            \bf{f} \left( \bf{B} \right) = \sum_{k=0}^{\infty} c_k \bf{B}^k = \bf{S} \left( \sum_{k=0}^{\infty} c_k \bf{A}^k \right) \bf{S}^{-1} = \bf{S} \bf{f} \left( \bf{A} \right) \bf{S}^{-1}
+        \end{gather*}
+    \end{theorem}
+
+    \begin{theorem}
+        Матрица \bf{A} с различными собственными значениями $\uplambda_1, \uplambda_2, \dots, \uplambda_m $
+        (нет кратных) подобна некоторой диагональной матрице $\bm{\Lambda}$, на главной диагонали которой стоят
+        собственные значения матрицы \bf{A}, то есть $ \bm{\Lambda} = \text{diag}\left( \uplambda_1, \uplambda_2, \dots, \uplambda_m \right)$
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        Пусть $\bf{u}_k$ -- собственные векторы матрицы \bf{A}. Обозначим за \bf{U} матрицу,
+        столбцами которой являются все $\bf{u}_k$. Тогда
+        \begin{flalign*}
+            \bf{A}\bf{U} = \bf{A}
+            \begin{pmatrix}
+                |        & |        &       &       & |        \\
+                |        & |        &       &       & |        \\
+                \bf{u}_1 & \bf{u}_2 & \dots & \dots & \bf{u}_m \\
+                |        & |        &       &       & |        \\
+                |        & |        &       &       & |
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                |                    & |                    &       &       & |                    \\
+                |                    & |                    &       &       & |                    \\
+                \uplambda_1 \bf{u}_1 & \uplambda_2 \bf{u}_2 & \dots & \dots & \uplambda_m \bf{u}_m \\
+                |                    & |                    &       &       & |                    \\
+                |                    & |                    &       &       & |
+            \end{pmatrix}
+            = \\
+            =
+            \begin{pmatrix}
+                |        & |        &       &       & |        \\
+                |        & |        &       &       & |        \\
+                \bf{u}_1 & \bf{u}_2 & \dots & \dots & \bf{u}_m \\
+                |        & |        &       &       & |        \\
+                |        & |        &       &       & |
+            \end{pmatrix}
+            \cdot
+            \begin{pmatrix}
+                \uplambda_1 & 0           & 0           & \dots & 0           \\
+                0           & \uplambda_2 & 0           & \dots & 0           \\
+                0           & 0           & \uplambda_3 & \dots & 0           \\
+                \dots       & \dots       & \dots       & \dots & \dots       \\
+                0           & 0           & 0           & \dots & \uplambda_m
+            \end{pmatrix}
+            = \bf{U} \bm{\Lambda}
+        \end{flalign*}
+        Умножая полученное равенство поочередно справа и слева на $\bf{U}^{-1}$, получаем требуемое
+        \begin{equation*}
+            \bm{\Lambda} = \bf{U}^{-1} \bf{A} \bf{U}, \qquad \bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}
+        \end{equation*}
+    \end{theorem}
+
+    \emph{Заметим, что} помимо доказательства теоремы, была определена матрица подобия \bf{U}, состоящая
+    из линейно независимых столбцов $\bf{u}_k$ и, следовательно, неособенная.
+
+    В общем случае, при наличии кратных собственных значений у матрицы \bf{A}, вместо матрицы $\bm{\Lambda}$,
+    возникает клеточно-диагональная матрица, где каждая клетка представляет собой так называемый
+    \emph{канонический ящик Жордана}.
+
+    Исключительно для простоты изложения дальнейшие теоремы будут доказываться только для матриц с различными
+    собственными значениями, однако результаты справедливы и для более общего случая.
+
+    \begin{theorem}
+        Если собственные значения матрицы \bf{A} обозначить через $\uplambda_1, \uplambda_2, \dots, \uplambda_m$,
+        то собственными значениями матрицы $\bf{f} \left( \bf{A} \right)$ будут числа $f(\uplambda_1), f(\uplambda_2), \dots, f(\uplambda_m)$
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        $\bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}$. По теореме о подобии матричных функций $\displaystyle \bf{f} \left( \bf{A} \right) = \bf{U}^{-1} \bf{f} \bm{\Lambda} \bf{U}$.
+        Представим $\bf{f} \left( \bm{\Lambda} \right)$ в покомпонентном виде
+        \begin{gather*}
+            \bf{f} \left( \bm{\Lambda} \right) = \sum_{k=0}^{\infty} c_k \bm{\Lambda}^k =
+            \begin{pmatrix}
+                \displaystyle
+                \sum_{k=0}^{\infty} c_k \uplambda_1^k & 0                                                   & \dots & \dots & 0                                                   \\
+                0                                     & \displaystyle \sum_{k=0}^{\infty} c_k \uplambda_2^k & \dots & \dots & 0                                                   \\
+                \dots                                 & \dots                                               & \dots & \dots & \dots                                               \\
+                \dots                                 & \dots                                               & \dots & \dots & \dots                                               \\
+                0                                     & 0                                                   & \dots & \dots & \displaystyle \sum_{k=0}^{\infty} c_k \uplambda_m^k
+            \end{pmatrix}
+            = \\
+            =\begin{pmatrix}
+                 f \left( \uplambda_1 \right) & 0                            & \dots & \dots & 0                            \\
+                 0                            & f \left( \uplambda_2 \right) & \dots & \dots & 0                            \\
+                 \dots                        & \dots                        & \dots & \dots & \dots                        \\
+                 \dots                        & \dots                        & \dots & \dots & \dots                        \\
+                 0                            & 0                            & \dots & \dots & f \left( \uplambda_m \right)
+            \end{pmatrix}
+        \end{gather*}
+        И тогда
+        \begin{equation*}
+            \bf{f} \left( \bf{A} \right) = \bf{U}^{-1} f \left( \bm{\Lambda} \right) \bf{U} = \bf{U}^{-1}
+            \begin{pmatrix}
+                f \left( \uplambda_1 \right) & 0                            & \dots & \dots & 0                            \\
+                0                            & f \left( \uplambda_2 \right) & \dots & \dots & 0                            \\
+                \dots                        & \dots                        & \dots & \dots & \dots                        \\
+                \dots                        & \dots                        & \dots & \dots & \dots                        \\
+                0                            & 0                            & \dots & \dots & f \left( \uplambda_m \right)
+            \end{pmatrix}
+            \bf{U}
+        \end{equation*}
+        что и означает, что $f(\uplambda_1), f(\uplambda_2), \dots, f(\uplambda_m)$ являются собственными
+        значениями матрицы $\bf{f} \left( \bf{A} \right)$, так как преобразование подобия не меняет собственных значений.
+    \end{theorem}
+
+    \emph{Следствие 1}. Из вышеприведенных формул непосредственно следует, что матричный ряд $\bf{f} \left( \bf{A} \right)$
+    существует тогда и только тогда, когда существуют \emph{все} скалярные степенные ряды, стоящие на диагонали
+    матрицы $\bf{f} \left( \bm{\Lambda} \right)$, а у тех, в свою очередь, необходимым и достаточным условием
+    существования является выполнение условий $\displaystyle \forall \, \uplambda_k \, \left| \uplambda_k \right| < R$.
+    Таким образом, это условие является необходимым и достаточным условием сходимости матричного степенного ряда.
+    На практике вопрос о сходимости матричного ряда решается в такой последовательности: сначала находится
+    радиус сходимости $R$ соответствующего скалярного ряда, а затем проверяется выполнение условия выше для всех
+    собственных значений.
+
+    \emph{Следствие 2}. Поскольку условие $\left\| \bf{A} \right\| < R$ является лишь достаточным условием
+    сходимости матричного степенного ряда, а условие выше небходимым и достаточным, то из совместного рассмотрения
+    обоих условий можно заключить, что все собственные значения матрицы не превышают ее любую каноническую норму.
+    \begin{equation*}
+        \left| \uplambda_k \right| \leq \left\| \bf{A} \right\|
+    \end{equation*}
+
+    \begin{theorem}
+        Две любые функции матрицы \bf{A} коммутируют между собой:
+        \begin{equation*}
+            \bf{f} \left( \bf{A} \right) \cdot \bf{g} \left( \bf{A} \right) = \bf{g} \left( \bf{A} \right) \cdot \bf{f} \left( \bf{A} \right)
+        \end{equation*}
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        \begin{equation*}
+            \bf{f} \left( \bf{A} \right) = \bf{U}^{-1} \bf{f} \left( \bm{\Lambda} \right) \bf{U} \text{ и } \bf{g} \left( \bf{A} \right) = \bf{U}^{-1} \bf{g} \left( \bm{\Lambda} \right) \bf{U}
+        \end{equation*}
+        В силу того, что диагональные матрицы всегда коммутируют:
+        \begin{flalign*}
+            &\bf{f} \left( \bf{A} \right) \bf{g} \left( \bf{A} \right) = \bf{U}^{-1} \bf{f} \left( \bm{\Lambda} \right) \bf{U} \bf{U}^{-1} \bf{g} \left( \bm{\Lambda} \right) \bf{U} = \bf{U}^{-1} \bf{f} \left( \bm{\Lambda} \right) \bf{g} \left( \bm{\Lambda} \right) \bf{U} = \\
+            &= \bf{U}^{-1} \bf{g} \left( \bm{\Lambda} \right) \bf{f} \left( \bm{\Lambda} \right) \bf{U} = \bf{U}^{-1} \bf{g} \left( \bm{\Lambda} \right) \bf{U} \bf{U}^{-1} \bf{f} \left( \bm{\Lambda} \right) \bf{U} = \bf{g} \left( \bf{A} \right) \bf{f} \left( \bf{A} \right)
+        \end{flalign*}
+    \end{theorem}
+
+    \begin{theorem}[Формула Кели-Гамильтона]
+        Пусть $\displaystyle Q(\uplambda) = (-1)^m \uplambda^m + b_1 \uplambda^{m-1} + \dots + b_m = 0$ -- характеристическое уравнение
+        любой матрицы \bf{A}. Тогда
+        \begin{equation*}
+            Q\left( \bf{A} \right) = (-1)^m \bf{A}^m + b_1 \bf{A}^{m-1} + \dots + b_m \bf{E} \equiv \bf{O}
+        \end{equation*}
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        Матрица с различными собственными значениями подобна диагональной матрице: $\bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}$.
+        По теореме о подобии матричных функций $\displaystyle \bf{A}^k = \bf{U} \bm{\Lambda} \bf{U}^{-1}$. Подставим в
+        \begin{equation*}
+            Q\left( \bf{A} \right) = (-1)^m \bf{A}^m + b_1 \bf{A}^{m-1} + \dots + b_m \bf{E}
+        \end{equation*}
+        вместо \bf{A} ее выражение через $\bm{\Lambda}$:
+        \begin{flalign*}
+            Q\left( \bf{A} \right) = (-1)^m \bf{U} \bm{\Lambda}^{m} \bf{U}^{-1} + b_1 \bf{U} \bm{\Lambda}^{m-1} \bf{U}^{-1} + \dots + b_m \bf{E} =\\
+            = \bf{U} \left( (-1)^m \bm{\Lambda}^m + b_1 \bm{\Lambda}^{m-1} + \dots + b_m \bf{E} \right) \bf{U}^{-1}
+        \end{flalign*}
+        В скобках стоит диагональная матрица с характеристическими полиномами на главной диагонали, в которые
+        подставлены собственные значения, и значит тождественно равными нулю. Тогда матрица в скобках -- нулевая,
+        и теорема доказана.
+    \end{theorem}
+
+    \begin{theorem}[Формула Лагранжа-Сильвестра]
+        Любая функция матрицы \bf{A}, имеющей различные собственные значения, может быть представлена в виде:
+        \begin{equation}
+            \bf{f}\left( \bf{A} \right) = \sum_{k=1}^{m} \frac{\left( \bf{A} - \uplambda_1 \bf{E} \right)\dots \left( \bf{A} - \uplambda_{k-1} \bf{E} \right)\left( \bf{A} - \uplambda_{k+1} \bf{E} \right)\dots \left( \bf{A} - \uplambda_m \bf{E} \right)}{\left( \uplambda_k - \uplambda_1 \right)\dots \left( \uplambda_k - \uplambda_{k-1} \right) \left( \uplambda_k - \uplambda_{k+1} \right)\dots \left( \uplambda_k - \uplambda_m \right)}f(\uplambda_k) = \label{eq:lagrange_sylvester}
+        \end{equation}
+        \begin{equation*}
+            = \sum_{k=1}^{m} \bf{T}_k f(\uplambda_k)
+        \end{equation*}
+
+        \underline{Доказательство}.
+        \vspace{5pt}
+
+        Подставим функцию $f(x)$ в виде интерполяционного полинома Лагранжа $\displaystyle L_{m-1}(x)$, взяв в качестве
+        узлов собственные значения матрицы \bf{A} $\uplambda_1, \uplambda_2, \dots, \uplambda_m$:
+        \begin{equation*}
+            f(x) = L_{m-1}(x) + R_{m-1}(x)
+        \end{equation*}
+        Подставим в эту формулу \bf{A} вместо $x$:
+        \begin{equation*}
+            \bf{f}\left( \bf{A} \right) = \bf{L}_{m-1}\left( \bf{A} \right) + \bf{R}_{m-1}\left( \bf{A} \right)
+        \end{equation*}
+        Остаточный член принимает вид
+        \begin{equation*}
+            \bf{R}_{m-1}\left( \bf{A} \right) = \frac{f^{(m)}(\xi)}{m!}\omega\left( \bf{A} \right)
+        \end{equation*}
+        где $\displaystyle \omega(\bf{A}) = \left( \bf{A} - \uplambda_1 \bf{E} \right)\dots \left( \bf{A} - \uplambda_m \bf{E} \right)$.
+        По теореме Кели-Гамильтона $\omega(\bf{A}) = \bf{O}$ и, следовательно, $\displaystyle \bf{f}\left( \bf{A} \right) = \bf{L}_{m-1}\left( \bf{A} \right)$
+    \end{theorem}
 \end{document}

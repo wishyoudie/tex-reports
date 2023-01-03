@@ -1,4 +1,104 @@
 \documentclass[../../calc-math-exam-2023.tex]{subfiles}
 \begin{document}
     \section{Решение систем линейных дифференциальных и разностных уравнений с постоянной матрицей.}\label{sec:ch18}
+
+    \subsection{Дифференциальные уравнения.}
+    Рассмотрим систему обыкновенных дифференциальных уравнений первого порядка, разрешенную относительно
+    производных
+    \begin{equation*}
+        \frac{dx^{(i)}(t)}{dt} = f^{(i)}\left( t, x^{(1)}(t), x^{(2)}(t), \dots, x^{(m)}(t) \right), \qquad i=1,2,\dots,m
+    \end{equation*}
+    где $t$ -- независимая переменная, $\displaystyle x^{(i)}(t)$ -- искомые функции,
+    $\displaystyle f^{(i)}$ -- функции, определенные на некотором множестве $(m+1)$-мерного евклидова пространства
+    переменных $t, x^{(i)}(t)$. Номер компоненты вектора здесь везде будем писать, как верхний индекс в скобках.
+    Перейдя к векторно-матричным обозначениям
+    \begin{equation*}
+        \bf{x}(t) =
+        \begin{pmatrix}
+            x^{(1)}(t) \\
+            x^{(2)}(t) \\
+            \dots      \\
+            x^{(m)}(t)
+        \end{pmatrix}
+        , \qquad
+        \bf{f}(t, \bf{x}) =
+        \begin{pmatrix}
+            f^{(1)}(t, x) \\
+            f^{(2)}(t, x) \\
+            \dots         \\
+            f^{(m)}(t, x) \\
+        \end{pmatrix}
+    \end{equation*}
+    Исходную систему перепишем в виде
+    \begin{equation}
+        \frac{d\bf{x}(t)}{dt} = \bf{f}(t, \bf{x}) \label{eq:matrix_differential_equation_definition}
+    \end{equation}
+    При этом требуется найти решение $\bf{x}(t)$, удовлетворяющее начальным условиям $\displaystyle \bf{x}(t_0) = \bf{x}_0$.
+    Такая задача называется начальной задачей или \emph{задачей Коши}.
+
+    Важным классом дифференциальных систем являются линейные системы с постоянной матрицей или постоянными коэффициентами
+    \begin{equation}
+        \frac{d\bf{x}(t)}{dt} = \bf{A}\bf{x}(t) + \bf{g}(t), \quad \bf{x}(t_0) = \bf{x}_0
+    \end{equation}
+    Сначала обратимся к однородной системе
+    \begin{equation*}
+        \frac{d\bf{x}(t)}{dt} = \bf{A}\bf{x}(t)
+    \end{equation*}
+    Ее решением является функция $\displaystyle \bf{x}(t) = e^{\bf{A}t} \bf{c}$, где \bf{c} -- вектор произвольных
+    постоянных. Убедиться в этом можно непосредственной подстановкой решения в уравнение.
+    \vspace{10pt}
+
+    Неоднородная система решается методом Лагранжа варианции произвольных постоянных. При этом полагаем, что элементы
+    вектора \bf{c} являются функциями независимой переменной $\bf{c} = \bf{c}(t)$. Подставляем искомый вид решения
+    в уравнение
+    \begin{equation*}
+        \bf{A}e^{\bf{A}t}\bf{c}(t) + e^{\bf{A}t}\frac{d\bf{c}(t)}{dt} = \bf{A} e^{\bf{A}t}\bf{c}(t) + \bf{g}(t)
+    \end{equation*}
+    Отсюда $\displaystyle e^{\bf{A}t}\frac{d\bf{c}(t)}{dt} = \bf{g}(t)$, и после умножения обеих частей равенства на
+    $\displaystyle e^{-\bf{A}t}$ получаем:
+    \begin{equation*}
+        \frac{d\bf{c}(t)}{dt} = e^{-\bf{A}t}\bf{g}(t)
+    \end{equation*}
+    Интегрируем это уравнение от $t_0$ до $t$
+    \begin{equation*}
+        \bf{c}(t) - \bf{c}(t_0) = \int_{t_0}^{t} e^{-\bf{A}\tau}\bf{g}(\tau)d\tau
+    \end{equation*}
+    и, подставив $\bf{c}(t)$ в искомый вид решения, определяем общее решение линейной неоднородной дифференциальной системы
+    \begin{equation*}
+        \bf{x}(t) = e^{\bf{A}t}\bf{c}(t_0) + e^{\bf{A}t}\int_{t_0}^{t}e^{-\bf{A}\tau}\bf{g}(\tau)d\tau
+    \end{equation*}
+    Учитывая начальные условия, находим вектор $\displaystyle c(t_0)$: $\displaystyle \bf{x}(t_0) = \bf{x}_0 = e^{\bf{A}t_0}\bf{c}(t_0)$
+    или $\displaystyle \bf{c}(t_0) = e^{-\bf{A}t_0}\bf{x}_0$ и окончательно получаем
+    \begin{equation*}
+        \bf{x}(t) = e^{\bf{A}(t - t_0)}\bf{x}_0 + \int_{t_0}^{t} e^{\bf{A}(t - \tau)}\bf{g}(\tau)d\tau
+    \end{equation*}
+    Без нарушения общости можно считать, что начальным значением независимой переменной является $\displaystyle t_0 = 0$. Тогда, используя теорему и свертке,
+    \begin{equation}
+        \bf{x}(t) = e^{\bf{A}t}\bf{x}_0 + \int_{0}^{t} e^{\bf{A}(t - \tau)}\bf{g}(\tau)d\tau = e^{\bf{A}t}\bf{x}_0 + \int_{0}^{t} e^{\bf{A}\tau}\bf{g}(t - \tau)d\tau
+    \end{equation}
+    Считая вектор $\bf{g}(t)$ постоянным, упростим полученное равенство:
+    \begin{equation*}
+        \bf{x}(t) = e^{\bf{A}t}\bf{x}_0 + \int_{0}^{t} e^{\bf{A}(t - \tau)}d\tau \cdot \bf{g} = e^{\bf{A}t}\bf{x}_0 + \left( e^{\bf{A}t} - \bf{E} \right)\bf{A}^{-1}\bf{g}
+    \end{equation*}
+
+    \subsection{Разностные уравнения.}
+    Рассмотрим линейную систему разностных уравнений с постоянной матрицей, где $k$ -- независимая целочисленная переменная
+    \begin{equation}
+        \bf{y}(k+1) = \bf{B}\bf{y}(k) + \bf{g}(k) \label{eq:matrix_sub_equation_definition}
+    \end{equation}
+    Будем ее решать так называемым пошаговым методом, последовательно назначая в~\eqref{eq:matrix_sub_equation_definition}
+    значения $k$ равным $0,1,2,\dots$ и обозначая $\bf{y}_k = \bf{y}(k)$
+    \begin{flalign*}
+        &\bf{y}_1 = \bf{B}\bf{y}_0 + \bf{g}_0\\
+        &\bf{y}_2 = \bf{B}\bf{y}_1 + \bf{g}_1 = \bf{B}^2 \bf{y}_0 + \bf{B} \bf{g}_0 + \bf{g}_1\\
+        &\bf{y}_3 = \bf{B}\bf{y}_2 + \bf{g}_2 = \bf{B}^3 \bf{y}_0 + \bf{B}^2 \bf{y}_0 + \bf{B} \bf{g}_1 + \bf{g}_2\\
+        &\dots
+    \end{flalign*}
+    \begin{equation}
+        \bf{y}_k = \bf{B}^k \bf{y}_0 + \sum_{i=0}^{k-1} \bf{B}^{k-i-1} \bf{g}_i
+    \end{equation}
+    В частном случае, когда $\bf{g}(k) = const = \bf{g}$, этот вектор можно вынести за знак суммы
+    \begin{equation}
+        \bf{y}_k = \bf{B}^k \bf{y}_0 + \left( \sum_{i=0}^{k-1} \bf{B}^i \right)\bf{g} = \bf{B}^k \bf{y}_0 + \left( \bf{B}^k - \bf{E} \right)\left( \bf{B} - \bf{E} \right)^{-1} \bf{g}
+    \end{equation}
 \end{document}

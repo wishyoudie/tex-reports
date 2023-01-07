@@ -9,13 +9,13 @@
 \begin{equation}
     x_{n+1} = \varphi(x_n) \label{eq:approx_single}
 \end{equation}
-пошаговым методом. Для оценки сходимости запишем равенство~\eqref{eq:approx_single_help} в точке $x^*$ и вычтем из
-него равенство~\eqref{eq:approx_single}:
+пошаговым методом. Для оценки сходимости запишем равенство~\eqref{eq:approx_single_help} в точке $x^*$ и вычтем из него
+равенство~\eqref{eq:approx_single}:
 \begin{equation*}
     \varepsilon_{n+1} = x^* - x_{n+1} = \varphi(x^*) - \varphi(x_n) = \varphi(x_n + \varepsilon_n) - \varphi(x_n)
 \end{equation*}
-Раскладывая $\varphi(x_n + \varepsilon_n)$ в ряд по степеням $\varepsilon_n$ и ограничиваясь в остаточном члене
-первой производной, получаем уравнение погрешности
+Раскладывая $\varphi(x_n + \varepsilon_n)$ в ряд по степеням $\varepsilon_n$ и ограничиваясь в остаточном члене первой производной, получаем
+уравнение погрешности
 \begin{equation*}
     \varepsilon_{n+1} = \varphi(x_n + \varepsilon_n) - \varphi(x_n) = \varphi(x_n) + \varepsilon_n \varphi'(\eta) - \varphi(x_n) = \varepsilon_n \varphi'(\eta)
 \end{equation*}
@@ -28,8 +28,8 @@
 желаемая точность.
 
 \subsection{Метод Ньютона для решения нелинейных уравнений.}
-Высокой скоростью сходимости в ряде случаев обладает \emph{метод Ньютона} (или \emph{метод касательных}).
-Подставляя в уравнение $f(x) = 0$ его корень $x^*$, и раскладывая в ряд по степеням $\varepsilon_n$
+Высокой скоростью сходимости в ряде случаев обладает \emph{метод Ньютона} (или \emph{метод касательных}). Подставляя в
+уравнение $f(x) = 0$ его корень $x^*$, и раскладывая в ряд по степеням $\varepsilon_n$
 \begin{equation*}
     0 = f(x^*) = f(x_n + \varepsilon_n) = f(x_n) + \varepsilon_n f'(x_n) + \frac{\varepsilon_n^2}{2!}f''(\eta)
 \end{equation*}

@@ -124,14 +124,15 @@ $\displaystyle \bm{\varepsilon}_{n+1} = - \frac{h^2 \bf{x}''(\eta)}{2}$.
 
 Аналогично убеждаемся, что метод Адамса имеет вторую степень (совпадают члены разложения при $h^1$ и $h^2$)
 \begin{flalign*}
-    &\displaystyle \bf{x}_{n+1} = \bf{x}_n + \frac{h}{2}\left( 3\bf{x}'(t_n) - \bf{x}'(t_n - h) \right) = \bf{x}_n + \frac{h}{2}\left( 3\bf{x}'(t_n) - \bf{x}'(t_n) + h\bf{x}''(t_n) - \frac{h^2}{2}\bf{x}'''(t_n) + \ldots \right) = \\
+    &\displaystyle \bf{x}_{n+1} = \bf{x}_n + \frac{h}{2}\left( 3\bf{x}'(t_n) - \bf{x}'(t_n - h) \right) = \\
+    &=\bf{x}_n + \frac{h}{2}\left( 3\bf{x}'(t_n) - \bf{x}'(t_n) + h\bf{x}''(t_n) - \frac{h^2}{2}\bf{x}'''(t_n) + \ldots \right) = \\
     &\displaystyle = \bf{x}_n + h\bf{x}'(t_n) + \frac{h^2}{2}\bf{x}''(t_n) - \frac{h^3}{4}\bf{x}'''(t_n) + \ldots
 \end{flalign*}
 а после вычитания этого выражения из~\eqref{eq:dcmf_precise} получаем оценку локальной погрешности:
 $\displaystyle \bm{\varepsilon}_{n+1} = \frac{5h^3\bf{x}'''(\eta)}{12}$. Также второй порядок точности будет и у
 метода трапеций~\eqref{eq:diff_traps}
 \begin{flalign*}
-    &\displaystyle \bf{x}_{n+1} = \bf{x}_n + \frac{h}{2}\left( \bf{f}(t_n, \bf{x}_n) + \bf{f}(t_{n+1}, \bf{x}_{n+1}) \right) = \bf{x}_n + \frac{h}{2}\left( \bf{x}'(t_n) + \bf{x}'(t_n + h) \right) = \\
+    &\displaystyle \bf{x}_{n+1} = \bf{x}_n + \frac{h}{2}\left( \bf{f}(t_n, \bf{x}_n) + \bf{f}(t_{n+1}, \bf{x}_{n+1}) \right) =\bf{x}_n + \frac{h}{2}\left( \bf{x}'(t_n) + \bf{x}'(t_n + h) \right) = \\
     &\displaystyle = \bf{x}_n + \frac{h}{2}\left( \bf{x}'(t_n) + \bf{x}'(t_n) + h\bf{x}''(t_n) + \frac{h^2}{2}\bf{x}'''(t_n) + \ldots \right) = \\
     &\displaystyle = \bf{x}_n + h\bf{x}'(t_n) + \frac{h^2}{2}\bf{x}''(t_n) + \frac{h^3}{4}\bf{x}'''(t_n) + \ldots
 \end{flalign*}

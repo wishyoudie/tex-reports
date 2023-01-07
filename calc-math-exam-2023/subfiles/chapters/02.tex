@@ -1,130 +1,129 @@
-\documentclass[../../calc-math-exam-2023.tex]{subfiles}
-\begin{document}
-    \section{Суммирование функций. Формула Абеля суммирования по частям.}\label{sec:ch02}
-    \subsection{Суммирование функций.}
-    Обратимся к уравнению
-    \begin{equation}
-        \Delta F(k) = \varphi(k)\label{eq:main_theme_equation}
-    \end{equation}
-    До сих пор мы занимались прямой задачей: по заданной функции $F(k)$ необходимо определить функцию $\varphi(k)$.
-    Теперь обратимся к обратной задаче: по заданной функции $\varphi(k)$ необходимо восстановить функцию $F(k)$.
-    Ситуация подобно нахождению функции по ее производной в непрерывных терминах. В этом случае
-    появляется возможность ее решения при помощи интеграла
-    \begin{equation*}
-        \int_a^b h(x)dx = \int_a^b f'(x)dx = f(b) - f(a)
-    \end{equation*}
+\section{Суммирование функций. Формула Абеля суммирования по частям.}\label{sec:ch02}
 
-    Аналогично, решение обратной задачи~\eqref{eq:main_theme_equation} позволяет, в свою очередь, успешно
-    решать задачу суммирования функции $\varphi(k)$. Запишем уравнение~\eqref{eq:main_theme_equation} последовательно
-    для $k = m, m+1, \dots, N - 1$ и результаты просуммируем.
+\subsection{Суммирование функций.}
+Обратимся к уравнению
+\begin{equation}
+    \Delta F(k) = \varphi(k)\label{eq:main_theme_equation}
+\end{equation}
+До сих пор мы занимались прямой задачей: по заданной функции $F(k)$ необходимо определить функцию $\varphi(k)$.
+Теперь обратимся к обратной задаче: по заданной функции $\varphi(k)$ необходимо восстановить функцию $F(k)$.
+Ситуация подобно нахождению функции по ее производной в непрерывных терминах. В этом случае
+появляется возможность ее решения при помощи интеграла
+\begin{equation*}
+    \int_a^b h(x)dx = \int_a^b f'(x)dx = f(b) - f(a)
+\end{equation*}
+
+Аналогично, решение обратной задачи~\eqref{eq:main_theme_equation} позволяет, в свою очередь, успешно
+решать задачу суммирования функции $\varphi(k)$. Запишем уравнение~\eqref{eq:main_theme_equation} последовательно
+для $k = m, m+1, \dots, N - 1$ и результаты просуммируем.
+\begin{flalign*}
+    &F(m+1) - F(m) = \varphi(m)\\
+    &F(m+2) - F (m + 1) = \varphi(m + 1)\\
+    &F(m+3) - F(m+2) = \varphi(m+2)\\
+    & \dots\\
+    &F(N) - F(N-1) = \varphi(N-1)\\
+    &F(N) - F(m) = \sum_{k=m}^{N-1} \varphi(k)\\
+\end{flalign*}
+
+Иными словами
+
+\begin{equation}
+    \sum_{k=m}^{N-1} \varphi(k) = \sum_{k=m}^{N-1} \Delta F(k) = F(N) - F(m)\label{eq:newton_leibniz}
+\end{equation}
+
+Выражение~\eqref{eq:newton_leibniz} является дискретным аналогом формулы Ньютона-Лейбница.
+В дополнение следует заметить, что она выводилась в предположении, что $N > m$.
+
+\vspace{10pt}
+
+Рассмотрим некоторые примеры суммирования функций. Результаты отдаленно
+напоминают таблицу интегралов для непрерывных функций, а оператор суммы
+сопоставляется определенному интегралу:
+\begin{equation*}
+    \sum_{k=0}^{N-1} \leftrightarrow \int_0^N
+\end{equation*}
+
+\begin{enumerate}
+    \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} a^k$
+
+    Функция $F(k)$, удовлетворяющая условию $\displaystyle \Delta F(k) = a^k$
+    легко находится из таблицы конечных разностей: $\displaystyle F(k) = \frac{a^k}{a-1}$. Тогда
+
+    \[
+        \sum_{k=0}^{N-1} a^k = \frac{\left(a^N - 1\right)}{a - 1} - \frac{a^0 - 1}{a - 1} = \frac{1 - a^N}{1 - a}
+    \]
+    \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} \cos\left(k + \frac{1}{2}\right)$
+
+    Аналогичным образом найдем функцию из таблицы конечных разностей.
+
+    \[
+        \sum_{k=0}^{N-1} \cos\left(k + \frac{1}{2}\right) = \sum_{k=0}^{N-1} \frac{\sin(k)}{2\sin\left(\frac{1}{2}\right)} =
+        \frac{\sin(N)}{2\sin\left(\frac{1}{2}\right)}
+    \]
+    \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} k^2$
+
+    Воспользуемся свойством №5 конечных разностей: полином степени $2$
+    является конечной разностью полинома степени $3$. Рассмотрим
     \begin{flalign*}
-        &F(m+1) - F(m) = \varphi(m)\\
-        &F(m+2) - F (m + 1) = \varphi(m + 1)\\
-        &F(m+3) - F(m+2) = \varphi(m+2)\\
-        & \dots\\
-        &F(N) - F(N-1) = \varphi(N-1)\\
-        &F(N) - F(m) = \sum_{k=m}^{N-1} \varphi(k)\\
+        &\Delta k^3 = (k+1)^3 - k^3 = 3k^2 + 3k + 1\\
+        &\Delta k^2 = (k+1)^2 - k^2 = 2k + 1\\
+        &\Delta k = (k+1) - k = 1
     \end{flalign*}
 
-    Иными словами
-
-    \begin{equation}
-        \sum_{k=m}^{N-1} \varphi(k) = \sum_{k=m}^{N-1} \Delta F(k) = F(N) - F(m)\label{eq:newton_leibniz}
-    \end{equation}
-
-    Выражение~\eqref{eq:newton_leibniz} является дискретным аналогом формулы Ньютона-Лейбница.
-    В дополнение следует заметить, что она выводилась в предположении, что $N > m$.
-
-    \vspace{10pt}
-
-    Рассмотрим некоторые примеры суммирования функций. Результаты отдаленно
-    напоминают таблицу интегралов для непрерывных функций, а оператор суммы
-    сопоставляется определенному интегралу:
+    Используя также свойства №1 и 2, получаем
     \begin{equation*}
-        \sum_{k=0}^{N-1} \leftrightarrow \int_0^N
+        \Delta \left(\frac{k^3}{3} - \frac{k^2}{2} + \frac{k}{6}\right) =
+        \frac{1}{3}\left(3k^2 + 3k + 1\right) - \frac{1}{2}\left(2k + 1\right) + \frac{1}{6} \cdot 1 =
+        k^2 + k + \frac{1}{3} - k - \frac{1}{2} + \frac{1}{6} = k^2
     \end{equation*}
 
-    \begin{enumerate}
-        \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} a^k$
+    \vspace{15pt}
 
-        Функция $F(k)$, удовлетворяющая условию $\displaystyle \Delta F(k) = a^k$
-        легко находится из таблицы конечных разностей: $\displaystyle F(k) = \frac{a^k}{a-1}$. Тогда
-
-        \[
-            \sum_{k=0}^{N-1} a^k = \frac{\left(a^N - 1\right)}{a - 1} - \frac{a^0 - 1}{a - 1} = \frac{1 - a^N}{1 - a}
-        \]
-        \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} \cos\left(k + \frac{1}{2}\right)$
-
-        Аналогичным образом найдем функцию из таблицы конечных разностей.
-
-        \[
-            \sum_{k=0}^{N-1} \cos\left(k + \frac{1}{2}\right) = \sum_{k=0}^{N-1} \frac{\sin(k)}{2\sin\left(\frac{1}{2}\right)} =
-            \frac{\sin(N)}{2\sin\left(\frac{1}{2}\right)}
-        \]
-        \item $\displaystyle \text{Найти } \sum_{k=0}^{N-1} k^2$
-
-        Воспользуемся свойством №5 конечных разностей: полином степени $2$
-        является конечной разностью полинома степени $3$. Рассмотрим
-        \begin{flalign*}
-            &\Delta k^3 = (k+1)^3 - k^3 = 3k^2 + 3k + 1\\
-            &\Delta k^2 = (k+1)^2 - k^2 = 2k + 1\\
-            &\Delta k = (k+1) - k = 1
-        \end{flalign*}
-
-        Используя также свойства №1 и 2, получаем
-        \begin{equation*}
-            \Delta \left(\frac{k^3}{3} - \frac{k^2}{2} + \frac{k}{6}\right) =
-            \frac{1}{3}\left(3k^2 + 3k + 1\right) - \frac{1}{2}\left(2k + 1\right) + \frac{1}{6} \cdot 1 =
-            k^2 + k + \frac{1}{3} - k - \frac{1}{2} + \frac{1}{6} = k^2
-        \end{equation*}
-
-        \vspace{15pt}
-
-        Получаем
-        \begin{flalign*}
-            &F(k) = \frac{1}{3}k^3 - \frac{1}{2}k^2 + \frac{1}{6}k\\
-            &\sum_{k=0}^N k^2 = \frac{N^3}{3} - \frac{N^2}{2} + \frac{N}{6}
-        \end{flalign*}
-    \end{enumerate}
-    \subsection{Суммирование по частям.}
-    Суммирование по частям вводится как прием, аналогичный интегрированию по частям в непрерывном случае.
-    Для вывода формулы запишем уравнение интегрирования по частям в несколько другом виде.
-    Введем три функции: $\displaystyle u(t), v(t), U(t)$, где $\displaystyle U(t) = \int_{0}^{t}u(\tau)d\tau$.
-    Рассмотрим производную выражения $U(t)v(t)$:
-
-    $\displaystyle \frac{d}{dt}\left(U(t)v(t)\right) = \frac{dU(t)}{dt}v(t) + U(t)\frac{dv(t)}{dt} = u(t)v(t) + U(t)\frac{dv(t)}{dt}$
-    \vspace{5pt}
-
-    Перенесем второе слагаемое из правой части равенства в левую и проинтегрируем
-    \begin{equation*}
-        \int_a^b u(t)v(t)dt = \int_a^b \frac{d}{dt}\left(U(t)v(t)\right)dt - \int_a^b U(t) \frac{dv(t)}{dt}dt = U(t)v(t) \biggr\rvert_{t=a}^{t=b} - \int_a^b U(t)\frac{dv(t)}{dt}dt
-    \end{equation*}
-
-    Теперь обратимся к суммированию. Аналогично введем три функции: $\displaystyle u(k), v(k), U(k)$, где $\displaystyle U(k) = \sum_{i=0}^k u(i)$. $\displaystyle \Delta U(k) = U(k+1) - U(k) = u(k+1)$.
-    Воспользуемся ранее полученной формулой конечной разности для произведения:
-
-    $\displaystyle \Delta \left(U(k)v(k)\right) = v(k+1) \Delta U(k) + U(k)\Delta v(k) = v(k+1)u(k+1) + U(k)\Delta v(k)$
-
-    Перенесем второе слагаемое из правой части равенства в левую и просуммируем обе его части:
-
-    \begin{theorem}[Формула Абеля суммирования по частям]
-        \begin{equation}
-            \sum_{k=p}^N u(k+1)v(k+1) = U(k)v(k) \bigg\rvert_{k=p}^{k=N+1} - \sum_{k=p}^N U(k) \Delta v(k)\label{eq:abel}
-        \end{equation}
-    \end{theorem}
-
-    \emph{Пример:} требуется найти $\displaystyle \sum_{k=0}^N ka^k$.
-
-    Возьмем функции $u(k) = a^{k-1}, v(k) = k-1$. Тогда
+    Получаем
     \begin{flalign*}
-        &U(k) = \sum_{i=0}^k a^{k-1} = \frac{1}{a}\frac{a^{k+1} - 1}{a - 1}\\
-        &\Delta v(k) = \Delta k = 1\\
-        &\\
-        &\sum_{k=0}^N ka^k = \frac{1}{a}\frac{a^{N+2} - 1}{a - 1}\cdot\left( ((N + 1) - 1) - (0 - 1)\right) - \sum_{k=0}^N \frac{1}{a}\frac{a^{k+1} - 1}{a - 1} = \\
-        &= \frac{(N+1)(a^{N+2} - 1)}{a(a - 1)} - \frac{1}{a(a-1)} \left( a\sum_{k=0}^{N} a^k - (N+1) \right) = \\
-        &=\frac{(N+1)(a^{N+2}-1)}{a(a-1)} - \frac{1}{a(a-1)} \left( a \frac{a^{N+1} - 1}{a - 1} - (N+1) \right) =\\
-        &=\frac{(a-1)(N+1)(a^{N+2} - 1) - a^{N+3} + a^2 + (a-1)(N+1)}{a(a-1)^2}=\\
-        &=\frac{(a-1)(N+1)a^{N+1} - a^{N+2} + a}{(a-1)^2} = \frac{Na^{N+2} - (N+1)a^{N+1} + a}{(a-1)^2} = \\
-        &=\frac{a\left( Na^{N+1} -(N+1)a^N + 1 \right)}{(a-1)^2}
+        &F(k) = \frac{1}{3}k^3 - \frac{1}{2}k^2 + \frac{1}{6}k\\
+        &\sum_{k=0}^N k^2 = \frac{N^3}{3} - \frac{N^2}{2} + \frac{N}{6}
     \end{flalign*}
-\end{document}
+\end{enumerate}
+
+\subsection{Суммирование по частям.}
+Суммирование по частям вводится как прием, аналогичный интегрированию по частям в непрерывном случае.
+Для вывода формулы запишем уравнение интегрирования по частям в несколько другом виде.
+Введем три функции: $\displaystyle u(t), v(t), U(t)$, где $\displaystyle U(t) = \int_{0}^{t}u(\tau)d\tau$.
+Рассмотрим производную выражения $U(t)v(t)$:
+
+$\displaystyle \frac{d}{dt}\left(U(t)v(t)\right) = \frac{dU(t)}{dt}v(t) + U(t)\frac{dv(t)}{dt} = u(t)v(t) + U(t)\frac{dv(t)}{dt}$
+\vspace{5pt}
+
+Перенесем второе слагаемое из правой части равенства в левую и проинтегрируем
+\begin{equation*}
+    \int_a^b u(t)v(t)dt = \int_a^b \frac{d}{dt}\left(U(t)v(t)\right)dt - \int_a^b U(t) \frac{dv(t)}{dt}dt = U(t)v(t) \biggr\rvert_{t=a}^{t=b} - \int_a^b U(t)\frac{dv(t)}{dt}dt
+\end{equation*}
+
+Теперь обратимся к суммированию. Аналогично введем три функции: $\displaystyle u(k), v(k), U(k)$, где $\displaystyle U(k) = \sum_{i=0}^k u(i)$. $\displaystyle \Delta U(k) = U(k+1) - U(k) = u(k+1)$.
+Воспользуемся ранее полученной формулой конечной разности для произведения:
+
+$\displaystyle \Delta \left(U(k)v(k)\right) = v(k+1) \Delta U(k) + U(k)\Delta v(k) = v(k+1)u(k+1) + U(k)\Delta v(k)$
+
+Перенесем второе слагаемое из правой части равенства в левую и просуммируем обе его части:
+
+\begin{theorem}[Формула Абеля суммирования по частям]
+    \begin{equation}
+        \sum_{k=p}^N u(k+1)v(k+1) = U(k)v(k) \bigg\rvert_{k=p}^{k=N+1} - \sum_{k=p}^N U(k) \Delta v(k)\label{eq:abel}
+    \end{equation}
+\end{theorem}
+
+\emph{Пример:} требуется найти $\displaystyle \sum_{k=0}^N ka^k$.
+
+Возьмем функции $u(k) = a^{k-1}, v(k) = k-1$. Тогда
+\begin{flalign*}
+    &U(k) = \sum_{i=0}^k a^{k-1} = \frac{1}{a}\frac{a^{k+1} - 1}{a - 1}\\
+    &\Delta v(k) = \Delta k = 1\\
+    &\\
+    &\sum_{k=0}^N ka^k = \frac{1}{a}\frac{a^{N+2} - 1}{a - 1}\cdot\left( ((N + 1) - 1) - (0 - 1)\right) - \sum_{k=0}^N \frac{1}{a}\frac{a^{k+1} - 1}{a - 1} = \\
+    &= \frac{(N+1)(a^{N+2} - 1)}{a(a - 1)} - \frac{1}{a(a-1)} \left( a\sum_{k=0}^{N} a^k - (N+1) \right) = \\
+    &=\frac{(N+1)(a^{N+2}-1)}{a(a-1)} - \frac{1}{a(a-1)} \left( a \frac{a^{N+1} - 1}{a - 1} - (N+1) \right) =\\
+    &=\frac{(a-1)(N+1)(a^{N+2} - 1) - a^{N+3} + a^2 + (a-1)(N+1)}{a(a-1)^2}=\\
+    &=\frac{(a-1)(N+1)a^{N+1} - a^{N+2} + a}{(a-1)^2} = \frac{Na^{N+2} - (N+1)a^{N+1} + a}{(a-1)^2} = \\
+    &=\frac{a\left( Na^{N+1} -(N+1)a^N + 1 \right)}{(a-1)^2}
+\end{flalign*}

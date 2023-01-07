@@ -1,334 +1,331 @@
-\documentclass[../../calc-math-exam-2023.tex]{subfiles}
-\begin{document}
-    \section{Обратная матрица, собственные числа и векторы. Задачи на матрицы. Норма матрицы, сходимость матричного степенного ряда, функции от матрицы.}\label{sec:ch16}
+\section{Обратная матрица, собственные числа и векторы. Задачи на матрицы. Норма матрицы, сходимость матричного степенного ряда, функции от матрицы.}\label{sec:ch16}
 
-    \subsection{Обратная матрица.}
-    \begin{definition}[Матрица]
-        Матрицей называется совокупность $n \times m$ скаляров $a_{ij}$, образующих
-        прямоугольную таблицу из $n$ строк и $m$ столбцов.
-        \begin{equation*}
-            \bf{A} =
-            \begin{pmatrix}
-                a_{11} & a_{12} & \dots & a_{1m} \\
-                a_{21} & a_{22} & \dots & a_{2m} \\
-                \dots  & \dots  & \dots & \dots  \\
-                a_{n1} & a_{n2} & \dots & a_{nm}
-            \end{pmatrix}
-        \end{equation*}
-        В литературе и, в частности, в этом конспекте матрицы обозначаются \bf{жирным} шрифтом.
-    \end{definition}
-    \begin{definition}[Обратная матрица]
-        Для квадратной матрицы с ненулевым определителем $ \displaystyle \left( \det(\bf{A}) \neq 0 \right)$
-        вводится понятие \emph{обратной матрицы} $\bf{X} = \bf{A}^{-1}$, которая существует, является
-        единственной и удовлетворяет условиям $ \displaystyle \bf{A} \cdot \bf{X} = \bf{E},\quad \bf{X} \cdot \bf{A} = \bf{E}$
-    \end{definition}
-
-    \subsection{Собственные числа и векторы.}
-    Поставим задачу: для заданной матрицы \bf{A} найти такие векторы \bf{u},
-    которые сохраняют свое направление после линейного преобразования.
-    \begin{equation}
-        \bf{y} = \bf{A} \bf{u} = \uplambda \bf{u} \Leftrightarrow \left( \bf{A} - \uplambda \bf{E} \right) \bf{u} = 0 \label{eq:lvdef}
-    \end{equation}
-    \begin{definition}
-        Числа $\uplambda$ и векторы \bf{u}, удовлетворяющие уравнению~\eqref{eq:lvdef} получили название
-        \emph{собственные значения} и \emph{собственные векторы}.
-    \end{definition}
-
-    Если определитель $\det\left( \bf{A} - \uplambda\bf{E} \right)$ не равен нулю, то система имеет
-    единственное решение $\bf{u} = 0$. Для того, чтобы существовало решение, отличное от нулевого
-    потребуем равенство нулю определителя. Запишем это в покомпонентном виде:
-    \begin{flalign*}
-        \det \left(
+\subsection{Обратная матрица.}
+\begin{definition}[Матрица]
+    Матрицей называется совокупность $n \times m$ скаляров $a_{ij}$, образующих
+    прямоугольную таблицу из $n$ строк и $m$ столбцов.
+    \begin{equation*}
+        \bf{A} =
         \begin{pmatrix}
             a_{11} & a_{12} & \dots & a_{1m} \\
             a_{21} & a_{22} & \dots & a_{2m} \\
             \dots  & \dots  & \dots & \dots  \\
             a_{n1} & a_{n2} & \dots & a_{nm}
         \end{pmatrix}
-        -
+    \end{equation*}
+    В литературе и, в частности, в этом конспекте матрицы обозначаются \bf{жирным} шрифтом.
+\end{definition}
+\begin{definition}[Обратная матрица]
+    Для квадратной матрицы с ненулевым определителем $ \displaystyle \left( \det(\bf{A}) \neq 0 \right)$
+    вводится понятие \emph{обратной матрицы} $\bf{X} = \bf{A}^{-1}$, которая существует, является
+    единственной и удовлетворяет условиям $ \displaystyle \bf{A} \cdot \bf{X} = \bf{E},\quad \bf{X} \cdot \bf{A} = \bf{E}$
+\end{definition}
+
+\subsection{Собственные числа и векторы.}
+Поставим задачу: для заданной матрицы \bf{A} найти такие векторы \bf{u},
+которые сохраняют свое направление после линейного преобразования.
+\begin{equation}
+    \bf{y} = \bf{A} \bf{u} = \uplambda \bf{u} \Leftrightarrow \left( \bf{A} - \uplambda \bf{E} \right) \bf{u} = 0 \label{eq:lvdef}
+\end{equation}
+\begin{definition}
+    Числа $\uplambda$ и векторы \bf{u}, удовлетворяющие уравнению~\eqref{eq:lvdef} получили название
+    \emph{собственные значения} и \emph{собственные векторы}.
+\end{definition}
+
+Если определитель $\det\left( \bf{A} - \uplambda\bf{E} \right)$ не равен нулю, то система имеет
+единственное решение $\bf{u} = 0$. Для того, чтобы существовало решение, отличное от нулевого
+потребуем равенство нулю определителя. Запишем это в покомпонентном виде:
+\begin{flalign*}
+    \det \left(
+    \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1m} \\
+        a_{21} & a_{22} & \dots & a_{2m} \\
+        \dots  & \dots  & \dots & \dots  \\
+        a_{n1} & a_{n2} & \dots & a_{nm}
+    \end{pmatrix}
+    -
+    \begin{pmatrix}
+        \uplambda & 0         & \dots & 0         \\
+        0         & \uplambda & \dots & 0         \\
+        \dots     & \dots     & \dots & \dots     \\
+        0         & 0         & \dots & \uplambda
+    \end{pmatrix}
+    \right) = \\
+    =\det
+    \begin{pmatrix}
+        a_{11} - \uplambda & a_{12}             & \dots & a_{1m}             \\
+        a_{21}             & a_{22} - \uplambda & \dots & a_{2m}             \\
+        \dots              & \dots              & \dots & \dots              \\
+        a_{n1}             & a_{n2}             & \dots & a_{nm} - \uplambda
+    \end{pmatrix}
+    = 0
+\end{flalign*}
+
+Вычисление этого определителя дает:
+\begin{equation*}
+    \det \left( \bf{A} - \uplambda \bf{E} \right) = (-1)^n \uplambda^n + b_1 \uplambda^{n-1} + \dots + b_{n-1}\uplambda + b_n = 0
+\end{equation*}
+Полином, стоящий в левой части уравнения, называется \emph{характеристическим}, как и само уравнение. Оно
+имеет ровно $n$ корней (с учетом крастности). Это и есть собственные значения матрицы $\displaystyle \uplambda_1, \uplambda_2, \dots, \uplambda_n$.
+Они составляют спектр матрицы \bf{A}, а величина $\rho \left( \bf{A} \right) = \max \left| \uplambda_i \right|$ называется
+\emph{спектральным радиусом}. Для каждого $\uplambda_i$ можно найти решение $\bf{u}_i$, т.е. собственный вектор.
+
+Поскольку собственные векторы находятся из решения однородной системы, то и неизвестными они оказываются с точностью
+до постоянного (ненулевого) множителя, т.е. собственные векторы однозначно определены по направлению, но их
+длины (нормы) остаются произвольными. Часто бывает удобно приводить их к единичной длине. Без доказательства
+оставим следующую теорему:
+\begin{theorem}
+    Если все собственные значения матрицы различны, то отвечающие им собственные векторы -- линейно-независимы.
+\end{theorem}
+
+\subsection{Задачи на матрицы.}
+Не умаляя общности, будем считать исходные матрицы квадратными. Те же задачи можно доказать
+и для матриц в общем виде, достаточно лишь поменять соответствующие индексы.
+\begin{theorem}
+    \begin{equation*}
+        \left( \bf{A} \cdot \bf{B} \right)^T = \bf{B}^T \cdot \bf{A}^T
+    \end{equation*}
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Рассмотрим отдельно левую и правую части равенства. Правая:
+    \begin{gather*}
+        \bf{B}^T \cdot \bf{A}^T =
         \begin{pmatrix}
-            \uplambda & 0         & \dots & 0         \\
-            0         & \uplambda & \dots & 0         \\
-            \dots     & \dots     & \dots & \dots     \\
-            0         & 0         & \dots & \uplambda
+            b_{11} & \dots & b_{n1} \\
+            \dots  & \dots & \dots  \\
+            b_{1n} & \dots & b_{nn}
         \end{pmatrix}
-        \right) = \\
-        =\det
+        \cdot
         \begin{pmatrix}
-            a_{11} - \uplambda & a_{12}             & \dots & a_{1m}             \\
-            a_{21}             & a_{22} - \uplambda & \dots & a_{2m}             \\
-            \dots              & \dots              & \dots & \dots              \\
-            a_{n1}             & a_{n2}             & \dots & a_{nm} - \uplambda
+            a_{11} & \dots & a_{n1} \\
+            \dots  & \dots & \dots  \\
+            a_{1n} & \dots & a_{nn}
+        \end{pmatrix} =\\
+        =\begin{pmatrix}
+             b_{11} \cdot a_{11} + \dots + b_{n1} \cdot a_{1n} & \dots & b_{11} \cdot a_{n1} + \dots + b_{n1} \cdot a_{nn} \\
+             \dots                                             & \dots & \dots                                             \\
+             b_{1n} \cdot a_{11} + \dots + b_{nn} \cdot a_{1n} & \dots & b_{1n} \cdot a_{n1} + \dots + b_{nn} \cdot a_{nn}
+        \end{pmatrix} = \\
+        = \begin{pmatrix}
+              a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} \\
+              \dots                                             & \dots & \dots                                             \\
+              a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
+        \end{pmatrix}
+    \end{gather*}
+    Левая:
+    \begin{gather*}
+        \left( \bf{A} \cdot \bf{b} \right)^T =
+        \left(
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\
+            \dots  & \dots & \dots  \\
+            a_{n1} & \dots & a_{nn}
+        \end{pmatrix}
+        \cdot
+        \begin{pmatrix}
+            b_{11} & \dots & b_{1n} \\
+            \dots  & \dots & \dots  \\
+            b_{n1} & \dots & b_{nn}
+        \end{pmatrix}
+        \right)^T
+        = \\
+        = \begin{pmatrix}
+              a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} \\
+              \dots                                             & \dots & \dots                                             \\
+              a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
+        \end{pmatrix}^T = \\
+        = \begin{pmatrix}
+              a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} \\
+              \dots                                             & \dots & \dots                                             \\
+              a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
+        \end{pmatrix}
+    \end{gather*}
+    В результате левая и правая части совпадают. Теорема доказана.
+\end{theorem}
+
+\begin{theorem}
+    \begin{equation*}
+        \left( \bf{A} \cdot \bf{B} \right)^{-1} = \bf{B}^{-1} \cdot \bf{A}^{-1}
+    \end{equation*}
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Умножим обе части равенства на $\left( \bf{A} \cdot \bf{B} \right)$. Слева, по определению,
+    получим единичную матрицу. Для выражения справа получаем
+    \begin{equation*}
+        \left( \bf{A} \cdot \bf{B} \right) \cdot \bf{B}^{-1} \cdot \bf{A}^{-1} = \bf{A} \cdot \left( \bf{B} \cdot \bf{B}^{-1} \right) \cdot \bf{A}^{-1} =
+        \bf{A} \cdot \bf{E} \cdot \bf{A}^{-1} = \bf{A} \cdot \bf{A}^{-1} = \bf{E}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    \begin{equation*}
+        \left( \bf{A}^T \right)^{-1} = \left( \bf{A}^{-1} \right)^T
+    \end{equation*}
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Умножим обе части равенства на $\displaystyle \bf{A}^T$. Слева, по определению,
+    получим единичную матрицу. Для выражения справа, используя первую задачу, получаем
+    \begin{equation*}
+        \left( \bf{A}^{-1} \right)^T \cdot \bf{A}^T = \left( \bf{A} \cdot \bf{A}^{-1} \right)^T = \bf{E}^T = \bf{E}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    \begin{equation*}
+        \det \left( \bf{A}^{-1} \right) = \frac{1}{\det\left( \bf{A} \right)}
+    \end{equation*}
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    \bf{TODO}
+\end{theorem}
+
+\begin{theorem}
+    При умножении матрицы \bf{A} на диагональную матрицу \bf{D} \emph{слева} $\bf{B} = \bf{D} \cdot \bf{A}$
+    все \emph{строки} матрицы \bf{A} умножаются на соответствующие диагональные элементы.
+
+    При умножении матрицы \bf{A} на диагональную матрицу \bf{D} \emph{справа} $\bf{B} = \bf{A} \cdot \bf{D}$
+    все \emph{столбцы} матрицы \bf{A} умножаются на соответствующие диагональные элементы.
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Очевидно и следует из определения умножения матриц.
+\end{theorem}
+
+\begin{theorem}
+    Собственные значения диагональной матрицы равны ее диагональным элементам.
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Пускай дана диагональная матрица \bf{D}. Рассмотрим определитель
+    \begin{equation*}
+        \det
+        \begin{pmatrix}
+            d_1 - \uplambda_1 & 0                 & \dots & 0                 \\
+            0                 & d_2 - \uplambda_2 & \dots & 0                 \\
+            \dots             & \dots             & \dots & \dots             \\
+            0                 & 0                 & \dots & d_n - \uplambda_n
         \end{pmatrix}
         = 0
+    \end{equation*}
+    Другими словами
+    \begin{equation*}
+        \left( d_1 - \uplambda_1 \right) \cdot \left( d_2 - \uplambda_2 \right) \dots \left( d_n - \uplambda_n \right) = 0
+    \end{equation*}
+    Поочередно получаем $\displaystyle \uplambda_i = d_i$. Теорема доказана.
+\end{theorem}
+
+\begin{theorem}
+    Собственные значения треугольной матрицы равны ее диагональным элементам.
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    Разложив определитель треугольной матрицы по первому столбцу, убедимся, что он равен произведению ее диагональных элементов.
+    Применим предыдущую задачу к диагональной матрице, элементами которой являются элементы главной диагонали данной.
+    Теорема доказана.
+\end{theorem}
+
+\begin{theorem}
+    При умножении треугольных матриц одного вида получается матрица того же вида.
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    \bf{TODO}
+\end{theorem}
+
+\begin{theorem}
+    Для треугольной матрицы ее обратная матрица имеет тот же вид.
+
+    \underline{Доказательство}.
+    \vspace{5pt}
+
+    \bf{TODO}
+\end{theorem}
+
+\begin{theorem}
+    Для произвольной квадратной матрицы сумма ее собственных значений равна сумме элементов главной диагонали,
+    а произведение ее собственных значений равно ее определителю.
+    \begin{flalign*}
+        &\sum_{k=1}^{N} \uplambda_k = \sum_{k=1}^{N} a_{kk} \\
+        &\prod_{k=1}^{N} \uplambda_k = \det \left( \bf{A} \right)
     \end{flalign*}
+\end{theorem}
 
-    Вычисление этого определителя дает:
-    \begin{equation*}
-        \det \left( \bf{A} - \uplambda \bf{E} \right) = (-1)^n \uplambda^n + b_1 \uplambda^{n-1} + \dots + b_{n-1}\uplambda + b_n = 0
-    \end{equation*}
-    Полином, стоящий в левой части уравнения, называется \emph{характеристическим}, как и само уравнение. Оно
-    имеет ровно $n$ корней (с учетом крастности). Это и есть собственные значения матрицы $\displaystyle \uplambda_1, \uplambda_2, \dots, \uplambda_n$.
-    Они составляют спектр матрицы \bf{A}, а величина $\rho \left( \bf{A} \right) = \max \left| \uplambda_i \right|$ называется
-    \emph{спектральным радиусом}. Для каждого $\uplambda_i$ можно найти решение $\bf{u}_i$, т.е. собственный вектор.
-
-    Поскольку собственные векторы находятся из решения однородной системы, то и неизвестными они оказываются с точностью
-    до постоянного (ненулевого) множителя, т.е. собственные векторы однозначно определены по направлению, но их
-    длины (нормы) остаются произвольными. Часто бывает удобно приводить их к единичной длине. Без доказательства
-    оставим следующую теорему:
-    \begin{theorem}
-        Если все собственные значения матрицы различны, то отвечающие им собственные векторы -- линейно-независимы.
-    \end{theorem}
-
-    \subsection{Задачи на матрицы.}
-    Не умаляя общности, будем считать исходные матрицы квадратными. Те же задачи можно доказать
-    и для матриц в общем виде, достаточно лишь поменять соответствующие индексы.
-    \begin{theorem}
-        \begin{equation*}
-            \left( \bf{A} \cdot \bf{B} \right)^T = \bf{B}^T \cdot \bf{A}^T
-        \end{equation*}
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Рассмотрим отдельно левую и правую части равенства. Правая:
-        \begin{gather*}
-            \bf{B}^T \cdot \bf{A}^T =
-            \begin{pmatrix}
-                b_{11} & \dots & b_{n1} \\
-                \dots  & \dots & \dots  \\
-                b_{1n} & \dots & b_{nn}
-            \end{pmatrix}
-            \cdot
-            \begin{pmatrix}
-                a_{11} & \dots & a_{n1} \\
-                \dots  & \dots & \dots  \\
-                a_{1n} & \dots & a_{nn}
-            \end{pmatrix} =\\
-            =\begin{pmatrix}
-                 b_{11} \cdot a_{11} + \dots + b_{n1} \cdot a_{1n} & \dots & b_{11} \cdot a_{n1} + \dots + b_{n1} \cdot a_{nn} \\
-                 \dots                                             & \dots & \dots                                             \\
-                 b_{1n} \cdot a_{11} + \dots + b_{nn} \cdot a_{1n} & \dots & b_{1n} \cdot a_{n1} + \dots + b_{nn} \cdot a_{nn}
-            \end{pmatrix} = \\
-            = \begin{pmatrix}
-                  a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} \\
-                  \dots                                             & \dots & \dots                                             \\
-                  a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
-            \end{pmatrix}
-        \end{gather*}
-        Левая:
-        \begin{gather*}
-            \left( \bf{A} \cdot \bf{b} \right)^T =
-            \left(
-            \begin{pmatrix}
-                a_{11} & \dots & a_{1n} \\
-                \dots  & \dots & \dots  \\
-                a_{n1} & \dots & a_{nn}
-            \end{pmatrix}
-            \cdot
-            \begin{pmatrix}
-                b_{11} & \dots & b_{1n} \\
-                \dots  & \dots & \dots  \\
-                b_{n1} & \dots & b_{nn}
-            \end{pmatrix}
-            \right)^T
-            = \\
-            = \begin{pmatrix}
-                  a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} \\
-                  \dots                                             & \dots & \dots                                             \\
-                  a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
-            \end{pmatrix}^T = \\
-            = \begin{pmatrix}
-                  a_{11} \cdot b_{11} + \dots + a_{1n} \cdot b_{n1} & \dots & a_{n1} \cdot b_{11} + \dots + a_{nn} \cdot b_{n1} \\
-                  \dots                                             & \dots & \dots                                             \\
-                  a_{11} \cdot b_{1n} + \dots + a_{1n} \cdot b_{nn} & \dots & a_{n1} \cdot b_{1n} + \dots + a_{nn} \cdot b_{nn}
-            \end{pmatrix}
-        \end{gather*}
-        В результате левая и правая части совпадают. Теорема доказана.
-    \end{theorem}
-
-    \begin{theorem}
-        \begin{equation*}
-            \left( \bf{A} \cdot \bf{B} \right)^{-1} = \bf{B}^{-1} \cdot \bf{A}^{-1}
-        \end{equation*}
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Умножим обе части равенства на $\left( \bf{A} \cdot \bf{B} \right)$. Слева, по определению,
-        получим единичную матрицу. Для выражения справа получаем
-        \begin{equation*}
-            \left( \bf{A} \cdot \bf{B} \right) \cdot \bf{B}^{-1} \cdot \bf{A}^{-1} = \bf{A} \cdot \left( \bf{B} \cdot \bf{B}^{-1} \right) \cdot \bf{A}^{-1} =
-            \bf{A} \cdot \bf{E} \cdot \bf{A}^{-1} = \bf{A} \cdot \bf{A}^{-1} = \bf{E}
-        \end{equation*}
-    \end{theorem}
-
-    \begin{theorem}
-        \begin{equation*}
-            \left( \bf{A}^T \right)^{-1} = \left( \bf{A}^{-1} \right)^T
-        \end{equation*}
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Умножим обе части равенства на $\displaystyle \bf{A}^T$. Слева, по определению,
-        получим единичную матрицу. Для выражения справа, используя первую задачу, получаем
-        \begin{equation*}
-            \left( \bf{A}^{-1} \right)^T \cdot \bf{A}^T = \left( \bf{A} \cdot \bf{A}^{-1} \right)^T = \bf{E}^T = \bf{E}
-        \end{equation*}
-    \end{theorem}
-
-    \begin{theorem}
-        \begin{equation*}
-            \det \left( \bf{A}^{-1} \right) = \frac{1}{\det\left( \bf{A} \right)}
-        \end{equation*}
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        \bf{TODO}
-    \end{theorem}
-
-    \begin{theorem}
-        При умножении матрицы \bf{A} на диагональную матрицу \bf{D} \emph{слева} $\bf{B} = \bf{D} \cdot \bf{A}$
-        все \emph{строки} матрицы \bf{A} умножаются на соответствующие диагональные элементы.
-
-        При умножении матрицы \bf{A} на диагональную матрицу \bf{D} \emph{справа} $\bf{B} = \bf{A} \cdot \bf{D}$
-        все \emph{столбцы} матрицы \bf{A} умножаются на соответствующие диагональные элементы.
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Очевидно и следует из определения умножения матриц.
-    \end{theorem}
-
-    \begin{theorem}
-        Собственные значения диагональной матрицы равны ее диагональным элементам.
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Пускай дана диагональная матрица \bf{D}. Рассмотрим определитель
-        \begin{equation*}
-            \det
-            \begin{pmatrix}
-                d_1 - \uplambda_1 & 0                 & \dots & 0                 \\
-                0                 & d_2 - \uplambda_2 & \dots & 0                 \\
-                \dots             & \dots             & \dots & \dots             \\
-                0                 & 0                 & \dots & d_n - \uplambda_n
-            \end{pmatrix}
-            = 0
-        \end{equation*}
-        Другими словами
-        \begin{equation*}
-            \left( d_1 - \uplambda_1 \right) \cdot \left( d_2 - \uplambda_2 \right) \dots \left( d_n - \uplambda_n \right) = 0
-        \end{equation*}
-        Поочередно получаем $\displaystyle \uplambda_i = d_i$. Теорема доказана.
-    \end{theorem}
-
-    \begin{theorem}
-        Собственные значения треугольной матрицы равны ее диагональным элементам.
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        Разложив определитель треугольной матрицы по первому столбцу, убедимся, что он равен произведению ее диагональных элементов.
-        Применим предыдущую задачу к диагональной матрице, элементами которой являются элементы главной диагонали данной.
-        Теорема доказана.
-    \end{theorem}
-
-    \begin{theorem}
-        При умножении треугольных матриц одного вида получается матрица того же вида.
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        \bf{TODO}
-    \end{theorem}
-
-    \begin{theorem}
-        Для треугольной матрицы ее обратная матрица имеет тот же вид.
-
-        \underline{Доказательство}.
-        \vspace{5pt}
-
-        \bf{TODO}
-    \end{theorem}
-
-    \begin{theorem}
-        Для произвольной квадратной матрицы сумма ее собственных значений равна сумме элементов главной диагонали,
-        а произведение ее собственных значений равно ее определителю.
-        \begin{flalign*}
-            &\sum_{k=1}^{N} \uplambda_k = \sum_{k=1}^{N} a_{kk} \\
-            &\prod_{k=1}^{N} \uplambda_k = \det \left( \bf{A} \right)
-        \end{flalign*}
-    \end{theorem}
-
-    \subsection{Нормы матриц.}
-    \begin{definition}[Норма матрицы]
-        \emph{Нормой} матрицы $\left\| \bf{A} \right\|$ называется число, удовлетворяющее следующим аксиомам:
-        \begin{enumerate}
-            \item $\displaystyle \left\| \bf{A} \right\| \geq 0$, при этом $\displaystyle \left\| \bf{A} \right\| = 0 \Leftrightarrow \bf{A} = \bf{O}$
-            \item $\displaystyle \left\| \alpha \bf{A} \right\| = \left| \alpha \right| \left\| \bf{A} \right\|$
-            \item $\left\| \bf{A} + \bf{B} \right\| \leq \left\| \bf{A} \right\| + \left\| \bf{B} \right\|$
-            \item $\left\| \bf{A} \cdot \bf{B} \right\| \leq \left\| \bf{A} \right\| \cdot \left\| \bf{B} \right\|$
-        \end{enumerate}
-    \end{definition}
-    Норма также называется \emph{канонической}, если к тому же выполняются следующие аксиомы:
+\subsection{Нормы матриц.}
+\begin{definition}[Норма матрицы]
+    \emph{Нормой} матрицы $\left\| \bf{A} \right\|$ называется число, удовлетворяющее следующим аксиомам:
     \begin{enumerate}
-        \item[5.] $a_{ik} \leq \left\| \bf{A} \right\| \qquad \forall i, k$
-        \item[6.] Если $\forall i, k \, \left| a_{ik} \right| \leq \left| b_{ik} \right|$, то $\left\| \bf{A} \right\| \leq \left\| \bf{B} \right\|$
+        \item $\displaystyle \left\| \bf{A} \right\| \geq 0$, при этом $\displaystyle \left\| \bf{A} \right\| = 0 \Leftrightarrow \bf{A} = \bf{O}$
+        \item $\displaystyle \left\| \alpha \bf{A} \right\| = \left| \alpha \right| \left\| \bf{A} \right\|$
+        \item $\left\| \bf{A} + \bf{B} \right\| \leq \left\| \bf{A} \right\| + \left\| \bf{B} \right\|$
+        \item $\left\| \bf{A} \cdot \bf{B} \right\| \leq \left\| \bf{A} \right\| \cdot \left\| \bf{B} \right\|$
     \end{enumerate}
-    Примерами матричной нормы являются:
-    \begin{equation*}
-        \left\| \bf{A} \right\|_1 = \max_i \sum_{j=1}^{n} \left| a_{ij} \right|; \qquad \left\| \bf{A} \right\|_2 = \max_j \sum_{i=1}^{n} \left| a_{ij} \right|;
-        \qquad \left\| \bf{A} \right\|_3 = \left( \sum_{i=1}^{n} \sum_{j=1}^{n} \left| a_{ij} \right|^2 \right)^{1/2}
-    \end{equation*}
-    Последняя называется \emph{Евклидовой нормой}. Все эти нормы являются каноническими, т.е. удовлетворяют всем шести аксиомам.
+\end{definition}
+Норма также называется \emph{канонической}, если к тому же выполняются следующие аксиомы:
+\begin{enumerate}
+    \item[5.] $a_{ik} \leq \left\| \bf{A} \right\| \qquad \forall i, k$
+    \item[6.] Если $\forall i, k \, \left| a_{ik} \right| \leq \left| b_{ik} \right|$, то $\left\| \bf{A} \right\| \leq \left\| \bf{B} \right\|$
+\end{enumerate}
+Примерами матричной нормы являются:
+\begin{equation*}
+    \left\| \bf{A} \right\|_1 = \max_i \sum_{j=1}^{n} \left| a_{ij} \right|; \qquad \left\| \bf{A} \right\|_2 = \max_j \sum_{i=1}^{n} \left| a_{ij} \right|;
+    \qquad \left\| \bf{A} \right\|_3 = \left( \sum_{i=1}^{n} \sum_{j=1}^{n} \left| a_{ij} \right|^2 \right)^{1/2}
+\end{equation*}
+Последняя называется \emph{Евклидовой нормой}. Все эти нормы являются каноническими, т.е. удовлетворяют всем шести аксиомам.
 
-    \subsection{Матричный ряд и матричные функции.}
-    Наиболее простыми матричными функциями являются полиномы. Для их построения необходимо образовать степени матрицы,
-    которые определены только для квадратных матриц, поэтому далее речь пойдет о них.
+\subsection{Матричный ряд и матричные функции.}
+Наиболее простыми матричными функциями являются полиномы. Для их построения необходимо образовать степени матрицы,
+которые определены только для квадратных матриц, поэтому далее речь пойдет о них.
 
-    По определению $\displaystyle \bf{A}^k = \prod_{i=1}^k \bf{A}, \, \bf{A}^0 = \bf{E}$. Тогда матричный полином:
-    \begin{equation*}
-        \bf{P}_n \left( \bf{A} \right) = c_0 \bf{E} + c_1 \bf{A} + c_2 \bf{A}^2 + \dots + c_n \bf{A}^n
-    \end{equation*}
-    Аргументом является квадратная матрица $m \times m$, и значением будет матрица той же размерности.
+По определению $\displaystyle \bf{A}^k = \prod_{i=1}^k \bf{A}, \, \bf{A}^0 = \bf{E}$. Тогда матричный полином:
+\begin{equation*}
+    \bf{P}_n \left( \bf{A} \right) = c_0 \bf{E} + c_1 \bf{A} + c_2 \bf{A}^2 + \dots + c_n \bf{A}^n
+\end{equation*}
+Аргументом является квадратная матрица $m \times m$, и значением будет матрица той же размерности.
 
-    Теперь устремим $n$ к бесконечности, т.е. формально перейдем к бесконечной сумме
-    \begin{equation}
-        \bf{P}\left( \bf{A} \right) = \sum_{\gamma = 0}^{\infty} c_{\gamma} \bf{A}^{\gamma} \label{eq:matrix_row}
-    \end{equation}
-    Такая сумма называется степенным матричным рядом относительно матрицы \bf{A}. Матричному ряду естественно
-    сопоставить скалярный ряд
-    \begin{equation*}
-        p(x) = \sum_{\gamma = 0}^{\infty} c_{\gamma} x^{\gamma}
-    \end{equation*}
-    Матричный ряд будем называться \emph{сходящимся}, если сходятся все $m^2$ скалярных рядов для элементов
-    матрицы $\bf{P}\left( \bf{A} \right)$. Введенное понятие нормы позволяет установить достаточное условие
-    сходимости матричного ряда. Введем матрицу $\displaystyle \bf{U}^{(\gamma)} = c_{\gamma}\bf{A}^{\gamma}$.
-    Обозначим ее элементы за $\displaystyle u_{kj}^{(\gamma)}$, а элементы матрицы $\bf{P} \left( \bf{A} \right)$
-    за $\displaystyle p_{kj}$. Тогда с учетом выполнения шести аксиом для канонической нормы имеем цепочку
-    неравенств
-    \begin{equation*}
-        \displaystyle \left| p_{kj} \right| = \left| \sum_{\gamma = 0}^{\infty} u_{kj}^{(\gamma)} \right| \leq \sum_{\gamma = 0}^{\infty} \left| u_{kj}^{(\gamma)} \right|
-        \leq \sum_{\gamma = 0}^{\infty} \left\| c_{\gamma} \bf{A}^{\gamma} \right\| = \sum_{\gamma = 0}^{\infty} \left| c_{\gamma} \right| \left\| \bf{A}^{\gamma} \right\|
-        \leq \sum_{\gamma = 0}^{\infty} \left| c_{\gamma} \right| \left\| \bf{A} \right\|^{\gamma}
-    \end{equation*}
-    В результате \emph{достаточным} условием сходимости матричного ряда является выполнение условия
-    \begin{equation}
-        \left\| \bf{A} \right\| < R
-    \end{equation}
-    являющегося, в свою очередь, условием абсолютной сходимости скалярного степенного ряда, стоящего последним в цепочке
-    неравенств. Здесь $R$ -- радиус сходимости скалярного степенного ряда.
+Теперь устремим $n$ к бесконечности, т.е. формально перейдем к бесконечной сумме
+\begin{equation}
+    \bf{P}\left( \bf{A} \right) = \sum_{\gamma = 0}^{\infty} c_{\gamma} \bf{A}^{\gamma} \label{eq:matrix_row}
+\end{equation}
+Такая сумма называется степенным матричным рядом относительно матрицы \bf{A}. Матричному ряду естественно
+сопоставить скалярный ряд
+\begin{equation*}
+    p(x) = \sum_{\gamma = 0}^{\infty} c_{\gamma} x^{\gamma}
+\end{equation*}
+Матричный ряд будем называться \emph{сходящимся}, если сходятся все $m^2$ скалярных рядов для элементов
+матрицы $\bf{P}\left( \bf{A} \right)$. Введенное понятие нормы позволяет установить достаточное условие
+сходимости матричного ряда. Введем матрицу $\displaystyle \bf{U}^{(\gamma)} = c_{\gamma}\bf{A}^{\gamma}$.
+Обозначим ее элементы за $\displaystyle u_{kj}^{(\gamma)}$, а элементы матрицы $\bf{P} \left( \bf{A} \right)$
+за $\displaystyle p_{kj}$. Тогда с учетом выполнения шести аксиом для канонической нормы имеем цепочку
+неравенств
+\begin{equation*}
+    \displaystyle \left| p_{kj} \right| = \left| \sum_{\gamma = 0}^{\infty} u_{kj}^{(\gamma)} \right| \leq \sum_{\gamma = 0}^{\infty} \left| u_{kj}^{(\gamma)} \right|
+    \leq \sum_{\gamma = 0}^{\infty} \left\| c_{\gamma} \bf{A}^{\gamma} \right\| = \sum_{\gamma = 0}^{\infty} \left| c_{\gamma} \right| \left\| \bf{A}^{\gamma} \right\|
+    \leq \sum_{\gamma = 0}^{\infty} \left| c_{\gamma} \right| \left\| \bf{A} \right\|^{\gamma}
+\end{equation*}
+В результате \emph{достаточным} условием сходимости матричного ряда является выполнение условия
+\begin{equation}
+    \left\| \bf{A} \right\| < R
+\end{equation}
+являющегося, в свою очередь, условием абсолютной сходимости скалярного степенного ряда, стоящего последним в цепочке
+неравенств. Здесь $R$ -- радиус сходимости скалярного степенного ряда.
 
-    \begin{definition}[Матричная функция]
-        Если матричный ряд сходится, то матрицу $\bf{P} \left( \bf{A} \right)$ называется
-        \emph{матричной функцией}.
-    \end{definition}
-    Примеры матричных функций:
-    \begin{gather*}
-        e^{\bf{A}} = \sum_{k=0}^{\infty} \frac{\bf{A}^k}{k!} \qquad \cos\left( \bf{A} \right) = \sum_{k=0}^{\infty} \frac{(-1)^k \bf{A}^{2k}}{(2k)!} \\
-        \sin \left( \bf{A} \right) = \sum_{k=0}^{\infty} \frac{(-1)^k \bf{A}^{2k + 1}}{(2k+1)!} \qquad \left( \bf{E} - \bf{A} \right)^{-1} = \sum_{k=0}^{\infty} \bf{A}^k
-    \end{gather*}
-\end{document}
+\begin{definition}[Матричная функция]
+    Если матричный ряд сходится, то матрицу $\bf{P} \left( \bf{A} \right)$ называется
+    \emph{матричной функцией}.
+\end{definition}
+Примеры матричных функций:
+\begin{gather*}
+    e^{\bf{A}} = \sum_{k=0}^{\infty} \frac{\bf{A}^k}{k!} \qquad \cos\left( \bf{A} \right) = \sum_{k=0}^{\infty} \frac{(-1)^k \bf{A}^{2k}}{(2k)!} \\
+    \sin \left( \bf{A} \right) = \sum_{k=0}^{\infty} \frac{(-1)^k \bf{A}^{2k + 1}}{(2k+1)!} \qquad \left( \bf{E} - \bf{A} \right)^{-1} = \sum_{k=0}^{\infty} \bf{A}^k
+\end{gather*}

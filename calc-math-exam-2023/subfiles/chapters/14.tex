@@ -1,42 +1,39 @@
-\documentclass[../../calc-math-exam-2023.tex]{subfiles}
-\begin{document}
-    \section{Среднеквадратичная аппроксимация (непрерывный случай). Понятие ортогональности.}\label{sec:ch14}
-    Теперь обратимся к варианту непрерывного задания $f(x)$ на $[a, b]$
-    \begin{equation}
-        \rho^2 = \int_a^b \left( Q(x) - f(x) \right)^2 dx \rightarrow \min \label{eq:approx_continuity}
-    \end{equation}
-    СЛАУ относительно $a_k$ сохранит прежний вид, только вместо сумм будут интегралы
-    \begin{equation}
-        a_0 \int_{a}^{b} \varphi_0 (x) \cdot \varphi_k (x) dx + a_1 \int_{a}^{b} \varphi_1 (x) \cdot \varphi_k (x) dx + \dots + a_m \int_{a}^{b} \varphi_m (x) \cdot \varphi_k (x) dx = \int_{a}^{b} f(x) \cdot \varphi_k (x) dx \label{eq:approx_eqsys_cont}
-    \end{equation}
+\section{Среднеквадратичная аппроксимация (непрерывный случай). Понятие ортогональности.}\label{sec:ch14}
+Теперь обратимся к варианту непрерывного задания $f(x)$ на $[a, b]$
+\begin{equation}
+    \rho^2 = \int_a^b \left( Q(x) - f(x) \right)^2 dx \rightarrow \min \label{eq:approx_continuity}
+\end{equation}
+СЛАУ относительно $a_k$ сохранит прежний вид, только вместо сумм будут интегралы
+\begin{equation}
+    a_0 \int_{a}^{b} \varphi_0 (x) \cdot \varphi_k (x) dx + a_1 \int_{a}^{b} \varphi_1 (x) \cdot \varphi_k (x) dx + \dots + a_m \int_{a}^{b} \varphi_m (x) \cdot \varphi_k (x) dx = \int_{a}^{b} f(x) \cdot \varphi_k (x) dx \label{eq:approx_eqsys_cont}
+\end{equation}
 
-    Аналогично дискретному случаю критерий $\displaystyle \rho^2$ может быть обобщен введением
-    положительной весовой функции $p(x)$
-    \begin{equation}
-        \rho^2 = \int_a^b p(x) \left( Q(x) - f(x) \right)^2 dx \rightarrow \min \label{eq:approx_with_p_cont}
-    \end{equation}
-    Все формулы сохранят прежний вид, а под знаком интеграла появится $p(x)$
-    \begin{equation}
-        a_0 \int_{a}^{b} p(x) \cdot \varphi_0 (x) \cdot \varphi_k (x) dx + \dots + a_m \int_{a}^{b} p(x) \cdot \varphi_m (x) \cdot \varphi_k (x) dx = \int_{a}^{b} p(x) \cdot f(x) \cdot \varphi_k (x) dx \label{eq:approx_eqsys_with_p_cont}
-    \end{equation}
+Аналогично дискретному случаю критерий $\displaystyle \rho^2$ может быть обобщен введением
+положительной весовой функции $p(x)$
+\begin{equation}
+    \rho^2 = \int_a^b p(x) \left( Q(x) - f(x) \right)^2 dx \rightarrow \min \label{eq:approx_with_p_cont}
+\end{equation}
+Все формулы сохранят прежний вид, а под знаком интеграла появится $p(x)$
+\begin{equation}
+    a_0 \int_{a}^{b} p(x) \cdot \varphi_0 (x) \cdot \varphi_k (x) dx + \dots + a_m \int_{a}^{b} p(x) \cdot \varphi_m (x) \cdot \varphi_k (x) dx = \int_{a}^{b} p(x) \cdot f(x) \cdot \varphi_k (x) dx \label{eq:approx_eqsys_with_p_cont}
+\end{equation}
 
-    Решение системы~\eqref{eq:approx_eqsys_with_p_cont} значительно упрощается, если вместо произвольных
-    линейно независимых функций $\left\{ \varphi_k (x) \right\}$ воспользоваться ортогональными функциями
-    $\left\{ g_k(x) \right\}$. Последовательность функций $\left\{ g_k(x) \right\}$ является ортогональной
-    на промежутке $[a, b]$ с весом $p(x)$, если выполняются следующие условия
-    \begin{equation*}
-        \int_{a}^{b} p(x)g_k(x)g_i(x)dx =
-        \begin{cases}
-            0\text{, если } i \neq k\\
-            A > 0\text{, если } i = k
-        \end{cases}
-    \end{equation*}
-    Если в дополнение $A = 1$, то такие функции называются \emph{ортонормированными}. Для ортогональных
-    функций все интегралы, кроме одного, в левой части~\eqref{eq:approx_eqsys_with_p_cont} равные нулю,
-    матрица этой системы оказывается диагональной, и каждое уравнение дает готовое выражение для
-    коэффициента
-    \begin{equation}
-        a_k = \frac{\displaystyle \int_{a}^{b} p(x)f(x)g_k(x)dx}{\displaystyle \int_{a}^{b} p(x)g_k^2(x)dx}
-    \end{equation}
-    Если исходный базис не является ортогональным, его можно сделать таковым, используя процедуру Грама-Шмидта.
-\end{document}
+Решение системы~\eqref{eq:approx_eqsys_with_p_cont} значительно упрощается, если вместо произвольных
+линейно независимых функций $\left\{ \varphi_k (x) \right\}$ воспользоваться ортогональными функциями
+$\left\{ g_k(x) \right\}$. Последовательность функций $\left\{ g_k(x) \right\}$ является ортогональной
+на промежутке $[a, b]$ с весом $p(x)$, если выполняются следующие условия
+\begin{equation*}
+    \int_{a}^{b} p(x)g_k(x)g_i(x)dx =
+    \begin{cases}
+        0\text{, если } i \neq k\\
+        A > 0\text{, если } i = k
+    \end{cases}
+\end{equation*}
+Если в дополнение $A = 1$, то такие функции называются \emph{ортонормированными}. Для ортогональных
+функций все интегралы, кроме одного, в левой части~\eqref{eq:approx_eqsys_with_p_cont} равные нулю,
+матрица этой системы оказывается диагональной, и каждое уравнение дает готовое выражение для
+коэффициента
+\begin{equation}
+    a_k = \frac{\displaystyle \int_{a}^{b} p(x)f(x)g_k(x)dx}{\displaystyle \int_{a}^{b} p(x)g_k^2(x)dx}
+\end{equation}
+Если исходный базис не является ортогональным, его можно сделать таковым, используя процедуру Грама-Шмидта.

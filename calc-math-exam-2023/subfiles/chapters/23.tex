@@ -1,152 +1,150 @@
-\documentclass[../../calc-math-exam-2023.tex]{subfiles}
-\begin{document}
-    \section{Методы последовательных приближений и Ньютона для решения нелинейных уравнений и систем.}\label{sec:ch23}
-    \subsection{Метод последовательных приближений для решения нелинейных уравнений.}
-    Эквивалентными преобразованиями приведем $f(x) = 0$ к виду
-    \begin{equation}
-        x = \varphi(x) \label{eq:approx_single_help}
-    \end{equation}
-    Вместо этого уравнения предлагается решить разностное
-    \begin{equation}
-        x_{n+1} = \varphi(x_n) \label{eq:approx_single}
-    \end{equation}
-    пошаговым методом. Для оценки сходимости запишем равенство~\eqref{eq:approx_single_help} в точке $x^*$ и вычтем из
-    него равенство~\eqref{eq:approx_single}:
-    \begin{equation*}
-        \varepsilon_{n+1} = x^* - x_{n+1} = \varphi(x^*) - \varphi(x_n) = \varphi(x_n + \varepsilon_n) - \varphi(x_n)
-    \end{equation*}
-    Раскладывая $\varphi(x_n + \varepsilon_n)$ в ряд по степеням $\varepsilon_n$ и ограничиваясь в остаточном члене
-    первой производной, получаем уравнение погрешности
-    \begin{equation*}
-        \varepsilon_{n+1} = \varphi(x_n + \varepsilon_n) - \varphi(x_n) = \varphi(x_n) + \varepsilon_n \varphi'(\eta) - \varphi(x_n) = \varepsilon_n \varphi'(\eta)
-    \end{equation*}
-    Отсюда непосредственно следует, что для убывания погрешности необходимо потребовать выполнение условия
-    \begin{equation*}
-        \left| \varphi'(\eta) \right| < 1
-    \end{equation*}
-    Искусство пользователя, таким образом, заключается в приведении уравнения $f(x) = 0$ к виду~\eqref{eq:approx_single_help}
-    так, чтобы имело место это неравенство. При этом, чем меньше по модулю значение производной, тем быстрее достигается
-    желаемая точность.
+\section{Методы последовательных приближений и Ньютона для решения нелинейных уравнений и систем.}\label{sec:ch23}
 
-    \subsection{Метод Ньютона для решения нелинейных уравнений.}
-    Высокой скоростью сходимости в ряде случаев обладает \emph{метод Ньютона} (или \emph{метод касательных}).
-    Подставляя в уравнение $f(x) = 0$ его корень $x^*$, и раскладывая в ряд по степеням $\varepsilon_n$
-    \begin{equation*}
-        0 = f(x^*) = f(x_n + \varepsilon_n) = f(x_n) + \varepsilon_n f'(x_n) + \frac{\varepsilon_n^2}{2!}f''(\eta)
-    \end{equation*}
-    пренебрежем последним слагаемым и для $\varepsilon_n$ получим
-    \begin{equation*}
-        \varepsilon_n \approx - \frac{f(x_n)}{f'(x_n)}
-    \end{equation*}
-    Тогда рабочая формула Ньютона принимает вид:
-    \begin{equation}
-        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \label{eq:newton_formula_single}
-    \end{equation}
-    В отличие от методов биссекции, секущих и обратной квадратической интерполяции сходимость~\eqref{eq:newton_formula_single}
-    обеспечивается далеко не всегда. В перечне достаточных условий сходимости фигурирует не только существование ненулевой
-    производной $f'(x)$ в точках $x_n$, но и ее знакопостоянство. Если, тем не менее, методу Ньютона обеспечено хорошее
-    начальное приближение, то в дальнейшем убывание погрешности носит квадратичный характер. Для доказательства этого
-    факта из очевидного неравенства $x^* = x^*$ вычтем уравнение~\eqref{eq:newton_formula_single}:
-    \begin{equation}
-        \varepsilon_{n+1} = \varepsilon_n + \frac{f(x_n)}{f'(x_n)} = \frac{f(x_n) + \varepsilon_n f'(x_n)}{f'(x_n)}
-    \end{equation}
-    Упрощая числитель при помощи выполненного разложения в ряд, получаем
-    \begin{equation*}
-        \varepsilon_{n+1} = - \frac{f''(\eta)}{2f'(x_n)}\varepsilon_n^2
-    \end{equation*}
-    \begin{equation}
-        |\varepsilon_{n+1}| < C\varepsilon_n^2, \qquad \left| \frac{f''(\eta)}{2f'(x_n)} \right| < C
-    \end{equation}
+\subsection{Метод последовательных приближений для решения нелинейных уравнений.}
+Эквивалентными преобразованиями приведем $f(x) = 0$ к виду
+\begin{equation}
+    x = \varphi(x) \label{eq:approx_single_help}
+\end{equation}
+Вместо этого уравнения предлагается решить разностное
+\begin{equation}
+    x_{n+1} = \varphi(x_n) \label{eq:approx_single}
+\end{equation}
+пошаговым методом. Для оценки сходимости запишем равенство~\eqref{eq:approx_single_help} в точке $x^*$ и вычтем из
+него равенство~\eqref{eq:approx_single}:
+\begin{equation*}
+    \varepsilon_{n+1} = x^* - x_{n+1} = \varphi(x^*) - \varphi(x_n) = \varphi(x_n + \varepsilon_n) - \varphi(x_n)
+\end{equation*}
+Раскладывая $\varphi(x_n + \varepsilon_n)$ в ряд по степеням $\varepsilon_n$ и ограничиваясь в остаточном члене
+первой производной, получаем уравнение погрешности
+\begin{equation*}
+    \varepsilon_{n+1} = \varphi(x_n + \varepsilon_n) - \varphi(x_n) = \varphi(x_n) + \varepsilon_n \varphi'(\eta) - \varphi(x_n) = \varepsilon_n \varphi'(\eta)
+\end{equation*}
+Отсюда непосредственно следует, что для убывания погрешности необходимо потребовать выполнение условия
+\begin{equation*}
+    \left| \varphi'(\eta) \right| < 1
+\end{equation*}
+Искусство пользователя, таким образом, заключается в приведении уравнения $f(x) = 0$ к виду~\eqref{eq:approx_single_help}
+так, чтобы имело место это неравенство. При этом, чем меньше по модулю значение производной, тем быстрее достигается
+желаемая точность.
 
-    Для расширения области сходимости можно использовать метод Ньютона с регулировкой шага
-    \begin{equation}
-        x_{n+1} = x_n - \alpha_n \frac{f(x_n)}{f'(x_n)}, \qquad 0 < \alpha_n \leq 1
-    \end{equation}
-    Первоначально, когда начальное приближение $x_0$ еще далеко от $x^*$, параметр $\alpha_n$ выбирают меньше 1
-    (часто на практике это примерно 1/3), а по мере приближения $x_n$ к $x^*$ значение $\alpha_n \rightarrow 1$,
-    превращая уравнение в обычный метод Ньютона. В некоторых случаях это и позволяет расширить область сходимости.
+\subsection{Метод Ньютона для решения нелинейных уравнений.}
+Высокой скоростью сходимости в ряде случаев обладает \emph{метод Ньютона} (или \emph{метод касательных}).
+Подставляя в уравнение $f(x) = 0$ его корень $x^*$, и раскладывая в ряд по степеням $\varepsilon_n$
+\begin{equation*}
+    0 = f(x^*) = f(x_n + \varepsilon_n) = f(x_n) + \varepsilon_n f'(x_n) + \frac{\varepsilon_n^2}{2!}f''(\eta)
+\end{equation*}
+пренебрежем последним слагаемым и для $\varepsilon_n$ получим
+\begin{equation*}
+    \varepsilon_n \approx - \frac{f(x_n)}{f'(x_n)}
+\end{equation*}
+Тогда рабочая формула Ньютона принимает вид:
+\begin{equation}
+    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \label{eq:newton_formula_single}
+\end{equation}
+В отличие от методов биссекции, секущих и обратной квадратической интерполяции сходимость~\eqref{eq:newton_formula_single}
+обеспечивается далеко не всегда. В перечне достаточных условий сходимости фигурирует не только существование ненулевой
+производной $f'(x)$ в точках $x_n$, но и ее знакопостоянство. Если, тем не менее, методу Ньютона обеспечено хорошее
+начальное приближение, то в дальнейшем убывание погрешности носит квадратичный характер. Для доказательства этого
+факта из очевидного неравенства $x^* = x^*$ вычтем уравнение~\eqref{eq:newton_formula_single}:
+\begin{equation}
+    \varepsilon_{n+1} = \varepsilon_n + \frac{f(x_n)}{f'(x_n)} = \frac{f(x_n) + \varepsilon_n f'(x_n)}{f'(x_n)}
+\end{equation}
+Упрощая числитель при помощи выполненного разложения в ряд, получаем
+\begin{equation*}
+    \varepsilon_{n+1} = - \frac{f''(\eta)}{2f'(x_n)}\varepsilon_n^2
+\end{equation*}
+\begin{equation}
+    |\varepsilon_{n+1}| < C\varepsilon_n^2, \qquad \left| \frac{f''(\eta)}{2f'(x_n)} \right| < C
+\end{equation}
 
-    Широкое распространение получил и модифицированный метод Ньютона с постоянной производной
-    \begin{equation}
-        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_0)}
-    \end{equation}
-    Сходимость в этом случае несколько замедляется, но заметно уменьшается трудоемкость отдельной итерации, не требующей
-    теперь вычисления производной.
+Для расширения области сходимости можно использовать метод Ньютона с регулировкой шага
+\begin{equation}
+    x_{n+1} = x_n - \alpha_n \frac{f(x_n)}{f'(x_n)}, \qquad 0 < \alpha_n \leq 1
+\end{equation}
+Первоначально, когда начальное приближение $x_0$ еще далеко от $x^*$, параметр $\alpha_n$ выбирают меньше 1
+(часто на практике это примерно 1/3), а по мере приближения $x_n$ к $x^*$ значение $\alpha_n \rightarrow 1$,
+превращая уравнение в обычный метод Ньютона. В некоторых случаях это и позволяет расширить область сходимости.
 
-    \subsection{Метод Ньютона для решения нелинейных систем.}
-    Решение систем нелинейных уравнений доставляет очень большие трудности, так как нет универсальных алгоритмов
-    решения этих задач, особенно для больших $m$.
+Широкое распространение получил и модифицированный метод Ньютона с постоянной производной
+\begin{equation}
+    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_0)}
+\end{equation}
+Сходимость в этом случае несколько замедляется, но заметно уменьшается трудоемкость отдельной итерации, не требующей
+теперь вычисления производной.
 
-    Достоинством метода Ньютона является то, что он обобщается на системы уравнений. С этой целью обратимся к уравнению
-    $f(x) = 0$, полагая \bf{x} и \bf{f} векторами:
-    \begin{equation*}
-        \bf{x} = \left( x^{(1)}, x^{(2)}, \ldots, x^{(m)} \right)^T, \quad \bf{f} = \left( f^{(1)}, f^{(2)}, \ldots, f^{(m)} \right)^T
-    \end{equation*}
-    Формула, являющаяся аналогом~\eqref{eq:newton_formula_single} может быть получена таким же образом, как и для
-    скалярного случая, на основе разложения в ряд. При этом $\varepsilon_n$ представляет собой вектор, и разложение в
-    ряд необходимо проводить по всем компонентам этого вектора для \bf{f}, как функции многих переменных.
+\subsection{Метод Ньютона для решения нелинейных систем.}
+Решение систем нелинейных уравнений доставляет очень большие трудности, так как нет универсальных алгоритмов
+решения этих задач, особенно для больших $m$.
 
-    В качестве иллюстрации остановимся на системе двух нелинейных уравнений с прежними обозначениями $\bf{x}_* = \bf{x}_n + \bm{\varepsilon}_n$
-    \begin{equation*}
-        \bf{x}_* =
-        \begin{pmatrix}
-            x_*^{(1)} \\
-            x_*^{(2)}
-        \end{pmatrix}
-        , \quad \bf{x}_n =
-        \begin{pmatrix}
-            x_n^{(1)} \\
-            x_n^{(2)}
-        \end{pmatrix}
-        , \quad \bm{\varepsilon}_n =
-        \begin{pmatrix}
-            \varepsilon_n^{(1)} \\
-            \varepsilon_n^{(2)}
-        \end{pmatrix}
-        , \quad \bf{f} =
-        \begin{pmatrix}
-            f^{(1)} \\
-            f^{(2)}
-        \end{pmatrix}
-    \end{equation*}
-    Подставим в первое уравнение значение решения $\bf{x}_*$ и разложим в ряд по $\varepsilon_n^{(1)}$ и $\varepsilon_n^{(2)}$,
-    пренебрегая малыми второго порядка и выше
-    \begin{flalign*}
-        &0 = f^{(1)}\left( x_*^{(1)}, x_*^{(2)} \right) = f^{(1)}\left( x_n^{(1)} + \varepsilon_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) = f^{(1)}\left( x_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) +\\
-        &+ \frac{\partial f^{(1)}}{\partial x^{(1)}} \left( x_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + (**) = f^{(1)}\left( x_n^{(1)}, x_n^{(2)} \right) + \frac{\partial f^{(1)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)}\\
-        &+ \frac{\partial f^{(1)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + (**)
-    \end{flalign*}
-    Аналогичное разложение можем записать для второго уравнения и суммарно получаем
-    \begin{flalign*}
-        &\frac{\partial f^{(1)}}{\partial x_n^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + \frac{\partial f^{(1)}}{\partial x_n^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)} = -f^{(1)} \left( x_n^{(1)}, x_n^{(2)} \right)\\
-        &\frac{\partial f^{(2)}}{\partial x_n^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + \frac{\partial f^{(2)}}{\partial x_n^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)} = -f^{(2)} \left( x_n^{(1)}, x_n^{(2)} \right)\
-    \end{flalign*}
-    Эта система может быть записана в матричной форме
-    \begin{equation}
-        \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}} \left( \bf{x}_{n+1} - \bf{x}_n \right) = -\bf{f}(\bf{x}_n) \label{eq:iter_matrix_1}
-    \end{equation}
-    или
-    \begin{equation}
-        \bf{x}_{n+1} = \bf{x}_n - \left( \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}_n} \right)^{-1} \bf{f}(\bf{x}_n) \label{eq:iter_matrix_2}
-    \end{equation}
-    где $\displaystyle \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}}$ -- матрица Якоби решаемой системы
-    \begin{equation*}
-        \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}} =
-        \begin{pmatrix}
-            \displaystyle \frac{\partial f^{(1)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) & \displaystyle \frac{\partial f^{(1)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \\
-            \displaystyle \frac{\partial f^{(2)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) & \displaystyle \frac{\partial f^{(2)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right)
-        \end{pmatrix}
-    \end{equation*}
+Достоинством метода Ньютона является то, что он обобщается на системы уравнений. С этой целью обратимся к уравнению
+$f(x) = 0$, полагая \bf{x} и \bf{f} векторами:
+\begin{equation*}
+    \bf{x} = \left( x^{(1)}, x^{(2)}, \ldots, x^{(m)} \right)^T, \quad \bf{f} = \left( f^{(1)}, f^{(2)}, \ldots, f^{(m)} \right)^T
+\end{equation*}
+Формула, являющаяся аналогом~\eqref{eq:newton_formula_single} может быть получена таким же образом, как и для
+скалярного случая, на основе разложения в ряд. При этом $\varepsilon_n$ представляет собой вектор, и разложение в
+ряд необходимо проводить по всем компонентам этого вектора для \bf{f}, как функции многих переменных.
 
-    Представление метода в виде~\eqref{eq:iter_matrix_2} позволяет уменьшить вычислительные затраты, поскольку не требует
-    обращения матрицы Якоби, а сводится к решению линейной алгебраической системы на каждом шаге итерационного процесса.
-    Как и в скалярном случае, в достаточно малой окрестности корня итерации сходятся и скорость сходимости квадратичная.
-    Значительно уменьшается объем вычислений в модифицированном варианте метода Ньютона, когда матрица Якоби вычисляется
-    однократно, раскладывается в произведение треугольных матриц программой \verb|DECOMP|, а затем для получения очередного
-    приближения используется только программа \verb|SOLVE|.
+В качестве иллюстрации остановимся на системе двух нелинейных уравнений с прежними обозначениями $\bf{x}_* = \bf{x}_n + \bm{\varepsilon}_n$
+\begin{equation*}
+    \bf{x}_* =
+    \begin{pmatrix}
+        x_*^{(1)} \\
+        x_*^{(2)}
+    \end{pmatrix}
+    , \quad \bf{x}_n =
+    \begin{pmatrix}
+        x_n^{(1)} \\
+        x_n^{(2)}
+    \end{pmatrix}
+    , \quad \bm{\varepsilon}_n =
+    \begin{pmatrix}
+        \varepsilon_n^{(1)} \\
+        \varepsilon_n^{(2)}
+    \end{pmatrix}
+    , \quad \bf{f} =
+    \begin{pmatrix}
+        f^{(1)} \\
+        f^{(2)}
+    \end{pmatrix}
+\end{equation*}
+Подставим в первое уравнение значение решения $\bf{x}_*$ и разложим в ряд по $\varepsilon_n^{(1)}$ и $\varepsilon_n^{(2)}$,
+пренебрегая малыми второго порядка и выше
+\begin{flalign*}
+    &0 = f^{(1)}\left( x_*^{(1)}, x_*^{(2)} \right) = f^{(1)}\left( x_n^{(1)} + \varepsilon_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) = f^{(1)}\left( x_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) +\\
+    &+ \frac{\partial f^{(1)}}{\partial x^{(1)}} \left( x_n^{(1)}, x_n^{(2)} + \varepsilon_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + (**) = f^{(1)}\left( x_n^{(1)}, x_n^{(2)} \right) + \frac{\partial f^{(1)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)}\\
+    &+ \frac{\partial f^{(1)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + (**)
+\end{flalign*}
+Аналогичное разложение можем записать для второго уравнения и суммарно получаем
+\begin{flalign*}
+    &\frac{\partial f^{(1)}}{\partial x_n^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + \frac{\partial f^{(1)}}{\partial x_n^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)} = -f^{(1)} \left( x_n^{(1)}, x_n^{(2)} \right)\\
+    &\frac{\partial f^{(2)}}{\partial x_n^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(1)} + \frac{\partial f^{(2)}}{\partial x_n^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \cdot \varepsilon_n^{(2)} = -f^{(2)} \left( x_n^{(1)}, x_n^{(2)} \right)\
+\end{flalign*}
+Эта система может быть записана в матричной форме
+\begin{equation}
+    \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}} \left( \bf{x}_{n+1} - \bf{x}_n \right) = -\bf{f}(\bf{x}_n) \label{eq:iter_matrix_1}
+\end{equation}
+или
+\begin{equation}
+    \bf{x}_{n+1} = \bf{x}_n - \left( \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}_n} \right)^{-1} \bf{f}(\bf{x}_n) \label{eq:iter_matrix_2}
+\end{equation}
+где $\displaystyle \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}}$ -- матрица Якоби решаемой системы
+\begin{equation*}
+    \frac{\partial \bf{f}(\bf{x}_n)}{\partial \bf{x}} =
+    \begin{pmatrix}
+        \displaystyle \frac{\partial f^{(1)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) & \displaystyle \frac{\partial f^{(1)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right) \\
+        \displaystyle \frac{\partial f^{(2)}}{\partial x^{(1)}}\left( x_n^{(1)}, x_n^{(2)} \right) & \displaystyle \frac{\partial f^{(2)}}{\partial x^{(2)}}\left( x_n^{(1)}, x_n^{(2)} \right)
+    \end{pmatrix}
+\end{equation*}
 
-    \subsection{Метод последовательных приближений для решения нелинейных систем.}
-    Формула~\eqref{eq:approx_single} cохраняет прежний вид, только \bf{x} и $\bm{\varphi}(\bf{x})$ являются векторами.
-    Достаточным условием сходимости является выполнение неравенства $\displaystyle \left\| \frac{\partial \bm{\varphi}}{\partial \bf{x}} \right\| < 1$,
-    где $\displaystyle \frac{\partial \bm{\varphi}}{\partial \bf{x}}$ -- матрица Якоби.
-\end{document}
+Представление метода в виде~\eqref{eq:iter_matrix_2} позволяет уменьшить вычислительные затраты, поскольку не требует
+обращения матрицы Якоби, а сводится к решению линейной алгебраической системы на каждом шаге итерационного процесса.
+Как и в скалярном случае, в достаточно малой окрестности корня итерации сходятся и скорость сходимости квадратичная.
+Значительно уменьшается объем вычислений в модифицированном варианте метода Ньютона, когда матрица Якоби вычисляется
+однократно, раскладывается в произведение треугольных матриц программой \verb|DECOMP|, а затем для получения очередного
+приближения используется только программа \verb|SOLVE|.
+
+\subsection{Метод последовательных приближений для решения нелинейных систем.}
+Формула~\eqref{eq:approx_single} cохраняет прежний вид, только \bf{x} и $\bm{\varphi}(\bf{x})$ являются векторами.
+Достаточным условием сходимости является выполнение неравенства $\displaystyle \left\| \frac{\partial \bm{\varphi}}{\partial \bf{x}} \right\| < 1$,
+где $\displaystyle \frac{\partial \bm{\varphi}}{\partial \bf{x}}$ -- матрица Якоби.

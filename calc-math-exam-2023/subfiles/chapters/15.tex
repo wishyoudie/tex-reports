@@ -1,102 +1,102 @@
-\documentclass[../../calc-math-exam-2023.tex]{subfiles}
-\begin{document}
-    \section{Ортогонализация по Шмидту. Примеры ортогональных полиномов.}\label{sec:ch15}
-    \subsection{Процедура ортогонализации Грама-Шмидта.}
-    Для начала обозначим задачу. Пусть задан набор линейно независимых функций $\left\{ \varphi_k(x) \right\}$.
-    Требуется построить набор ортогональных функций $\left\{ g_k(x) \right\}$, которые будут являться
-    линейной комбинацией функций $\left\{ \varphi_k(x) \right\}$. Аппроксимация, таким образом, будет
-    выполняться в том же классе функций.
+\section{Ортогонализация по Шмидту. Примеры ортогональных полиномов.}\label{sec:ch15}
 
-    Введем следующее обозначение: $\tilde{g}_k(x)$ -- функции ортогональные, но еще не
-    нормированные. Очередная функция $\tilde{g}_k(x)$ строится так, чтобы она была ортогональна всем
-    $\tilde{g}_i(x)$, построенным до нее.
-    \vspace{10pt}
+\subsection{Процедура ортогонализации Грама-Шмидта.}
+Для начала обозначим задачу. Пусть задан набор линейно независимых функций $\left\{ \varphi_k(x) \right\}$.
+Требуется построить набор ортогональных функций $\left\{ g_k(x) \right\}$, которые будут являться
+линейной комбинацией функций $\left\{ \varphi_k(x) \right\}$. Аппроксимация, таким образом, будет
+выполняться в том же классе функций.
 
-    Шаг 1.
+Введем следующее обозначение: $\tilde{g}_k(x)$ -- функции ортогональные, но еще не
+нормированные. Очередная функция $\tilde{g}_k(x)$ строится так, чтобы она была ортогональна всем
+$\tilde{g}_i(x)$, построенным до нее.
+\vspace{10pt}
 
-    $ \displaystyle \tilde{g}_0(x) = \varphi_0(x)$. Нормируем ее.
+Шаг 1.
+
+$ \displaystyle \tilde{g}_0(x) = \varphi_0(x)$. Нормируем ее.
+\begin{equation*}
+    \int_{a}^{b} p(x) \tilde{g}_0^2 dx = \alpha_0^2, \quad g_0(x) = \frac{\tilde{g}_0}{\alpha_0}
+\end{equation*}
+
+Шаг $m$.
+
+Функция $\tilde{g}_m(x)$ строится с привлечением новой $\varphi_m(x)$ и добавлением линейной
+комбинации функций $ \displaystyle g_k(x)$, построенных на предыдущих шагах.
+\begin{equation*}
+    \tilde{g}_m(x) = \varphi_m(x) - \sum_{k=0}^{m-1} C_{m,k} \cdot g_k(x)
+\end{equation*}
+
+Из условия ортогональности $ \displaystyle \tilde{g}_m(x)$ и $ \displaystyle g_i(x)$ получаем
+выражения для коэффициентов $C_{m, i}$
+\begin{equation*}
+    \int_{a}^{b} p(x) \cdot \tilde{g}_m(x) \cdot g_i(x)dx = \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx - \sum_{k=0}^{m-1} C_{m, k} \cdot \int_{a}^{b} p(x) \cdot g_k(x) \cdot g_i(x)dx = 0
+\end{equation*}
+Все интегралы под знаком суммы, кроме одного, равны нулю и для $ \displaystyle C_{m, i}$ имеем
+\begin{equation*}
+    C_{m,i} = \frac{\displaystyle \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx}{\displaystyle \int_{a}^{b} p(x) \cdot g_i^2(x)dx}, \quad \int_{a}^{b} p(x) \tilde{g}_m^2(x) dx = \alpha_m^2, \quad g_m(x) = \frac{\tilde{g}_m}{\alpha_m}
+\end{equation*}
+
+\subsection{Примеры ортогональных полиномов.}
+Неотъемлимыми атрибутами понятия ортогональности являются промежуток интегрирования и
+весовая функция. Проблема различных промежутков, возникающих на практике, решается легко.
+Полиномы для стандартных промежутков ($[-1, 1]$, $[0, 1]$) приводятся в справочниках и
+учебниках, а к произвольному промежутку переходят обычной заменой переменных. Примером
+является следующая замена
+\begin{equation*}
+    x = \frac{a + b}{2} + \frac{b - a}{2}t, \qquad x \in [a, b], \quad t \in [-1, 1]
+\end{equation*}
+В приводимых примерах остановимся на промежутке $[-1, 1]$. Тогда главной отличительной
+особенностью различных полиномов будет весовая функция $p(x)$.
+\begin{enumerate}
+    \item Ортогональные полиномы Лежандра
+    \vspace{5pt}
+
+    Для этих полиномов весовая функция имеет популярный вид: $p(x) \equiv 1$ и сами они
+    могут быть вычислены по формуле
+    \begin{equation}
+        \displaystyle L_n(x) = \frac{(-1)^n}{n!\, 2^n} \frac{d^n}{dx^n} \left[ \left( 1 - x^2 \right)^n \right], \qquad x \in [-1, 1] \label{eq:legendre}
+    \end{equation}
+    \emph{Заметим, что} $ \displaystyle L_0(x) = 1, L_1(x) = x$, а следующие полиномы
+    можно найти при помощи рекуррентной формулы:
     \begin{equation*}
-        \int_{a}^{b} p(x) \tilde{g}_0^2 dx = \alpha_0^2, \quad g_0(x) = \frac{\tilde{g}_0}{\alpha_0}
+    (n+1)
+        L_{n+1}(x) - (2n+1)xL_n(x) + nL_{n-1}(x) = 0
     \end{equation*}
-    
-    Шаг $m$.
-
-    Функция $\tilde{g}_m(x)$ строится с привлечением новой $\varphi_m(x)$ и добавлением линейной
-    комбинации функций $ \displaystyle g_k(x)$, построенных на предыдущих шагах.
+    Применив ее, получаем
     \begin{equation*}
-        \tilde{g}_m(x) = \varphi_m(x) - \sum_{k=0}^{m-1} C_{m,k} \cdot g_k(x)
+        L_2(x) = \frac{3x^2-1}{2}, \quad L_3(x) = \frac{5x^3-3x}{2}, \quad L_4(x) = \frac{35x^4-30x^2+3}{8}\dots
     \end{equation*}
-
-    Из условия ортогональности $ \displaystyle \tilde{g}_m(x)$ и $ \displaystyle g_i(x)$ получаем
-    выражения для коэффициентов $C_{m, i}$
+    В такой форме полиномы Лежандра ортогональны, но не нормированы. Квадрат нормы:
     \begin{equation*}
-        \int_{a}^{b} p(x) \cdot \tilde{g}_m(x) \cdot g_i(x)dx = \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx - \sum_{k=0}^{m-1} C_{m, k} \cdot \int_{a}^{b} p(x) \cdot g_k(x) \cdot g_i(x)dx = 0
+        \int_{-1}^{1} L_n^2(x)dx = \frac{2}{2n+1}
     \end{equation*}
-    Все интегралы под знаком суммы, кроме одного, равны нулю и для $ \displaystyle C_{m, i}$ имеем
+
+    \item Ортогональные полиномы Чебышева
+    \vspace{5pt}
+
+    Для этих полиномов весовая функция выглядит следующим образом:
     \begin{equation*}
-        C_{m,i} = \frac{\displaystyle \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx}{\displaystyle \int_{a}^{b} p(x) \cdot g_i^2(x)dx}, \quad \int_{a}^{b} p(x) \tilde{g}_m^2(x) dx = \alpha_m^2, \quad g_m(x) = \frac{\tilde{g}_m}{\alpha_m}
+        p(x) = \frac{1}{\sqrt{1-x^2}}.
     \end{equation*}
-
-    \subsection{Примеры ортогональных полиномов.}
-    Неотъемлимыми атрибутами понятия ортогональности являются промежуток интегрирования и
-    весовая функция. Проблема различных промежутков, возникающих на практике, решается легко.
-    Полиномы для стандартных промежутков ($[-1, 1]$, $[0, 1]$) приводятся в справочниках и
-    учебниках, а к произвольному промежутку переходят обычной заменой переменных. Примером
-    является следующая замена
+    При $x \in [-1, 1]$ они могут быть вычислены по формуле
+    \begin{equation}
+        T_0(x) = 1, \quad T_1(x) = x, \quad T_n(x) = \cos \left( n \cdot \arccos(x) \right) \label{eq:chebyshev}
+    \end{equation}
+    Как и для полиномов Лежандра, здесь имеет место следующее рекуррентное соотношение:
     \begin{equation*}
-        x = \frac{a + b}{2} + \frac{b - a}{2}t, \qquad x \in [a, b], \quad t \in [-1, 1]
+        T_{n+1}(x) = 2xT_n(x) - T_{n-1}(x)
     \end{equation*}
-    В приводимых примерах остановимся на промежутке $[-1, 1]$. Тогда главной отличительной
-    особенностью различных полиномов будет весовая функция $p(x)$.
-    \begin{enumerate}
-        \item Ортогональные полиномы Лежандра
-        \vspace{5pt}
-
-        Для этих полиномов весовая функция имеет популярный вид: $p(x) \equiv 1$ и сами они
-        могут быть вычислены по формуле
-        \begin{equation}
-            \displaystyle L_n(x) = \frac{(-1)^n}{n!\, 2^n} \frac{d^n}{dx^n} \left[ \left( 1 - x^2 \right)^n \right], \qquad x \in [-1, 1] \label{eq:legendre}
-        \end{equation}
-        \emph{Заметим, что} $ \displaystyle L_0(x) = 1, L_1(x) = x$, а следующие полиномы
-        можно найти при помощи рекуррентной формулы:
-        \begin{equation*}
-            (n+1)L_{n+1}(x) - (2n+1)xL_n(x) + nL_{n-1}(x) = 0
-        \end{equation*}
-        Применив ее, получаем
-        \begin{equation*}
-            L_2(x) = \frac{3x^2-1}{2}, \quad L_3(x) = \frac{5x^3-3x}{2}, \quad L_4(x) = \frac{35x^4-30x^2+3}{8}\dots
-        \end{equation*}
-        В такой форме полиномы Лежандра ортогональны, но не нормированы. Квадрат нормы:
-        \begin{equation*}
-            \int_{-1}^{1} L_n^2(x)dx = \frac{2}{2n+1}
-        \end{equation*}
-
-        \item Ортогональные полиномы Чебышева
-        \vspace{5pt}
-
-        Для этих полиномов весовая функция выглядит следующим образом:
-        \begin{equation*}
-            p(x) = \frac{1}{\sqrt{1-x^2}}.
-        \end{equation*}
-        При $x \in [-1, 1]$ они могут быть вычислены по формуле
-        \begin{equation}
-            T_0(x) = 1, \quad T_1(x) = x, \quad T_n(x) = \cos \left( n \cdot \arccos(x) \right) \label{eq:chebyshev}
-        \end{equation}
-        Как и для полиномов Лежандра, здесь имеет место следующее рекуррентное соотношение:
-        \begin{equation*}
-            T_{n+1}(x) = 2xT_n(x) - T_{n-1}(x)
-        \end{equation*}
-        Применив ее, получаем
-        \begin{equation*}
-            T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 -3x, \quad T_4(x) = 8x^4 -8x^2 + 1\dots
-        \end{equation*}
-        Полиномы Чебышева могут быть представлены и в другом виде:
-        \begin{equation}
-            T_n(x) = \frac{(-2)^n n!}{(2n)!}\sqrt{1-x^2}\frac{d^n}{dx^n}\left[ \left( 1 - x^2 \right)^{n-1/2} \right] \label{eq:chebyshev2}
-        \end{equation}
-        Квадраты нормы:
-        \begin{equation*}
-        (T_0, T_0) = \pi, \qquad (T_n, T_n) = \int_{-1}^{1} \frac{T_n^2(x)}{\sqrt{1-x^2}}dx = \frac{\pi}{2}
-        \end{equation*}
-    \end{enumerate}
-\end{document}
+    Применив ее, получаем
+    \begin{equation*}
+        T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 -3x, \quad T_4(x) = 8x^4 -8x^2 + 1\dots
+    \end{equation*}
+    Полиномы Чебышева могут быть представлены и в другом виде:
+    \begin{equation}
+        T_n(x) = \frac{(-2)^n n!}{(2n)!}\sqrt{1-x^2}\frac{d^n}{dx^n}\left[ \left( 1 - x^2 \right)^{n-1/2} \right] \label{eq:chebyshev2}
+    \end{equation}
+    Квадраты нормы:
+    \begin{equation*}
+    (T_0, T_0)
+        = \pi, \qquad (T_n, T_n) = \int_{-1}^{1} \frac{T_n^2(x)}{\sqrt{1-x^2}}dx = \frac{\pi}{2}
+    \end{equation*}
+\end{enumerate}

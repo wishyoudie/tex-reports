@@ -183,7 +183,12 @@ $n$ корней (с учетом кратности). Это и есть соб
     \underline{Доказательство}.
     \vspace{5pt}
 
-    \bf{TODO}
+    Поскольку \emph{определитель произведения равен произведению определителей}, получаем
+    \begin{equation*}
+        \det \left( \bf{A}^{-1} \right) \cdot \det \left( \bf{A} \right) =
+        \det \left( \bf{A}^{-1} \cdot \bf{A} \right) = \det \left( \bf{E} \right) = 1
+    \end{equation*}
+    Теорема доказана.
 \end{theorem}
 
 \begin{theorem}
@@ -235,12 +240,37 @@ $n$ корней (с учетом кратности). Это и есть соб
 \end{theorem}
 
 \begin{theorem}
-    При умножении треугольных матриц одного вида получается матрица того же вида.
+    При умножении треугольных матриц одного вида получается треугольная матрица того же вида.
 
     \underline{Доказательство}.
     \vspace{5pt}
 
-    \bf{TODO}
+    Не умаляя общности, положим \bf{A} и \bf{B} нижними треугольными матрицами третьего порядка. В общем случае
+    доказательство строится аналогично, меняется только объем записей.
+    \begin{gather*}
+        \bf{C} = \bf{A} \cdot \bf{B} =
+        \begin{pmatrix}
+            a_{11} & 0      & 0      \\
+            a_{21} & a_{22} & 0      \\
+            a_{31} & a_{32} & a_{33}
+        \end{pmatrix} \cdot
+        \begin{pmatrix}
+            b_{11} & 0      & 0      \\
+            b_{21} & b_{22} & 0      \\
+            b_{31} & b_{32} & b_{33}
+        \end{pmatrix} = \\
+        \begin{pmatrix}
+            a_{11} \cdot b_{11} + 0 \cdot b_{21} + 0 \cdot b_{31}           & a_{11} \cdot 0 + 0 \cdot b_{22} + 0 \cdot b_{32} & a_{11} \cdot 0 + 0 \cdot + 0 \cdot b_{33} \\
+            a_{21} \cdot b_{11} + a_{22} \cdot b_{21} + 0 \cdot b_{31}      & a_{21} \cdot 0 + a_{22} \cdot b_{22} + 0 \cdot b_{32} & a_{21} \cdot 0 + a_{22} \cdot 0 + 0 \cdot b_{33} \\
+            a_{31} \cdot b_{11} + a_{32} \cdot b_{21} + a_{33} \cdot b_{31} & 0 + a_{32} \cdot b_{22} + a_{33} \cdot b_{32} & 0 + 0 + a_{33} \cdot b_{33}
+        \end{pmatrix} = \\
+        = \begin{pmatrix}
+              c_{11} & 0      & 0      \\
+              c_{21} & c_{22} & 0      \\
+              c_{31} & c_{32} & c_{33}
+        \end{pmatrix}
+    \end{gather*}
+    Таким образом \bf{C} -- тоже нижняя треугольная матрица. Теорема доказана.
 \end{theorem}
 
 \begin{theorem}
@@ -249,7 +279,18 @@ $n$ корней (с учетом кратности). Это и есть соб
     \underline{Доказательство}.
     \vspace{5pt}
 
-    \bf{TODO}
+    Заметим, что единичная матрица -- тоже треугольная.
+    \begin{equation*}
+        \bf{E} =
+        \begin{pmatrix}
+            1     & 0     & \dots & 0     \\
+            0     & 1     & \dots & 0     \\
+            \dots & \dots & \dots & \dots \\
+            0     & 0     & \dots & 1
+        \end{pmatrix} = \bf{A} \cdot \bf{A}^{-1}
+    \end{equation*}
+    Поскольку \bf{A} -- треугольная, то по предыдущей теореме $\bf{A}^{-1}$ тоже должна быть треугольной, причем того же
+    типа. Теорема доказана.
 \end{theorem}
 
 \begin{theorem}

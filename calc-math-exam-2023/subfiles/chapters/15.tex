@@ -5,33 +5,33 @@
 набор ортогональных функций $\left\{ g_k(x) \right\}$, которые будут являться линейной комбинацией функций
 $\left\{ \varphi_k(x) \right\}$. Аппроксимация, таким образом, будет выполняться в том же классе функций.
 
-Введем следующее обозначение: $\tilde{g}_k(x)$ -- функции ортогональные, но еще не нормированные. Очередная функция
-$\tilde{g}_k(x)$ строится так, чтобы она была ортогональна всем $\tilde{g}_i(x)$, построенным до нее.
+Введем следующее обозначение: $\tilde{g_k}(x)$ -- функции ортогональные, но еще не нормированные. Очередная функция
+$\tilde{g_k}(x)$ строится так, чтобы она была ортогональна всем $\tilde{g_i}(x)$, построенным до нее.
 \vspace{10pt}
 
 Шаг 1.
 
-$\displaystyle \tilde{g}_0(x) = \varphi_0(x)$. Нормируем ее.
+$\displaystyle \tilde{g_0}(x) = \varphi_0(x)$. Нормируем ее.
 \begin{equation*}
-    \int_{a}^{b} p(x) \tilde{g}_0^2 dx = \alpha_0^2, \quad g_0(x) = \frac{\tilde{g}_0}{\alpha_0}
+    \int_{a}^{b} p(x) \displaystyle \tilde{g_0}^2 dx = \alpha_0^2, \quad g_0(x) = \frac{\tilde{g_0}}{\alpha_0}
 \end{equation*}
 
 Шаг $m$.
 
-Функция $\tilde{g}_m(x)$ строится с привлечением новой $\varphi_m(x)$ и добавлением линейной комбинации функций
+Функция $\tilde{g_m}(x)$ строится с привлечением новой $\varphi_m(x)$ и добавлением линейной комбинации функций
 $\displaystyle g_k(x)$, построенных на предыдущих шагах.
 \begin{equation*}
-    \tilde{g}_m(x) = \varphi_m(x) - \sum_{k=0}^{m-1} C_{m,k} \cdot g_k(x)
+    \tilde{g_m}(x) = \varphi_m(x) - \sum_{k=0}^{m-1} C_{m,k} \cdot g_k(x)
 \end{equation*}
 
-Из условия ортогональности $\displaystyle \tilde{g}_m(x)$ и $\displaystyle g_i(x)$ получаем выражения для коэффициентов
-$C_{m, i}$
+Навесим на каждое слагаемое интеграл:
 \begin{equation*}
-    \int_{a}^{b} p(x) \cdot \tilde{g}_m(x) \cdot g_i(x)dx = \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx - \sum_{k=0}^{m-1} C_{m, k} \cdot \int_{a}^{b} p(x) \cdot g_k(x) \cdot g_i(x)dx = 0
+    \int_{a}^{b} p(x) \cdot \tilde{g_m}(x) \cdot g_i(x)dx = \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx - \sum_{k=0}^{m-1} C_{m, k} \cdot \int_{a}^{b} p(x) \cdot g_k(x) \cdot g_i(x)dx = 0
 \end{equation*}
-Все интегралы под знаком суммы, кроме одного, равны нулю и для $\displaystyle C_{m, i}$ имеем
+Из условия ортогональности $\displaystyle \tilde{g_m}(x)$ и $\displaystyle g_i(x)$ интеграл в левой части уравнения равен
+нулю. Все интегралы под знаком суммы, кроме одного, тоже равны нулю и для $\displaystyle C_{m, i}$ имеем
 \begin{equation*}
-    C_{m,i} = \frac{\displaystyle \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx}{\displaystyle \int_{a}^{b} p(x) \cdot g_i^2(x)dx}, \quad \int_{a}^{b} p(x) \tilde{g}_m^2(x) dx = \alpha_m^2, \quad g_m(x) = \frac{\tilde{g}_m}{\alpha_m}
+    C_{m,i} = \frac{\displaystyle \int_{a}^{b} p(x) \cdot \varphi_m(x) \cdot g_i(x) dx}{\displaystyle \int_{a}^{b} p(x) \cdot g_i^2(x)dx}, \quad \int_{a}^{b} p(x) \tilde{g_m}^2(x) dx = \alpha_m^2, \quad g_m(x) = \frac{\tilde{g_m}}{\alpha_m}
 \end{equation*}
 
 \subsection{Примеры ортогональных полиномов.}

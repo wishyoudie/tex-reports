@@ -115,7 +115,7 @@
     \underline{Доказательство}.
     \vspace{5pt}
 
-    $\bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}$. По теореме о подобии матричных функций $\displaystyle \bf{f} \left( \bf{A} \right) = \bf{U}^{-1} \bf{f} \bm{\Lambda} \bf{U}$.
+    $\bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}$. По теореме о подобии матричных функций $\displaystyle \bf{f} \left( \bf{A} \right) = \bf{U}^{-1} \bf{f} \left( \bm{\Lambda} \right) \bf{U}$.
     Представим $\bf{f} \left( \bm{\Lambda} \right)$ в покомпонентном виде
     \begin{gather*}
         \bf{f} \left( \bm{\Lambda} \right) = \sum_{k=0}^{\infty} c_k \bm{\Lambda}^k =
@@ -187,6 +187,7 @@ $\bf{f} \left( \bm{\Lambda} \right)$, а у тех, в свою очередь, 
 \end{theorem}
 
 \begin{theorem}[Формула Кели-Гамильтона]
+    Всякая матрица удовлетворяет своему характеристическому уравнению.
     Пусть $\displaystyle Q(\uplambda) = (-1)^m \uplambda^m + b_1 \uplambda^{m-1} + \dots + b_m = 0$ -- характеристическое
     уравнение любой матрицы \bf{A}. Тогда
     \begin{equation*}
@@ -197,7 +198,7 @@ $\bf{f} \left( \bm{\Lambda} \right)$, а у тех, в свою очередь, 
     \vspace{5pt}
 
     Матрица с различными собственными значениями подобна диагональной матрице: $\bf{A} = \bf{U} \bm{\Lambda} \bf{U}^{-1}$.
-    По теореме о подобии матричных функций $\displaystyle \bf{A}^k = \bf{U} \bm{\Lambda} \bf{U}^{-1}$. Подставим в
+    По теореме о подобии матричных функций $\displaystyle \bf{A}^k = \bf{U} \bm{\Lambda}^k \bf{U}^{-1}$. Подставим в
     \begin{equation*}
         Q\left( \bf{A} \right) = (-1)^m \bf{A}^m + b_1 \bf{A}^{m-1} + \dots + b_m \bf{E}
     \end{equation*}

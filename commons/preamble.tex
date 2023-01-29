@@ -61,14 +61,6 @@
 \usepackage{setspace}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-% \pagestyle{fancy}
-% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-% \renewcommand{\footrulewidth}{0.4pt}
-% \fancyhead[LO,RE]{Example header left}
-% \fancyhead[LE,RO]{Example header right}
-% \fancyfoot[LO,RE]{Example footer left}
-% \fancyfoot[LE,RO]{Example footer right}
-% \fancyfoot[C]{\thepage/\pageref{LastPage}}
 
 %%% Graphics
 % Custom colors
@@ -76,6 +68,7 @@
 \definecolor{myblue1}{RGB}{0, 109, 167}
 \definecolor{commentgreen}{RGB}{2,112,10}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{amethyst}{RGB}{153, 102, 203}
 
 \usepackage{pgfplots} % Plots
 \usepackage{tikz}
@@ -90,6 +83,7 @@
 \newcommand{\definebox}[2]{\newcounter{#1}\newenvironment{#1}[1][]{\stepcounter{#1}\mdfsetup{frametitle={\tikz[baseline=(current bounding box.east),outer sep=0pt]\node[anchor=east,rectangle,fill=white]{\strut \MakeUppercase#1~\csname the#1\endcsname\ifstrempty{##1}{}{:~##1}};}}\mdfsetup{innertopmargin=1pt,linecolor=#2,linewidth=3pt,topline=true,frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}\begin{mdframed}[]\relax}{\end{mdframed}}}
 \definebox{definition}{black!90}
 \definebox{theorem}{myblue1!90}
+\definebox{demonstration}{amethyst!90}
 
 \newcounter{Theorem}
 \def\themytheorem{\thesection.\arabic{Theorem}}

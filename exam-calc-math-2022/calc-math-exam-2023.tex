@@ -1,42 +1,14 @@
 \documentclass[a4paper,12pt]{article}
 \input{../commons/preamble}
 
-\usepackage{titlesec}
 \begin{document}
-    \begin{center}
-        \Large
-        \textbf{Политех Петра Великого, 2 курс, осень 2022/23}\\[10pt]
-        \textbf{Подготовка к экзамену по вычислительной математике}\\[10pt]
-        \normalsize
-        Лектор: Устинов Сергей Михайлович
-        \rule{\linewidth}{0.4pt}
-    \end{center}
-    \tableofcontents
-    \newpage
-    \pagestyle{fancy}
-    \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-    \fancyhead[LE,RO]{}
-    \fancyhead[LO,RE]{Вычислительная математика, 2 курс, осень 2022/23}
-    \renewcommand{\footrulewidth}{0.4pt}
-    \fancyfoot[C]{\thepage/\pageref{LastPage}}
-    \fancyfoot[LE,RO]{Автор конспекта: Ильин Владимир}
-    \fancyfoot[LO,RE]{Вопрос №\thesection}
-
-    \titleformat{\section}
-    [display]
-    {\bfseries\Large}
-    {}
-    {0ex}
-    {
-        \vspace{-3.5ex}
-        \rule{\textwidth}{1pt}
-        Вопрос \thesection \ \centering
-        \vspace{1ex}
-    }
-    [
-        \normalfont\normalsize
-        \rule{\textwidth}{1pt}
-    ]
+    \project{Политех Петра Великого, 2 курс, осень 2022/23}%
+    {Подготовка к экзамену по вычислительной математике}%
+    {Лектор: Устинов Сергей Михайлович}%
+    {Вычислительная математика, 2 курс, осень 2022/23}%
+    {Вопрос №\thesection}%
+    {Автор конспекта: Ильин Владимир}%
+    \filetitle{Вопрос \thesection \ }{\vspace{-0.25ex}}
 
     \include{subfiles/chapters/01} % Вопрос №1
     \include{subfiles/chapters/02} % Вопрос №2

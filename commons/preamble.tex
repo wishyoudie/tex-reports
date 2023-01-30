@@ -46,10 +46,11 @@
 
 %%% Numeration
 \newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
-
+\newcommand{\thesec}{\arabic{section}}
 \renewcommand\thesection{\arabic{section}.}
 \renewcommand\thesubsection{\thesection\arabic{subsection}}
 \renewcommand\thesubsubsection{\RNumb{\arabic{subsubsection}}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \renewcommand{\bf}{\textbf}
 \renewcommand{\it}{\textit}
 
@@ -61,6 +62,7 @@
 \usepackage{setspace}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+
 
 %%% Graphics
 % Custom colors
@@ -189,6 +191,56 @@
 \usepackage[normalem]{ulem} % }
 \useunder{\uline}{\ul}{}    % } Underline text
 \usepackage[colorlinks,urlcolor=blue,filecolor=blue,citecolor=blue,linkcolor = blue,unicode=true]{hyperref}
+\usepackage{titlesec}
 
+\newcommand{\projectname}[3]{
+    \begin{center}
+        \Large
+        \textbf{#1}\\[10pt]
+        \textbf{#2}\\[10pt]
+        \normalsize
+        #3
+        \rule{\linewidth}{0.4pt}
+    \end{center}
+}
+
+\newcommand{\hfconfiguration}[3]{
+    \pagestyle{fancy}
+    \fancyhead[LE,RO]{}
+    \fancyhead[LO,RE]{#1}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyfoot[C]{\thepage/\pageref*{LastPage}}
+    \fancyfoot[LO,RE]{#2}
+    \fancyfoot[LE,RO]{#3}
+}
+
+\newcommand{\filename}[2]{
+    \pagebreak
+    \titleformat{\section}
+    [display]
+    {\bfseries\Large}
+    {}
+    {0ex}
+    {
+        \vspace{-4.5ex}
+        % \rule{\textwidth}{1pt}
+        #1 \centering
+    % \vspace{1ex}
+    }
+    [
+        \normalfont\large
+        #2
+        \rule{\textwidth}{0.4pt}
+        \normalsize
+    ]
+}
+
+\newcommand{\project}[6]{
+    \projectname{#1}{#2}{#3}
+    \pagestyle{empty}
+    \tableofcontents
+    \newpage
+    \hfconfiguration{#4}{#5}{#6}
+}
 %%% Final touch
 \usepackage{subfiles}

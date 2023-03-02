@@ -1,0 +1,44 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.17)  7 FEB 2023 14:05
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**lec-01.tex
+(./lec-01.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-04-10>
+Runaway argument?
+../../lec-calc-math-2023.tex \begin {document} \filename {Лекци�\ETC.
+./lec-01.tex:7: Paragraph ended before \@fileswith@ptions was complete.
+<to be read again> 
+                   \par 
+l.7 
+    
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+./lec-01.tex:8: I can't find file `lec-01.aux'.
+\enddocument ...keatletter \@@input \jobname .aux 
+                                                  \fi \UseOneTimeHook {enddo...
+l.8 \end{document}
+                  
+(Press Enter to retry, or Control-D to exit)
+Please type another input file name
+./lec-01.tex:8: Emergency stop.
+\enddocument ...keatletter \@@input \jobname .aux 
+                                                  \fi \UseOneTimeHook {enddo...
+l.8 \end{document}
+                  
+*** (job aborted, file error in nonstop mode)
+
+ 
+Here is how much of TeX's memory you used:
+ 21 strings out of 478238
+ 469 string characters out of 5850455
+ 289994 words of memory out of 5000000
+ 18359 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 13i,0n,12p,173b,14s stack positions out of 5000i,500n,10000p,200000b,80000s
+./lec-01.tex:8:  ==> Fatal error occurred, no output PDF file produced!

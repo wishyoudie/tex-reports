@@ -4,9 +4,9 @@
 \usepackage{booktabs} % Better tables
 \usepackage{enumitem} % Lists
 \usepackage{dsfont}
-\usepackage{geometry} % \usepackage[left=2cm,right=2cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry} % Page geometry
-\usepackage[utf8]{inputenc} % \usepackage[utf8x]{inputenc} % Encoding
-\usepackage[T2A]{fontenc} % \usepackage[T1,T2A]{fontenc} % Font
+\usepackage{geometry} % Page geometry
+\usepackage[utf8]{inputenc} % Encoding
+\usepackage[T2A]{fontenc} % Font
 \usepackage[english, russian]{babel} % Multi-language support
 \usepackage{titling} % Better titles
 \usepackage{textcomp} % Old-style numbers? Check difference
@@ -18,7 +18,7 @@
 \usepackage{transparent} % Transparent colors
 \usepackage{caption}    % }
 \usepackage{subcaption} % } Captioning figures
-\usepackage{xcolor} % Colors
+\usepackage[table,xcdraw]{xcolor} % Colors
 \usepackage{textpos} % Absolute positioning
 \usepackage{upgreek} % Cool greek letters
 
@@ -47,12 +47,14 @@
 %%% Numeration
 \newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 \newcommand{\thesec}{\arabic{section}}
-\renewcommand\thesection{\arabic{section}.}
-\renewcommand\thesubsection{\thesection\arabic{subsection}}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
 \renewcommand\thesubsubsection{\RNumb{\arabic{subsubsection}}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \renewcommand{\bf}{\textbf}
 \renewcommand{\it}{\textit}
+\def\hash{\texttt{\#}}
+\def\cpp{\C\texttt{++}}
 
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
@@ -192,6 +194,10 @@
 \useunder{\uline}{\ul}{}    % } Underline text
 \usepackage[colorlinks,urlcolor=blue,filecolor=blue,citecolor=blue,linkcolor = blue,unicode=true]{hyperref}
 \usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+\usepackage{secdot}
+\sectiondot{subsection}
+\usepackage{kvmap} % Karnaugh-maps for logic functions
 
 \newcommand{\projectname}[3]{
     \begin{center}

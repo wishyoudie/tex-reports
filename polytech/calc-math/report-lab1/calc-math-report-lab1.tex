@@ -2,7 +2,38 @@
 \input{../../../commons/preamble}
 
 \begin{document}
-
-	wow
-
+	\input{subfiles/titlepage}
+	\tableofcontents
+	\hfconfiguration{Решение дифференциальных уравнений}{}{}
+	\section{Задача}
+	Для дифференциального уравнения, иллюстрирующего второй закон Ньютона,
+	решить краевую задачу методом стрельбы.
+	\begin{equation*}
+		m y'' + py' + ky = F(t)
+	\end{equation*}
+	Параметры:
+	\begin{gather*}
+		k = 1/8 \text{ Н/м }, m = 1 \text{ кг }, p = 3/4 \text{ Нс/м\textsuperscript{2} }\\
+		A = \begin{pmatrix}
+			0 & 1 \\
+			-k/m & -p/m
+		\end{pmatrix},
+		\uplambda_1 = -\frac{1}{2}, \uplambda_2 = -\frac{1}{4}
+	\end{gather*}
+	
+	
+	\section{Ход работы}
+	Метод стрельбы -- это численный метод, заключающийся в сведении краевой задачи к решению \emph{последовательности} задач Коши для
+	той же системы дифференциальных уравнений. На рисунке синим обозначено решение, полученное методом стрельбы, а
+	красным -- точное.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{subfiles/graph}
+		\caption{Сравнение полученного решения с точным}
+		\label{fig:graph}
+	\end{figure}
+	
+	\lstinputlisting[style=def, label={lst:list}]{subfiles/lab1.m}
+	
 \end{document}

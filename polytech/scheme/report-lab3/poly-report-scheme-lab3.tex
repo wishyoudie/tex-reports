@@ -1,0 +1,221 @@
+\documentclass[a4paper,12pt]{article}
+\input{commons/preamble}
+
+\begin{document}
+    \input{polytech/scheme/report-lab3/subfiles/titlepage}
+
+    % \tableofcontents
+    \hfconfiguration{Лабораторная работа №3}{}{}
+
+    \section{Цели работы}
+    \begin{itemize}
+        \item Закрепление знания характеристик и режимов работы триггеров основных типов;
+        \item получение практических навыков тестирования и управления триггерами;
+        \item получение навыков ввода проекта в графическом редакторе пакета QP, тестирования
+        и отладки проекта и анализа временных характеристик триггеров;
+        \item получение навыков отладки цифровых устройств данного класса на физической модели;
+        конфигурирование ПЛИС и экспериментальная проверка работы типовых устройств с триггерами
+        при использовании лабораторной платы DiLaB.
+    \end{itemize}
+    \section{Исходные данные}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline Вариант & Длительность импульса & Фронт/спад & Частота \\
+            \hline 8 & 8 нс & Спад & 1.5 Гц \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \section{Ход работы}
+    \subsection{Асинхронный RS-триггер}
+
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-1}
+		\caption{Разработанная схема триггера}
+		\label{fig:scheme-1}
+	\end{figure}
+    
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/tech-mv-1}
+		\caption{Схема в Technology Map Viewer}
+		\label{fig:tech-mv-1}
+	\end{figure}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|cc|cc|c|}
+        \hline
+        \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Дискретное\\ время $t$\\\end{tabular}} & \multicolumn{2}{c|}{Входные переменные} & \multicolumn{2}{c|}{Состояния}    & \multirow{2}{*}{Режим работы} \\ \cline{2-5}
+                                                                                        & \multicolumn{1}{c|}{$S(t)$}     & $R(t)$    & \multicolumn{1}{c|}{$Q(t)$} & $nQ(t)$ &                               \\ \hline
+        0                                                                               & \multicolumn{1}{c|}{0}        & 1       & \multicolumn{1}{c|}{1}    & 0     & Установка 1                   \\ \hline
+        1                                                                               & \multicolumn{1}{c|}{1}        & 1       & \multicolumn{1}{c|}{1}    & 0     & Хранение 1                    \\ \hline
+        2                                                                               & \multicolumn{1}{c|}{1}        & 0       & \multicolumn{1}{c|}{0}    & 1     & Установка 0                   \\ \hline
+        3                                                                               & \multicolumn{1}{c|}{1}        & 1       & \multicolumn{1}{c|}{0}    & 1     & Хранение 0                    \\ \hline
+        4                                                                               & \multicolumn{1}{c|}{0}        & 0       & \multicolumn{1}{c|}{1}    & 1     & Особое состояние                   \\ \hline
+        \end{tabular}
+        \caption{Таблица переходов триггера}
+        \label{tab:tab-1}
+    \end{table}
+    
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-1}
+		\caption{Временная диаграмма}
+		\label{fig:wave-1}
+	\end{figure}
+
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-1-2}
+		\caption{Временная диаграмма с импульсами}
+		\label{fig:wave-1-2}
+	\end{figure}
+    По результатам моделирования видно, что минимальная длительность сигнала, переключающего триггер
+    составляет $3.6$ нс.
+    \subsection{RS-триггер синхронизируемый уровнем}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-2}
+		\caption{Разработанная схема триггера}
+		\label{fig:scheme-2}
+	\end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|ccc|cc|c|}
+        \hline
+        \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Дискретное\\ время $t$\end{tabular}} & \multicolumn{3}{c|}{Входные переменные}                            & \multicolumn{2}{c|}{Состояния}         & \multirow{2}{*}{Режим работы}     \\ \cline{2-6}
+                                                                                        & \multicolumn{1}{c|}{$C(t)$} & \multicolumn{1}{c|}{$S(t)$} & $R(t)$ & \multicolumn{1}{c|}{$Q(t)$} & $Q(t+1)$ &                                   \\ \hline
+        0                                                                               & \multicolumn{1}{c|}{0}      & \multicolumn{1}{c|}{H}      & H      & \multicolumn{1}{c|}{0}      & 0        & \multirow{2}{*}{Хранение}         \\ \cline{1-6}
+        1                                                                               & \multicolumn{1}{c|}{0}      & \multicolumn{1}{c|}{H}      & H      & \multicolumn{1}{c|}{1}      & 1        &                                   \\ \hline
+        2                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{0}      & 0      & \multicolumn{1}{c|}{0}      & 0        & \multirow{2}{*}{Хранение}         \\ \cline{1-6}
+        3                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{0}      & 0      & \multicolumn{1}{c|}{1}      & 1        &                                   \\ \hline
+        4                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{1}      & 0      & \multicolumn{1}{c|}{0}      & 1        & \multirow{2}{*}{Запись 1}         \\ \cline{1-6}
+        5                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{1}      & 0      & \multicolumn{1}{c|}{1}      & 1        &                                   \\ \hline
+        6                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{0}      & 1      & \multicolumn{1}{c|}{0}      & 0        & \multirow{2}{*}{Запись 0}         \\ \cline{1-6}
+        7                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{0}      & 1      & \multicolumn{1}{c|}{1}      & 0        &                                   \\ \hline
+        8                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{1}      & 1      & \multicolumn{1}{c|}{0}      & H        & \multirow{2}{*}{Особое состояние} \\ \cline{1-6}
+        9                                                                               & \multicolumn{1}{c|}{1}      & \multicolumn{1}{c|}{1}      & 1      & \multicolumn{1}{c|}{1}      & H        &                                   \\ \hline
+        \end{tabular}
+        \caption{Таблица переходов триггера}
+        \label{tab:tab-2}
+    \end{table}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-2}
+		\caption{Временная диаграмма}
+		\label{fig:wave-2}
+	\end{figure}
+    Из результатов моделирования видно, что триггер синхронизируется уровнем, а не перепадом.
+    При переходе триггера из особого состояния в состояние хранения на его выходе сохраняется <<1>>.
+    
+    \subsection{Использование примитива DFFE}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-3}
+		\caption{Разработанная схема триггера}
+		\label{fig:scheme-3}
+	\end{figure}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-3}
+		\caption{Временная диаграмма}
+		\label{fig:wave-3}
+	\end{figure}
+    При одновременной подаче активного уровня на входы PRN и CLRN триггер устанавливается в 0.
+    \subsection{Использование примитива JKFFE}
+    
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-4}
+		\caption{Разработанная схема триггера}
+		\label{fig:scheme-4}
+	\end{figure}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-4}
+		\caption{Временная диаграмма}
+		\label{fig:wave-4}
+	\end{figure}
+    При одновременной подаче активного уровня на входы PRN и CLRN триггер устанавливается в 0.
+    \subsection{Генератор коротких импульсов}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-5}
+		\caption{Разработанная схема триггера}
+		\label{fig:scheme-5}
+	\end{figure}
+    
+    Устанавливая элементы LCELL, получаем длительность формируемого импульса в 8 нс. Всего потребовалось
+    15 элементов. Разница в примерно 8 нс можно увидеть в значении графы <<Master Time Bar>> на рисунках
+    ниже.
+
+    \begin{minipage}{0.49\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-5-1}
+            \caption{Временная диаграмма}
+            \label{fig:wave-5-1}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.49\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-5-2}
+            \caption{Временная диаграмма}
+            \label{fig:wave-5-2}
+        \end{figure}
+    \end{minipage}
+
+    Используя Chip Planner, посмотрим на расположение данной схемы на кристалле и функциональным преобразователем. 
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=0.38\linewidth]{polytech/scheme/report-lab3/subfiles/images/crystal}
+		\caption{Размещение на кристалле}
+		\label{fig:crystal}
+	\end{figure}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/func_trans}
+		\caption{Функциональный преобразователь}
+		\label{fig:func_trans}
+	\end{figure}
+
+    \subsection{Устройство удвоения частоты}
+    Для создания подобного устройства объединим 2 схемы из предыдущего пункта хода работы.
+    Один триггер будет формировать единичный импульс при фронте C, а другой при спаде.
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-7}
+		\caption{Разработанная схема устройства}
+		\label{fig:scheme-7}
+	\end{figure}
+    На временной диаграмме видим формирование импульсов как на фронте, так и на спаде.
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-7}
+		\caption{Временная диаграмма}
+		\label{fig:wave-7}
+	\end{figure}
+
+    \subsection{Устройство выявления спада}
+    Для выявления спада сигнала необходимо смотреть на результат логической функции $\overline{D} \cdot Q$.
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/scheme-8}
+		\caption{Разработанная схема устройства}
+		\label{fig:scheme-8}
+	\end{figure}
+    \begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{polytech/scheme/report-lab3/subfiles/images/wave-8}
+		\caption{Временная диаграмма}
+		\label{fig:wave-8}
+	\end{figure}
+
+    \section{Вывод}
+    В ходе выполнения работы были закреплены знания характеристик и режимов работы триггеров основных типов.
+    Были получены практические навыки тестирования и управления триггерами. Была проведена экспериментальная
+    проверка работы типовых устройств с триггерами.
+\end{document}

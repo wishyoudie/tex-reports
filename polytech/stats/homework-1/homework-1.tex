@@ -1,0 +1,78 @@
+\documentclass[a4paper,12pt]{article}
+\input{commons/preamble}
+
+\begin{document}
+    \input{polytech/stats/homework-1/subfiles/titlepage}
+    \hfconfiguration{Расчетная работа №1, вариант 8}{}{}    
+    1. В квадрат со стороной 1.0 вписан круг. Найти вероятность того, что точка, наудачу
+    брошенная в квадрат, не попадет в круг. Предполагается, что вероятность попадания
+    точки в круг пропорциональна площади квадрата и не зависит от его расположения.
+
+    \textit{Решение.} Найдем вероятность события, обратному данному. Она будет равна
+    отношению площади круга к площади квадрата.
+    \begin{equation*}
+        p = 1 - q = 1 - \frac{S_\text{круга}}{S_\text{квадрата}} = 1 - \frac{\pi \cdot (a/2)^2}{a^2} =
+        1 - \frac{\pi}{4} \approx 0.21
+    \end{equation*}
+
+    \vspace{1cm}
+
+    2. Найти вероятность безотказной работы системы передачи и обработки информации, состоящей из модулей:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\linewidth]{polytech/stats/homework-1/subfiles/images/scheme}
+    \end{figure}
+    Отказ каждого модуля происходит независимо с вероятностями
+    \[
+    p_1 = p_4 = 0.1, \, p_2 = p_5 = 0.2, \, p_3 = p_6 = 0.3    
+    \]
+    \textit{Решение.} Найдем вероятности таких событий, которые повлекут за собой отказ всей системы.
+    \begin{itemize}
+        \item $\displaystyle P(2) = 0.2$
+        \item $\displaystyle P(3\&6) = p_3 \cdot p_6 = 0.09$
+        \item $\displaystyle P(4\&5) = p_4 \cdot p_5 = 0.02$
+        \item $\displaystyle P(1) = 0.1$
+    \end{itemize}
+    Теперь вероятность отказа системы:
+    \begin{gather*}
+        P_A = P(2) + P(3\&6) + P(4\&5) + P(1) = 0.2 + 0.09 + 0.02 + 0.1 = 0.41 \\
+        \overline{P}_A = 1 - P_A = 0.59
+    \end{gather*}
+    % \vspace{1cm}
+
+    3. Передаче по каналу связи с равной вероятностью подлежат кодовые слова:
+    \begin{verbatim}
+                    101000, 011001, 001101, 011110
+    \end{verbatim}
+    Канал симметричный, вероятность искажения каждого отдельного символа $q = 0.1$
+    В результате однократной передачи на приемной стороне принятно слово \verb|101110|.
+    Рассчитать априорные и апостериорные вероятности возможных сообщений.
+    
+    \textit{Решение.} Априорные:
+    \begin{itemize}
+        \item[] $\displaystyle P(H_i) = 1/4$
+        \item $\displaystyle P(A|H_1) = q^2 \cdot (1-q)^4 = 0.0066$
+        \item $\displaystyle P(A|H_2) = q^5 \cdot (1-q) = 0.000009$
+        \item $\displaystyle P(A|H_3) = q^3 \cdot (1-q)^3 = 0.0007$
+        \item $\displaystyle P(A|H_4) = q^2 \cdot (1-q)^4 = 0.0066$
+    \end{itemize}
+    Полная вероятность:
+    \begin{equation*}
+        P(A) = 1/4 \cdot \sum_{i=1}^4 P(A|H_i) = 0.0034
+    \end{equation*}
+    Апостериорные:
+    \begin{itemize}
+        \item $\displaystyle P(H_1|A) = P(A|H_1) \cdot P(H_1) / P(A) = 0.4853$
+        \item $\displaystyle P(H_2|A) = P(A|H_2) \cdot P(H_2) / P(A) = 0.0007$
+        \item $\displaystyle P(H_3|A) = P(A|H_3) \cdot P(H_3) / P(A) = 0.5147$
+        \item $\displaystyle P(H_4|A) = P(A|H_4) \cdot P(H_4) / P(A) = 0.4853$
+    \end{itemize}
+    \vspace{1cm}
+
+    4. Рассчитать и представить на одном графике биномиальное распределение вероятностей и распределение
+    вероятностей, рассчитанное по теореме Муавра-Лапласа для $n = 15, \, p = 0.5$.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/stats/homework-1/subfiles/images/graph}
+    \end{figure}
+\end{document}

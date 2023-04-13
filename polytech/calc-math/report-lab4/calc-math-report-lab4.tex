@@ -2,11 +2,32 @@
 \input{commons/preamble}
 
 \begin{document}
-	%\input{polytech/calc-math/report-lab4/subfiles/titlepage}
-	%\tableofcontents
-	%\hfconfiguration{Методы оптимизации}{}{}
+	\input{polytech/calc-math/report-lab4/subfiles/titlepage}
+	\hfconfiguration{Методы оптимизации}{}{}
 	\section{Задача}
+	Сравнить методы золотого сечения и половинного деления. Исходная функция: $\displaystyle y = x^4 - 3x^3 + 2x^2 -x + 1$
 	\section{Ход работы}
-	% \lstinputlisting[style=def, label={lst:list}]{subfiles/lab1.m}
-	
+	\subsection{Метод золотого сечения}
+	Выход: \verb|x0=1.7639 iter=12|
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab4/subfiles/opt1}
+		\caption{Метод золотого сечения}
+		\label{fig:graph}
+	\end{figure}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab4/subfiles/opt1.m}
+	\subsection{Метод половинного деления}
+	Выход: \verb|x0=1.7617 iter=8|
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab4/subfiles/opt2}
+		\caption{Метод половинного деления}
+		\label{fig:graph}
+	\end{figure}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab4/subfiles/opt2.m}
+	\section{Вывод}
+	В ходе работы были решены задачи поиска точки минимума заданной функции при помощи методов золотого сечения
+	и половинного деления. В отличие от второго, первый метод гарантированно уменьшает отрезок поиска на
+	фиксированное значение, однако в данной задаче ему потребовалось больше итераций. Однако, за это был получен
+	ответ, более близкий к реальному ($1.7633$).
 \end{document}

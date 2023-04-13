@@ -2,11 +2,33 @@
 \input{commons/preamble}
 
 \begin{document}
-	%\input{polytech/calc-math/report-lab3/subfiles/titlepage}
-	%\tableofcontents
-	%\hfconfiguration{Методы решения СЛАУ}{}{}
+	\input{polytech/calc-math/report-lab3/subfiles/titlepage}
+	\hfconfiguration{Методы решения СЛАУ}{}{}
 	\section{Задача}
+	Сравнить погрешности LU и QR разложений, а также метода Холецкого.
 	\section{Ход работы}
-	% \lstinputlisting[style=def, label={lst:list}]{subfiles/lab1.m}
-	
+	На рисунках представлены погрешности для трех случайных матриц. LU -- красным, QR -- синим,
+	метод Холецкого -- черным.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab3/subfiles/slau}
+		\caption{Сравнение погрешностей (1)}
+		\label{fig:graph}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab3/subfiles/slau2}
+		\caption{Сравнение погрешностей (2)}
+		\label{fig:graph}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab3/subfiles/slau3}
+		\caption{Сравнение погрешностей (3)}
+		\label{fig:graph}
+	\end{figure}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab3/subfiles/lab3.m}
+	\section{Вывод}
+	Исходя из полученных графиков, можно утверждать, что в среднем погрешность LU-разложения наименьшая
+	из трех методов, а соотношение погрешностей QR-разложения и разложения Холецкого зависит от задачи.
 \end{document}

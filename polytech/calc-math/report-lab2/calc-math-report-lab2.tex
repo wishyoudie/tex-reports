@@ -2,11 +2,32 @@
 \input{commons/preamble}
 
 \begin{document}
-	%\input{polytech/calc-math/report-lab2/subfiles/titlepage}
-	%\tableofcontents
-	%\hfconfiguration{Исследование погрешности для методов LU и QR}{}{}
+	\input{polytech/calc-math/report-lab2/subfiles/titlepage}
+	\hfconfiguration{Исследование погрешности для методов LU и QR}{}{}
 	\section{Задача}
+		Исследовать погрешности методов LU и QR разложения матрицы.
 	\section{Ход работы}
-	% \lstinputlisting[style=def, label={lst:list}]{subfiles/lab1.m}
+	\subsection{LU-разложение}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab2/subfiles/lu.m}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{polytech/calc-math/report-lab2/subfiles/lu2.jpg}
+		\caption{Числа обусловленности}
+		\label{fig:lu2}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{polytech/calc-math/report-lab2/subfiles/lu1.jpg}
+		\caption{Погрешность метода LU}
+		\label{fig:lu1}
+	\end{figure}
+	\subsection{QR-разложение}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab2/subfiles/qr.m}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{polytech/calc-math/report-lab2/subfiles/qr.jpg}
+		\caption{QR-разложение}
+		\label{fig:qr}
+	\end{figure}
 	
 \end{document}

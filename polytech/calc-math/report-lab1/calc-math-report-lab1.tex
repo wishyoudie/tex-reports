@@ -1,13 +1,13 @@
 \documentclass[a4paper,12pt]{article}
-\input{../../../commons/preamble}
+\input{commons/preamble}
 
 \begin{document}
-	\input{subfiles/titlepage}
+	\input{polytech/calc-math/report-lab1/subfiles/titlepage}
 	\tableofcontents
 	\hfconfiguration{Решение дифференциальных уравнений}{}{}
 	\section{Задача}
 	Для дифференциального уравнения, иллюстрирующего второй закон Ньютона,
-	решить краевую задачу методом стрельбы.
+	решить краевую задачу методом стрельбы и конечно-разностным методом.
 	\begin{equation*}
 		m y'' + py' + ky = F(t)
 	\end{equation*}
@@ -23,17 +23,23 @@
 	
 	
 	\section{Ход работы}
-	Метод стрельбы -- это численный метод, заключающийся в сведении краевой задачи к решению \emph{последовательности} задач Коши для
-	той же системы дифференциальных уравнений. На рисунке синим обозначено решение, полученное методом стрельбы, а
-	красным -- точное.
-	
+	\subsection{Метод стрельбы}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\linewidth]{subfiles/graph}
-		\caption{Сравнение полученного решения с точным}
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab1/subfiles/odu1}
+		\caption{Сравнение решения методом стрельбы с точным}
 		\label{fig:graph}
 	\end{figure}
-	
-	\lstinputlisting[style=def, label={lst:list}]{subfiles/lab1.m}
-	
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab1/subfiles/lab1.m}
+	\subsection{Конечно-разностный метод}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{polytech/calc-math/report-lab1/subfiles/odu2}
+		\caption{Сравнение решения методом сетки с точным}
+		\label{fig:graph}
+	\end{figure}
+	\lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/report-lab1/subfiles/lab1-2.m}
+	\section{Вывод}
+	В ходе работы была решена краевая задача методами стрельбы и сетки. Полученные решения близки
+	к точному.
 \end{document}

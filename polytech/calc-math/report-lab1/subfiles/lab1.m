@@ -1,31 +1,24 @@
-clear all
-m = 1;
-k = 1/8;
-p = 3/4;
-
-a = 0;
-b = 20;
+clear all;
+stv = 0;
+endv = 20;
 h = 0.2;
-x = a:h:b;
+x = stv:h:endv;
 s = size(x);
-points = s(2);
-hold on; 
-
-yp = @(t) 3 * exp(-0.5 * t) - 2 * exp(-0.25 * t);
+n = s(2);
+hold on;
+yp = @(t) exp(-0.5 * t) / (exp(-0.5) - exp(-0.25)) - exp(-0.25 * t) / (exp(-0.5) - exp(-0.25));
 plot(x, yp(x), 'r');
-
-X = zeros(points);
-XX = zeros(points, 1);
+X = zeros(n);
+XX = zeros(n, 1);
 t = 0;
-endval = yp(b);
-
-d = abs(heul(t, points, h) - endval);
+endval = yp(endv);
+d = abs(heul(t, n, h) - endval);
 step = 1;
-prec = 1e-8;
+prec = 1e-10;
 while d > prec
     t = t + step;
-    newval = heul(t, points, h);
-    if abs(newval - endval) < prec
+    newval = heul(t, n, h);
+    if abs(newval- endval) < prec
         break
     end
     newd = abs(newval - endval);
@@ -38,10 +31,19 @@ while d > prec
     d = newd;
 end
 X(1) = t;
-XX(1) = 1;
-for i=2:points
-    X(i) = X(i - 1) + (-(3/4) * X(i - 1) - (1/8) * XX(i - 1)) * h;
+XX(1) = 0;
+for i = 2:n
+    X(i) = X(i - 1) + ((-3/4) * X(i-1) - (1/8) * XX(i - 1)) * h;
     XX(i) = XX(i - 1) + X(i) * h / 2 + X(i - 1) * h / 2;
 end
 plot(x, XX, 'b');
 hold off;
+function heul = heul(t, n, h)
+    X(1) = t;
+    XX(1) = 0;
+    for i = 2:n
+        X(i) = X(i - 1) + ((-3/4) * X(i-1) - (1/8) * XX(i - 1)) * h;
+        XX(i) = XX(i - 1) + X(i) * h / 2 + X(i - 1) * h / 2;
+    end
+    heul = XX(n);
+end

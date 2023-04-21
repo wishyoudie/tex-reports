@@ -1,0 +1,313 @@
+\documentclass[a4paper,12pt]{article}
+\input{commons/preamble}
+
+\begin{document}
+    \input{polytech/scheme/report-lab4/subfiles/titlepage}
+
+    \tableofcontents
+    \hfconfiguration{Лабораторная работа №4}{}{}
+
+    \section{Цели работы}
+    \begin{itemize}
+        \item Закрепление навыков структурного синтеза конечных автоматов;
+        \item Закрепление знаний о характеристиках и режимах работы триггеров основных типов;
+        \item Получение практических навыков тестирования и управления КА;
+        \item Получение навыков ввода прокта в графическом редакторе пакета QP,
+        тестирования и отладки проекта и анализа временных характеристик КА;
+        \item Знакомство с редактором КА пакета QP  и анализ результатов синтеза;
+        \item Получение навыков отладки цифровых устройств класса КА на физической модели:
+        конфигурирование ПЛИС и экспериментальная проверка работы КА при использовании
+        лабораторного стенда.
+    \end{itemize}
+    \section{Исходные данные}
+    Вариант исходного задания -- 8. Тип триггера -- JK.
+
+    \begin{minipage}{0.5\linewidth}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|cl|cccc|}
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{$(x_2, x_1)^t$}} & \multicolumn{4}{c|}{$r^t$}                                                   \\ \cline{3-6} 
+            \multicolumn{2}{|c|}{}                                & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{2} & 3 \\ \hline
+            \multicolumn{2}{|c|}{0 0}                             & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{0} & 1 \\ \hline
+            \multicolumn{2}{|c|}{0 1}                             & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{H} & H \\ \hline
+            \multicolumn{2}{|c|}{1 0}                             & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{H} & 2 \\ \hline
+            \multicolumn{2}{|c|}{1 1}                             & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{3} & 1 \\ \hline
+            \end{tabular}
+            \caption{Таблица переходов}
+            \label{tab:transtab}
+        \end{table}
+    \end{minipage}
+    \begin{minipage}[b]{0.5\linewidth}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $r^t$          & 0  & 1  & 2  & 3  \\ \hline
+            $(y_2, y_1)^t$ & 01 & 10 & 10 & 01 \\ \hline
+            \end{tabular}
+            \caption{Таблица выходов}
+        \end{table}
+    \end{minipage}
+
+    \newpage
+    \section{Ход работы}
+    \subsection{Структурный синтез КА}
+    При помощи таблицы~\ref{tab:transtab} составим граф переходов.
+
+    \begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[
+            nodecirc/.style={circle, draw=black, fill=gray!30, thick},
+            nofill/.style={circle, draw=cyan},
+            filled/.style={circle, draw=cyan, fill=cyan}
+        ]
+        \matrix (m) [ matrix of nodes, row sep=2cm, column sep=4cm,
+                    nodes = {anchor=center}] {
+                    |[nodecirc]{$r_0$};| & |[nodecirc]{$r_1$};| \\
+                    |[nodecirc]{$r_3$};| & |[nodecirc]{$r_2$};| \\
+        };
+        \draw[->, thick] (m-1-1) to node[left] {10} (m-2-1);
+        \draw[->, thick] (m-1-2) to node[above] {10} (m-1-1);
+        \draw[->, thick] (m-1-2) to node[right] {11} (m-2-2);
+        \draw[->, thick] (m-2-2) to node[above] {11} (m-2-1);
+        \def\myshift#1{\raisebox{-2.5ex}}
+        \draw [->,thick,postaction={decorate,decoration={text along path,text align=center,text={|\myshift|10}}}] (m-2-1) to [bend right=15]  (m-2-2);
+        \draw [->,thick,postaction={decorate,decoration={text along path,text align=center,text={|\myshift|00}}}] (m-2-1) to [bend right=5]  (m-1-2);
+        \def\myshift#1{\raisebox{1ex}}
+        \draw [->,thick,postaction={decorate,decoration={text along path,text align=center,text={|\myshift|11}}}] (m-2-1) to [bend right=-5]  (m-1-2);
+        \draw[<->, thick, red] (m-2-2) to node[right] {00} (m-1-1);
+        \end{tikzpicture}
+        \caption{Граф переходов синтезируемого автомата}
+    \end{center}
+\end{figure}
+    Всего автомат имеет 4 различных состояния, значит, минимальное необходиоме число триггеров $m = \log_2 4 = 2$.
+    Воспользовавшись экономичным кодированием внутренних состояний, получим необходимые коды:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $r^t$          & 0  & 1  & 2  & 3  \\ \hline
+        $(Q_2, Q_1)^t$ & 00 & 01 & 11 & 10 \\ \hline
+        \end{tabular}
+        \caption{Коды состояний автомата}
+        \label{tab:statecodes}
+    \end{table}
+    Воспользовавшись таблицами~\ref{tab:transtab} и~\ref{tab:statecodes} получим закодированную таблицу
+    переходов синтезируемого КА:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|cl|cccc|}
+        \hline
+        \multicolumn{2}{|c|}{\multirow{2}{*}{$(x_2, x_1)^t$}} & \multicolumn{4}{c|}{$(Q_2, Q_1)^t$}                                                   \\ \cline{3-6} 
+        \multicolumn{2}{|c|}{}                                & \multicolumn{1}{c|}{00} & \multicolumn{1}{c|}{01} & \multicolumn{1}{c|}{11} & 10 \\ \hline
+        \multicolumn{2}{|c|}{0 0}                             & \multicolumn{1}{c|}{11} & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{00} & 01 \\ \hline
+        \multicolumn{2}{|c|}{0 1}                             & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{H} & H \\ \hline
+        \multicolumn{2}{|c|}{1 0}                             & \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{00} & \multicolumn{1}{c|}{H} & 11 \\ \hline
+        \multicolumn{2}{|c|}{1 1}                             & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{11} & \multicolumn{1}{c|}{10} & 01 \\ \hline
+        \end{tabular}
+        \caption{Таблица переходов}
+        \label{tab:transtab_coded}
+    \end{table}    
+    Используя таблицу истинности для JK-триггера, построим таблицу управления триггером:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        $(x_2, x_1)^t$ & $(Q_2, Q_1)^t$ & $(Q_2, Q_1)^{t+1}$ & $J_2$ & $K_2$ & $J_1$ & $K_1$ \\ \hline
+        00             & 00             & 11                 & 1     & H     & 1     & H     \\ \hline
+        00             & 01             & H                  & H     & H     & H     & H     \\ \hline
+        00             & 11             & 00                 & H     & 1     & H     & 1     \\ \hline
+        00             & 10             & 01                 & H     & 1     & 1     & H     \\ \Xhline{4\arrayrulewidth}
+        01             & 00             & H                  & H     & H     & H     & H     \\ \hline
+        01             & 01             & H                  & H     & H     & H     & H     \\ \hline
+        01             & 11             & H                  & H     & H     & H     & H     \\ \hline
+        01             & 10             & H                  & H     & H     & H     & H     \\ \Xhline{4\arrayrulewidth}
+        10             & 00             & 10                 & 1     & H     & 0     & H     \\ \hline
+        10             & 01             & 00                 & 0     & H     & H     & 1     \\ \hline
+        10             & 11             & H                  & H     & H     & H     & H     \\ \hline
+        10             & 10             & 11                 & H     & 0     & 1     & H     \\ \Xhline{4\arrayrulewidth}
+        11             & 00             & H                  & H     & H     & H     & H     \\ \hline
+        11             & 01             & 11                 & 1     & H     & H     & 0     \\ \hline
+        11             & 11             & 10                 & H     & 0     & H     & 1     \\ \hline
+        11             & 10             & 01                 & H     & 1     & 1     & H     \\ \hline
+        \end{tabular}
+        \caption{Таблица функций возбуждения триггеров}
+        \label{tab:erection}
+    \end{table}
+    Произведем минимизацию полученных функций при помощи карт Карно:
+
+    \begin{minipage}{0.5\linewidth}
+        \begin{center}
+            \begin{tikzpicture}[karnaugh,
+                thick,
+                grp/.style n args={3}{#1,fill=#1!30,
+                    minimum width=#2\kmunitlength,
+                    minimum height=#3\kmunitlength,
+                    rounded corners=0.2\kmunitlength,
+                    fill opacity=0.6,
+                    rectangle,draw}]]
+                \karnaughmaptab{4}{$J_2$}{{$x_2$}{$x_1$}{$Q_2$}{$Q_1$}}%
+                {1HHH HHHH H1HH 10HH}%
+                {
+                    \node[grp={blue}{0.9}{3.9}](n000) at (0.5, 2.0) {};
+                    \node[grp={red}{3.9}{1.9}](n001) at (2.0, 2.0) {};
+                }
+            \end{tikzpicture}
+        
+            $J_2 = \color{blue}\overline{Q}_1 \overline{Q_2} \color{black} + \color{red} x_1 \color{black} = \overline{\overline{x}_1 \overline{\overline{Q}_1 \overline{Q}_2}}$
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+        \begin{center}
+            \begin{tikzpicture}[karnaugh,
+                thick,
+                grp/.style n args={3}{#1,fill=#1!30,
+                    minimum width=#2\kmunitlength,
+                    minimum height=#3\kmunitlength,
+                    rounded corners=0.2\kmunitlength,
+                    fill opacity=0.6,
+                    rectangle,draw}]]
+                \karnaughmaptab{4}{$K_2$}{{$x_2$}{$x_1$}{$Q_2$}{$Q_1$}}%
+                {HH11 HHHH HH01 HHH0}%
+                {
+                    \node[grp={blue}{3.9}{1.9}](n001) at (2.0, 3.0) {};
+                    \node[grp={red}{0.9}{1.9}](n000) at (3.5, 2.0) {};
+                    \node[grp={red}{0.9}{1.9}](n002) at (0.5, 2.0) {};
+                }
+            \end{tikzpicture}
+        
+            $K_2 = \color{blue}\overline{x}_2 \color{black} + \color{red} x_1\overline{Q}_1 \color{black} = \overline{x_2 \overline{x_1 \overline{Q}_1}}$
+        \end{center}
+    \end{minipage}
+
+    \begin{minipage}{0.5\linewidth}
+        \begin{center}
+            \begin{tikzpicture}[karnaugh,
+                thick,
+                grp/.style n args={3}{#1,fill=#1!30,
+                    minimum width=#2\kmunitlength,
+                    minimum height=#3\kmunitlength,
+                    rounded corners=0.2\kmunitlength,
+                    fill opacity=0.6,
+                    rectangle,draw}]]
+                \karnaughmaptab{4}{$J_1$}{{$x_2$}{$x_1$}{$Q_2$}{$Q_1$}}%
+                {1HH1 HHHH HHH1 0HH1}%
+                {
+                    \node {};
+                    \node[grp={blue}{3.9}{1.9}](n001) at (2.0, 3.0) {};
+                    \node[grp={red}{1.9}{3.9}](n000) at (3.0, 2.0) {};
+                }
+            \end{tikzpicture}
+        
+            $J_1 = \color{blue}\overline{x}_2 \color{black} + \color{red} Q_2 \color{black} = \overline{x_2 \overline{Q}_2}$
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+        \begin{center}
+            \begin{tikzpicture}[karnaugh,
+                thick,
+                grp/.style n args={3}{#1,fill=#1!30,
+                    minimum width=#2\kmunitlength,
+                    minimum height=#3\kmunitlength,
+                    rounded corners=0.2\kmunitlength,
+                    fill opacity=0.6,
+                    rectangle,draw}]]
+                \karnaughmaptab{4}{$K_1$}{{$x_2$}{$x_1$}{$Q_2$}{$Q_1$}}%
+                {HH1H HHHH H01H H1HH}%
+                {
+                    \node {};
+                    \node[grp={blue}{3.9}{0.9}](n001) at (2.0, 3.5) {};
+                    \node[grp={blue}{3.9}{0.9}](n002) at (2.0, 0.5) {};
+                    \node[grp={red}{1.9}{3.9}](n000) at (3.0, 2.0) {};
+                }
+            \end{tikzpicture}
+        
+            $K_1 = \color{blue}\overline{x}_1 \color{black} + \color{red} Q_2 \color{black} = \overline{x_1 \overline{Q}_2}$
+        \end{center}
+    \end{minipage}
+
+    Также составим таблицу для выходных сигналов, как функций состояния автоматов, и проведем минимизацию.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|}
+        \hline
+        $(Q_2, Q_1)$ & $(y_2, y_1)$ \\ \hline
+        0 0          & 0 1          \\ \hline
+        0 1          & 1 0          \\ \hline
+        1 1          & 1 0          \\ \hline
+        1 0          & 0 1          \\ \hline
+        \end{tabular}
+    \end{table}
+    \[y_1 = \overline{Q}_1, \, y_2 = Q_2 \overline{Q}_1 + \overline{Q}_2 Q_1 = \overline{\overline{Q_2 \overline{Q}_1} \cdot \overline{\overline{Q}_2 Q_1}}\]
+
+    \subsection{Исследование синтезированного автомата}
+    Введем схему синтезированного автомата в Quartus Prime.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/scheme}
+        \caption{Синтезированная схема}
+        \label{fig:scheme}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/tmv1}
+        \caption{Technology Map Viewer}
+        \label{fig:tmv1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\linewidth]{polytech/scheme/report-lab4/subfiles/images/app}
+        \caption{Аппаратные затраты}
+        \label{fig:app}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/wave}
+        \caption{Моделирование работы}
+        \label{fig:wave}
+    \end{figure}
+
+    Сравнение выходных результатов для Q и Y подтверждает правильность работы устройства.
+
+    \subsection{Синтез конечного автомата средствами Quartus Prime}
+
+    Теперь создадим автомат при помощи встроенных средств среды Quartus.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.25\linewidth]{polytech/scheme/report-lab4/subfiles/images/smw1}
+        \includegraphics[width=0.4\linewidth]{polytech/scheme/report-lab4/subfiles/images/smw2}
+        \includegraphics[width=0.15\linewidth]{polytech/scheme/report-lab4/subfiles/images/smw3}
+
+        \begin{minipage}{0.45\linewidth}
+            \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/smw4}
+        \end{minipage}
+        \begin{minipage}{0.45\linewidth}
+            \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/smw5}
+        \end{minipage}
+        \caption{Настройки создания автомата}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/scheme_machine}
+        \caption{Синтезированная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{polytech/scheme/report-lab4/subfiles/images/compile_machine}
+        \caption{Отчет о компиляции}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/scheme/report-lab4/subfiles/images/smv}
+        \caption{State Machine Viewer}
+    \end{figure}
+    \section{Вывод}
+    В ходе работы были закреплены знания характеристик и режимов работы триггеров. Были получены навыки
+    структурного синтеза, тестирования и управления конечными автоматами. Конечный автомат на основе заданных
+    данных был синтезирован вручную, а также при помощи встроенных средств Quartus Prime. Автомат, полученный
+    вручную работает медленее и содержит большее число элементов, чем созданный автоматически. Помимо оптимизаций,
+    производимых Quartus это также связано с тем, что для тестирования <<ручной>> автомат выводил промежуточные значения.
+\end{document}

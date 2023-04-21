@@ -2,6 +2,7 @@
 \usepackage{listings} % Code listings
 \usepackage{graphicx} % Images
 \usepackage{booktabs} % Better tables
+\usepackage{makecell}
 \usepackage{enumitem} % Lists
 \usepackage{dsfont}
 \usepackage{geometry} % Page geometry
@@ -76,10 +77,13 @@
 
 \usepackage{pgfplots} % Plots
 \usepackage{tikz}
-\usetikzlibrary{3d,perspective}
+\usetikzlibrary{3d,perspective,decorations.text}
 \usetikzlibrary{animations}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
 \usepackage{tikz-cd}
 \usetikzlibrary{cd}
+\usetikzlibrary{karnaugh}
 \pgfplotsset{width=6cm,compat=newest}
 \usepackage{color}
 
@@ -200,7 +204,7 @@
 \usepackage{secdot}
 \sectiondot{subsection}
 \usepackage{kvmap} % Karnaugh-maps for logic functions
-
+\usepackage{}
 \newcommand{\projectname}[3]{
     \begin{center}
         \Large

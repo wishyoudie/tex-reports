@@ -1,4 +1,4 @@
 # Default ignored files
-../out
-../.idea
+out
+.idea
 token.txt

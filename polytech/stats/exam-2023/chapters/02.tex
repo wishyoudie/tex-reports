@@ -40,6 +40,12 @@
         \item $0 \leq P(A) \leq 1$;
         \item $T = T \cup \varnothing$;
         \item $P(T) = P(T) + P(\varnothing) = 1 + P(\varnothing) \Rightarrow P(\varnothing) = 0$;
+        \item Пусть $A \subset \Omega, B \subset \Omega$, и $A$ и $B$ противоположны. Тогда $P(A \cup B) = P(A) + P(B) = P(T) = 1$,
+        откуда $P(A) = 1 - P(B)$, то есть
+        \begin{itemize}
+            \item[] $P(A) = 1 - P(\overline{A})$,
+            \item[] $P(B) = 1 - P(\overline{B})$;
+        \end{itemize}
     \end{enumerate}
 
     В современной теории вероятностей вероятностная мера определяется на классах событий. Классы событий образуют таким образом,
@@ -61,5 +67,5 @@
         
         *Пример алгебры: многоугольники на плоскости, мерой для которых является их площадь.
     \end{definition}
-
+    \newpage
 \end{document}

@@ -1,5 +1,6 @@
 \documentclass[a4paper,12pt]{article}
 \input{commons/preamble}
+\graphicspath{{polytech/scheme/report-lab6/subfiles/images/}}
 
 \begin{document}
     \input{polytech/scheme/report-lab6/subfiles/titlepage}
@@ -10,16 +11,133 @@
     \section{Цель работы}
     Исследование счетчиков, построенных по различной архитектуре, и типовых функциональных устройств с их использованием.
     \section{Исходные данные}
-    Вариант задания -- 8. Разрядность счетчика = 6, число тетрад = 3.
+    Вариант задания -- 8. Число тетрад = 3.
     \section{Ход работы}
     \subsection{Исследование счетчика с последовательным переносом}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{scheme1}
+        \caption{Разработанная схема}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\linewidth]{compile1}
+        \caption{Аппаратные затраты}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\linewidth]{fmax1}
+        \caption{Максимальная тактовая частота}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{timings1}
+        \caption{Задержки появления сигналов}
+    \end{figure}
+    Сумма Тсо = 37,546.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{tmv1}
+        \caption{Technology Map Viewer}
+    \end{figure}
+
+    Проведем несколько временных тестов. Для начала используем частоту, меньшую максимальной.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_1__60}
+        \caption{$T = 60 \text{ нс} < T_\textit{max}$ -- счетчик работает нормально.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_1__30}
+        \caption{$T = 30 \text{ нс} \approx T_\textit{max}$ -- счетчик работает нормально.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_1__5}
+        \caption{$T = 5 \text{ нс} > T_\textit{max}$ -- счетчик работает с опозданием.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_1__3}
+        \caption{$T = 3 \text{ нс} >> T_\textit{max}$ -- счетчик ломается.}
+    \end{figure}
     \subsection{Исследование счетчика, реализованного на основе мегафункции}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{scheme2}
+        \caption{Разработанная схема}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_2_1}
+        \caption{Временная диаграмма работы счетчика в режиме сложения}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_2_2}
+        \caption{Временная диаграмма работы счетчика в режиме вычитания}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_2_3}
+        \caption{Временная диаграмма работы счетчика в режиме синхронной загрузки}
+    \end{figure}
     \subsection{Делитель частоты на число}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_div}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_div}
+        \caption{Временная диаграмма}
+    \end{figure}
+    Видно, что cout принимает значение 1 раз в data тактов (в данном случае data = 15). Если перевести
+    счетчик в режим сложения и подать на вход число (256 - data) = 241, то cout станет единицей только при
+    числе 255.
     \subsection{Устройство фиксации коротких импульсов}
-    \subsection{Генератор треугольного сигнала}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_filter}
+        \caption{Разработанная схема}
+    \end{figure}
     \subsection{Двоично-десятичный счетчик}
-    \subsection{преобразователь из двоичного кода в двоично-десятичный}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_5}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_5}
+        \caption{Временная диаграмма}
+    \end{figure}
+    \subsection{Преобразователь из двоичного кода в двоично-десятичный}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_6}
+        \caption{Разработанная схема}
+    \end{figure}
     \subsection{Накапливающий сумматор}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_last}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_last}
+        \caption{Временная диаграмма}
+    \end{figure}
     \section{Вывод}
     В ходе работы получены навыки исследования двоичных счетчиков, построенных по различной архитектуре,
     такие как счетчики с последовательным переносом и счетчики, основанные на мегафункции. Было проведено

@@ -2,5 +2,30 @@
 \graphicspath{{polytech/stats/exam-2023/images/}}
 \begin{document}
 \section{Формулы сложения и умножения вероятностей. Вывод формул. Примеры применения.}
+    Пусть $A \subset \Omega, B \subset \Omega$ и события пересекаются, то есть $A \cap B \neq \varnothing$.
+    В этом случае вероятность объединения событий не равна сумме вероятностей. Для вывода формулы представим
+    объединение пересекающихся событий $A$ и $B$ в виде объединения трех непересекающихся событий:
+    \begin{equation*}
+        A \cup B = (A \cap \overline{B}) \cup (\overline{A} \cap B) \cup (A \cap B).
+    \end{equation*}
+    Точно так же представим события $A$ и $B$:
+    \begin{equation*}
+        A = (A \cap \overline{B}) \cup (A \cap B), \ B = (\overline{A} \cap B) \cup (A \cap B).
+    \end{equation*}
+    К этим выражениям можно применить аксиому счетной аддитивности вероятностной меры:
+    \begin{gather*}
+        P(A \cup B) = P(A \cap \overline{B}) + P(\overline{A} \cap B) + P(A \cap B),\\
+        P(A) = P(A \cap \overline{B}) + P(A \cap B), \ P(B) = P(\overline{A} \cap B) + P(A \cap B),
+    \end{gather*}
+    откуда следует, что $P(A \cap \overline{B}) = P(A) - P(A \cap B)$ и $P(\overline{A} \cap B) = P(B) - P(A \cap B)$.
+    Подставляя эти выражения в первое, окончательно получим:
+    \begin{theorem}[Формула сложения вероятностей]
+        \begin{equation*}
+            P(A \cup B) = P(A) - P(A \cup B) + P(B) - P(A \cup B) + P(A \cup B) = P(A) + P(B) - P(A \cap B).
+        \end{equation*}
+    \end{theorem}
 
+    // Вывод формулы произведения вероятностей
+
+    \newpage
 \end{document}

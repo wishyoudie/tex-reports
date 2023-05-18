@@ -3,16 +3,82 @@
 
 \begin{document}
 	\input{polytech/calc-math/coursework/subfiles/titlepage}
+	\hfconfiguration{Курсовая работа}{}{}
+	
 	\tableofcontents
-	\hfconfiguration{КУРСОВАЯ РАБОТА}{}{}
-	% \section{Задача}
-	% \section{Ход работы}
-	% \begin{figure}[H]
-	% 	\centering
-	% 	\includegraphics[width=0.7\linewidth]{polytech/calc-math/coursework/subfiles/odu2}
-	% 	\caption{Сравнение решения методом сетки с точным}
-	% 	\label{fig:graph}
-	% \end{figure}
-	% \lstinputlisting[style=def, label={lst:list}]{polytech/calc-math/coursework/subfiles/lab1-2.m}
-	% \section{Вывод}
+	\newpage
+	
+	\section{Введение}
+	Дифференциальное уравнение, описывающее движение пузырьков имеет общий вид:
+	\begin{equation}
+		\frac{d^2 y}{dt^2} + C_2 \frac{dy}{dt} - C_1 \frac{y}{(1 + y^2)^3} = 0\label{eq:maintask}
+	\end{equation}
+	Задавшись начальными значениями $y(0) = 0.05, y'(0) = 0$, построить график решения $y(t)$ для
+	$t \in [0, 1]$.
+
+	Оценить погрешность результата и влияние на точность погрешности исходных данных.
+	\begin{gather}
+		C_1 = 0.5686341 \cdot \int_{0}^{\pi/2} \frac{zdz}{\sin z \left(\cos z + 0.7 \sin z\right)}\label{eq:taskc1}\\
+		C_2 = 0.1622131 \cdot x^*,\label{eq:taskc2}
+	\end{gather}
+	где $x^*$ -- положительный корень уравнения
+	\begin{equation*}
+		x \cdot \text{sh}\, \frac{10}{x} = 15
+	\end{equation*}
+
+	\newpage
+	
+	\section{Основная часть}
+	\subsection{Решение}
+	Перепишем исходную задачу в виде системы
+	\begin{equation}
+		\begin{cases}
+			\displaystyle z'(y, t) = C_1 \cdot p(y) - C_2 \cdot z(y, t) \\
+			\displaystyle z(y, t) = \frac{dy}{dt} \\
+			\displaystyle p(y) = \frac{y}{(1 + y^2)^3}
+		\end{cases}
+	\end{equation}.
+
+	Решение системы будем производить следующим образом. Сначала необходимо найти
+	коэффициенты $C_1$ и $C_2$. 
+	
+	Для поиска $C_1$ будем считать значение определенного интеграла
+	численным методом при помощи библиотечной функции \texttt{scipy.integrate.quad}, являющейся
+	аналогом подпрограммы QUANC8.
+
+	В случае $C_2$ необходимо найти корень уравнения, для этого используем аналог подпрограммы
+	ZEROIN -- \texttt{scipy.optimize.root\_scalar}.
+
+	Найдя значения коэффициентов, решим однородное дифференциальное уравнение функцией \texttt{scipy.integrate.odeint}
+	и отрисуем исходный график.
+
+	Результаты работы программы:
+	\begin{equation*}
+		C_1 = 1.000000020436, \qquad C_2 = 0.999999865779
+	\end{equation*}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{polytech/calc-math/coursework/subfiles/images/graph}
+		\caption{График решения}
+		\label{fig:graph}
+	\end{figure}
+
+	\subsection{Оценка погрешностей}
+	Изменим начальные условия и коэффициенты в формулах для $C_i$ на 1\%. Получим значения
+	\begin{gather*}
+		C_1^* = 0.990000020232, \qquad C_2^* = 1.009999864436 \rightarrow \\
+		\Delta C_1 = 0.010000000204, \qquad \Delta C_2 = 0.009999998657.
+	\end{gather*}
+	Итого наблюдается погрешность менее, чем в 1\%, что является допустимым.
+
+	\section{Заключение}
+	В ходе работы было решено дифференциальное уравнение второго порядка, а так же
+	численными методами найдены значение определенного интеграла и корень нелинейного
+	уравнения. Изменения начальных условий на 1\% повлекли за собой изменения результатов
+	меньше 1\%, что является допустимым для данной задачи.
+
+	\newpage
+	\section{Приложение 1}
+	\lstinputlisting[style=py, caption={main.py}, captionpos=b, label={lst:main}]{polytech/calc-math/coursework/subfiles/code/main.py}
 \end{document}

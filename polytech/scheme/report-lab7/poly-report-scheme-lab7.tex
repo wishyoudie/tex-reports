@@ -1,0 +1,29 @@
+\documentclass[a4paper,12pt]{article}
+\input{commons/preamble}
+\graphicspath{{polytech/scheme/report-lab7/subfiles/images/}}
+
+\begin{document}
+    \input{polytech/scheme/report-lab7/subfiles/titlepage}
+
+    \tableofcontents
+    \hfconfiguration{Лабораторная работа №7}{}{}
+
+    \section{Цель работы}
+    \begin{itemize}
+        \item Исследование режимов загрузки и сдвига данных в регистрах;
+        \item Исследование регистров с обратными связями;
+        \item Исследование типовых функциональных устройств с использованием регистров;
+        \item Получение навыков по тестированию и отладке устройств с регистрами.
+    \end{itemize}
+    \section{Исходные данные}
+    \begin{table}[H]
+        \centering
+        \resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        № & Разрядность регистра & \begin{tabular}[c]{@{}c@{}}Разрядность\\ регистра для\\ генератора\\ псевдослучайных\\ чисел\end{tabular} & \begin{tabular}[c]{@{}c@{}}Разряды\\ для XNOR\\ в обратной\\ связи\\ нумерация\\ разрядов --\\ с нуля\end{tabular} & \begin{tabular}[c]{@{}c@{}}Бит-\\ стаффинг\end{tabular} & \begin{tabular}[c]{@{}c@{}}Признак\\ начала\\ слова\end{tabular} & \begin{tabular}[c]{@{}c@{}}$n$ для\\ битового\\ интервала\end{tabular} \\ \hline
+        8 & $n = 12$             & $n = 12$                                                                                                  & $11, \ 8$                                                                                                          & $M = 5$                                                 & 000000                                                           & $n = 4$                                                                \\ \hline
+        \end{tabular}}
+    \end{table}
+    \section{Ход работы}
+    \section{Вывод}
+\end{document}

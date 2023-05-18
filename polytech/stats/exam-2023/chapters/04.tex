@@ -2,5 +2,34 @@
 \graphicspath{{polytech/stats/exam-2023/images/}}
 \begin{document}
 \section{Зависимые события. Условные вероятности. Вывод формулы. Признак независимости случайных событий.}
+    \begin{definition}[Условная вероятность]
+        Пусть $A \subset \Omega, B \subset \Omega$ и сформулированы условия $S$.
 
+        \textit{Условной вероятностью} называют вероятность осуществления одного из событий, при условии, что
+        другое событие состоялось.
+        \begin{equation*}
+            P(B|A) = \frac{P(A \cap B)}{P(A)}
+        \end{equation*}
+    \end{definition}
+
+    Из определений $P(B|A)$ и $P(A|B)$ получаем следующий вывод:
+    \begin{equation*}
+        P(A \cap B) = P(B|A) \cdot P(A) = P(A|B) \cdot P(B).
+    \end{equation*}
+    События $A$ и $B$ независимы, когда $P(B|A) = P(B)$ и $P(A|B) = P(A) \Rightarrow$
+    \begin{theorem}[Признак независимости событий]
+        События $A$ и $B$ независимы тогда и только тогда, когда $P(A \cap B) = P(A) \cdot P(B)$.
+
+        \textit{Доказательство.}
+        \vspace{0.5cm}
+        В самом деле, при таком соотношении
+        \begin{equation*}
+            P(B|A) = \frac{P(A \cap B)}{P(A)} = \frac{P(A)P(B)}{P(A)} = P(B)
+        \end{equation*}
+    \end{theorem}
+    Если $A$ и $B$ связаны взаимно-однозначно, то 
+    \begin{equation*}
+        P(A \cap B) = P(A) = P(B), \quad P(B|A) = 1, \quad P(A|B) = 1.
+    \end{equation*}
+    \newpage
 \end{document}

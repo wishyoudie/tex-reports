@@ -1,0 +1,117 @@
+\documentclass[a4paper,12pt]{article}
+\input{commons/preamble}
+
+\begin{document}
+    \input{polytech/stats/homework-2/subfiles/titlepage}
+    \hfconfiguration{Расчетная работа №2}{}{}    
+
+    \section{Оценка полных характеристик распределения}
+    Рассмотрим вывод \texttt{part1.py}:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{polytech/stats/homework-2/subfiles/fig/1}
+        \caption{Выборочная функция распределения}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{polytech/stats/homework-2/subfiles/fig/2}
+        \caption{Гистограмма $\varphi^*(x)$}
+    \end{figure}
+    \section{Частные характеристики распределения}
+    Будем искать характеристики для двух выборок: помимо полной, выделим
+    ее подпоследовательность длиной 20. Найдем точечные оценки (\texttt{part21.py}):
+    \begin{enumerate}
+        \item Полная выборка
+        \begin{itemize}
+            \item Выборочное среднее $= 0.3326$
+            \item Выборочная медиана $= 0.2392$
+            \item Середина размаха $= 0.91975$
+            \item Второй центральный момент (дисперсия) $= 0.1198$
+            \item Третий центральный момент $= 0.092$
+            \item Четвертый центральный момент $= 0.1269$
+            \item Коэффициент асимметрии $=2.2181$
+            \item Коэффициент эксцесса $= 5.8456$
+            \item Границы интерквантильного промежутка (для $P = 0.95$): $[-0.3641, 0.9111]$
+        \end{itemize}
+        \item Частичная выборка
+        \begin{itemize}
+            \item Выборочное среднее $= 0.336$
+            \item Выборочная медиана $= 0.2364$
+            \item Середина размаха $= 0.6802$
+            \item Второй центральный момент (дисперсия) $= 0.0841$
+            \item Третий центральный момент $= 0.0493$
+            \item Четвертый центральный момент $= 0.0472$
+            \item Коэффициент асимметрии $=2.0238$
+            \item Коэффициент эксцесса $= 3.6748$
+        \end{itemize}
+    \end{enumerate}
+    Интервальные оценки с доверительной вероятностью $Q = 0.95$:
+    \begin{enumerate}
+        \item Полная выборка
+        \begin{itemize}
+            \item Первый начальный момент $= 0.3326$
+            \item Интервальные оценки для первого начального момента: $(0.2653, 0.3999)$
+            \item Второй центральный момент $= 0.1209$
+            \item Интервальные оценки для второго центрального момента: $(0.0938, 0.1619)$
+            \item Интерквантильный промежуток (параметрический подход): $(0.257, 0.408)$
+            \item Интерквантильный промежуток (непараметрический подход): $(0.232, 0.251)$
+        \end{itemize}
+        \item Частичная выборка
+        \begin{itemize}
+            \item Первый начальный момент $= 0.4596$
+            \item Интервальные оценки для первого начального момента: $(0.2144, 0.7047)$
+            \item Второй центральный момент $= 0.2744$
+            \item Интервальные оценки для второго центрального момента: $(0.1587, 0.5854)$
+        \end{itemize}
+    \end{enumerate}
+    
+    \section{Идентификация закона распределения генеральной совокупности}
+    Исходя из вида гистограммы, можно сделать предположение об экспоненциальном
+    виде закона распределения.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{polytech/stats/homework-2/subfiles/fig/3}
+    \end{figure}
+    Проверим гипотезу несколькими критериями (\texttt{part3.py}):
+    \begin{enumerate}
+        \item Критерий <<Хи-квадрат>>: подходит;
+        \item Критерий типа Колмогорова-Смирного: подходит;
+        \item Критерий <<Омега-квадрат>> Мизеса: подходит.
+    \end{enumerate}
+
+    \section{Вывод}
+    В ходе работы были оценены полные и частные характеристики распределения данной случайной величины.
+    Было идентифицировано, что она подчиняется экспоненциальному закону распределения.
+    \newpage
+    \section*{Приложение 1}
+    % \lstinputlisting[style=py, caption={main.py}, captionpos=b, label={lst:main}]{polytech/stats/homework-2/subfiles/main.py}
+    % \lstinputlisting[style=py, caption={part1.py}, captionpos=b, label={lst:part1}]{polytech/stats/homework-2/subfiles/part1.py}
+    % \lstinputlisting[style=py, caption={part21.py}, captionpos=b, label={lst:part21}]{polytech/stats/homework-2/subfiles/part21.py}
+    % \lstinputlisting[style=py, caption={part23.py}, captionpos=b, label={lst:part23}]{polytech/stats/homework-2/subfiles/part23.py}
+    % \lstinputlisting[style=py, caption={part3.py}, captionpos=b, label={lst:part3}]{polytech/stats/homework-2/subfiles/part3.py}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\linewidth]{polytech/stats/homework-2/subfiles/fig/main}
+        \caption{\texttt{main.py}}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{polytech/stats/homework-2/subfiles/fig/part1}
+        \caption{\texttt{part1.py}}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/stats/homework-2/subfiles/fig/part21}
+        \caption{\texttt{part21.py}}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/stats/homework-2/subfiles/fig/part22}
+        \caption{\texttt{part23.py}}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{polytech/stats/homework-2/subfiles/fig/part3}
+        \caption{\texttt{part3.py}}
+    \end{figure}
+\end{document}

@@ -5,8 +5,9 @@
 \begin{document}
     \input{polytech/scheme/report-lab9/subfiles/titlepage}
 
-    \tableofcontents
     \hfconfiguration{Лабораторная работа №9}{}{}
+    
+    \tableofcontents
 
     \section{Цель работы}
     \begin{itemize}
@@ -15,6 +16,7 @@
         \item получение навыков по организации параллельной обработки данных и по использованию
         операционных узлов в режиме разделения времени.
     \end{itemize}
+
     \section{Исходные данные}
     \begin{table}[H]
         \centering
@@ -24,7 +26,106 @@
         8 & $0.5$            & $0,1,3,4,13,14$ & 24         & 5          & 8          \\ \hline
         \end{tabular}
     \end{table}
+
     \section{Ход работы}
-    \section{Вывод}
+    \subsection{Исследование работы дешифратора на основе мегафункции}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_first}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_first}
+        \caption{Временная диаграмма}
+    \end{figure}
+    \subsection{Исследование генератора треугольного сигнала}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_tria}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_tria}
+        \caption{Временная диаграмма}
+    \end{figure}
+
+    \subsection{Реализация логической функции четырех переменных}
+
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+                                    & $x_3$                     & $x_2$                     & $x_1$                     & $x_0$                     & $f$                       & $D$                                \\ \hline
+            \cellcolor[HTML]{32CB00}0  & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 &                                    \\ \cline{1-6}
+            \cellcolor[HTML]{32CB00}1  & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \multirow{-2}{*}{1}                \\ \hline
+            2                          & 0                         & 0                         & 1                         & 0                         & 0                         &                                    \\ \cline{1-6}
+            \cellcolor[HTML]{32CB00}3  & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \multirow{-2}{*}{$x_0$}            \\ \hline
+            \cellcolor[HTML]{32CB00}4  & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 &                                    \\ \cline{1-6}
+            5                          & 0                         & 1                         & 0                         & 1                         & 0                         & \multirow{-2}{*}{$\overline{x_0}$} \\ \hline
+            6                          & 0                         & 1                         & 1                         & 0                         & 0                         &                                    \\ \cline{1-6}
+            7                          & 0                         & 1                         & 1                         & 1                         & 0                         & \multirow{-2}{*}{0}                \\ \hline
+            8                          & 1                         & 0                         & 0                         & 0                         & 0                         &                                    \\ \cline{1-6}
+            9                          & 1                         & 0                         & 0                         & 1                         & 0                         & \multirow{-2}{*}{0}                \\ \hline
+            10                         & 1                         & 0                         & 1                         & 0                         & 0                         &                                    \\ \cline{1-6}
+            11                         & 1                         & 0                         & 1                         & 1                         & 0                         & \multirow{-2}{*}{0}                \\ \hline
+            12                         & 1                         & 1                         & 0                         & 0                         & 0                         &                                    \\ \cline{1-6}
+            \cellcolor[HTML]{32CB00}13 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \multirow{-2}{*}{$x_0$}            \\ \hline
+            \cellcolor[HTML]{32CB00}14 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}1 & \cellcolor[HTML]{32CB00}0 & \cellcolor[HTML]{32CB00}1 &                                    \\ \cline{1-6}
+            15                         & 1                         & 1                         & 1                         & 1                         & 0                         & \multirow{-2}{*}{$\overline{x_0}$} \\ \hline
+            \end{tabular}
+        \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_logic}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_logic}
+        \caption{Временная диаграмма}
+    \end{figure}
+
+    \subsection{Исследование преобразователя параллельного кода в последовательный}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_code}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_code}
+        \caption{Временная диаграмма}
+    \end{figure}
+
+    \subsection{Исследование шифратора позиционного кода в четырехразрядный двоичный код}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_schiffer}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{wave_schiffer}
+        \caption{Временная диаграмма}
+    \end{figure}
+
+    \subsection{Исследование устройства суммирования n-разрядных данных от M потоков на одном сумматоре в режиме разделения времени}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scheme_last}
+        \caption{Разработанная схема}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{wave_last}
+        \caption{Временная диаграмма}
+    \end{figure}
     
+    \section{Вывод}
+    В ходе работы были исследованы дешифраторы, мультиплексоры, а также получены навыки работы с ними в различных
+    устройствах, таких как шифратор, распределитель тактовых импульсов, преобразователь параллельного кода в последовательный,
+    устройство суммирования.
 \end{document}

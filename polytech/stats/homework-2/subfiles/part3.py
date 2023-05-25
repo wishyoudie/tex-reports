@@ -30,6 +30,7 @@ def part3(data):
         Xi += (nk - n * pk) ** 2 / (n * pk)
     p_value = 1 - chi2.cdf(Xi, 8)
     print("Критерий Хи-квадрат: ", end='')
+    print(p_value)
     if p_value > alpha:
         print("подходит.")
     else:
@@ -54,6 +55,7 @@ def part3(data):
     cdf = expon.cdf(data_sorted, loc=mu, scale=std)
     omega_squared = np.sum((ecdf - cdf) ** 2) # значение статистики критерия Мизеса
     critical_value = 0.461 # критическое значение статистики Мизеса для уровня значимости 0.05 и n=9
+    print(omega_squared)
     if omega_squared < critical_value:
         print("подходит.")
     else:

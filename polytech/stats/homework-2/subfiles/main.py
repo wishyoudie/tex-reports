@@ -5,14 +5,14 @@ from part23 import part23
 from part3 import part3
 
 nums = []
-with open('data.txt') as f:
+with open('./data.txt') as f:
     for line in f.readlines():
         nums.append(float(line))
 data = np.array(nums)
 rnd = int(100 * np.random.rand())
 random_data = np.array(nums[rnd:rnd + 20])
 
-part1(data)
-part21(data, random_data)
-part23(data, random_data)
+#part1(data)
+# part21(data, random_data)
+#part23(data, random_data)
 part3(data)
